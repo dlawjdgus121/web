@@ -8,17 +8,32 @@ import Signup from "../pages/Signup";
 import PostWrite from "../pages/PostWrite";
 import PostDetail from "../pages/PostDetail";
 
+import Button from "../elements/Button";
+import Grid from "../elements/Grid";
+
 function App() {
   return (
     <>
-      <ConnectedRouter>
-        <Route path="/" exact component={Main}></Route>
-        <Route path="/login" exact component={Login}></Route>
-        <Route path="/signup" exact component={Signup}></Route>
-        <Route path="/write" exact component={PostWrite}></Route>
-        <Route path="/write/:id" exact component={PostWrite}></Route>
-        <Route path="/post/:id" exact component={PostDetail}></Route>
-      </ConnectedRouter>
+      <Grid>
+        <ConnectedRouter>
+          <Route path="/" exact component={Main}></Route>
+          <Route path="/login" exact component={Login}></Route>
+          <Route path="/signup" exact component={Signup}></Route>
+          {/* 게시물 작성 */}
+          <Route path="/write" exact component={PostWrite}></Route>
+          {/* 게시물 수정 */}
+          <Route path="/write/:id" exact component={PostWrite}></Route>
+          {/* 상세 페이지 */}
+          <Route path="/post/:id" exact component={PostDetail}></Route>
+        </ConnectedRouter>
+      </Grid>
+      <Button
+        is_float
+        text="+"
+        _onClick={() => {
+          // history.push("/write");
+        }}
+      ></Button>
     </>
   );
 }
