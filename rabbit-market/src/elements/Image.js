@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import React from "react";
+import styled from 'styled-components';
+import React from 'react';
 
 const Image = (props) => {
   const { shape, src, size } = props;
@@ -9,10 +9,10 @@ const Image = (props) => {
     size: size,
   };
   //만약 모양이 원이면 서클을 적용해 주세용
-  if (shape === "circle") {
-    return <ImageCircle {...styles}></ImageCircle>;
+  if (shape === 'logo') {
+    return <Logo {...styles}></Logo>;
   }
-  if (shape === "rectangle") {
+  if (shape === 'rectangle') {
     return (
       <AspectOuter>
         <AspectInner {...styles}></AspectInner>
@@ -23,14 +23,14 @@ const Image = (props) => {
 };
 
 Image.defaultProps = {
-  shape: "circle",
-  src: "https://s1.best-wallpaper.net/wallpaper/m/1812/Portugal-Porto-river-bridge-city-morning_m.jpg",
+  shape: 'rectangle',
+  src: 'https://s1.best-wallpaper.net/wallpaper/m/1812/Portugal-Porto-river-bridge-city-morning_m.jpg',
   size: 36,
 };
 const AspectOuter = styled.div`
   width: 100%;
   min-width: 250px;
-  --size: ${(props) => props.size}px;
+  --size: ${(props) => props.size}vw;
   width: var(--size);
   height: var(--size);
 `;
@@ -39,19 +39,18 @@ const AspectInner = styled.div`
   position: relative;
   padding-top: 75%;
   overflow: hidden;
-  background-image: url("${(props) => props.src}");
+  background-image: url('${(props) => props.src}');
   background-size: cover;
   background-position: center;
 `;
 
 //원의 형태 잡아주기
-const ImageCircle = styled.div`
-  --size: ${(props) => props.size}px;
-  width: var(--size);
-  height: var(--size);
-  border-radius: var(--size);
-  background-image: url("${(props) => props.src}");
-  background-size: cover;
+const Logo = styled.div`
+  height: 50px;
+  background-image: url('${(props) => props.src}');
+  background-size: contain; // 이미지 잘리기 방지
+  background-repeat: no-repeat; // 이미지 반복 방지
+  background-position: center; // 이미지 수직 가운데 정렬
   margin: 4px;
 `;
 

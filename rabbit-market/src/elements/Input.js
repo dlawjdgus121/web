@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-import Text from "./Text";
-import Grid from "./Grid";
+import Text from './Text';
+import Grid from './Grid';
 const Input = (props) => {
   const {
     label,
@@ -13,7 +13,20 @@ const Input = (props) => {
     value,
     border,
     border_radius,
+    is_header,
   } = props;
+
+  if (is_header) {
+    return (
+      <HeaderInput
+        type={type}
+        placeholder={placeholder}
+        onChange={_onChange}
+        border={border}
+        border_radius={border_radius}
+      ></HeaderInput>
+    );
+  }
 
   if (multiLine) {
     return (
@@ -50,11 +63,11 @@ const Input = (props) => {
 Input.defaultProps = {
   multiLine: false,
   label: false,
-  placeholder: "텍스트를 입력해주세요.",
-  type: "text",
+  placeholder: '텍스트를 입력해주세요.',
+  type: 'text',
   border: false,
   border_radius: false,
-  value: "",
+  value: '',
   _onChange: () => {},
 };
 
@@ -64,9 +77,9 @@ const ElTextarea = styled.textarea`
   padding: 12px 4px;
   margin: 5px 0px;
   box-sizing: border-box;
-  ${(props) => (props.border ? `border:${props.border};` : "")}
+  ${(props) => (props.border ? `border:${props.border};` : '')}
   ${(props) =>
-    props.border_radius ? `border-radius:${props.border_radius};` : ""}
+    props.border_radius ? `border-radius:${props.border_radius};` : ''}
 `;
 const ElInput = styled.input`
   border: 1px solid #212121;
@@ -74,8 +87,21 @@ const ElInput = styled.input`
   padding: 12px 4px;
   margin: 5px 0px;
   box-sizing: border-box;
-  ${(props) => (props.border ? `border:${props.border};` : "")}
+  ${(props) => (props.border ? `border:${props.border};` : '')}
   ${(props) =>
-    props.border_radius ? `border-radius:${props.border_radius};` : ""}
+    props.border_radius ? `border-radius:${props.border_radius};` : ''}
 `;
+
+const HeaderInput = styled.input`
+  border: 1px solid #212121;
+  width: 40%;
+  padding: 12px 4px;
+  margin: 5px 0px;
+  box-sizing: border-box;
+  ${(props) => (props.border ? `border:${props.border};` : '')}
+  ${(props) =>
+    props.border_radius ? `border-radius:${props.border_radius};` : ''}
+  border: 0.3rem solid #6667ab;
+`;
+
 export default Input;

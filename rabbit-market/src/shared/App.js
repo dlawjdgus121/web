@@ -1,20 +1,22 @@
-import { BrowserRouter, Route, Router } from "react-router-dom";
+import { BrowserRouter, Route, Router } from 'react-router-dom';
 // import { ConnectedRouter } from "connected-react-router";
 // import { history } from "../redux/configureStore";
 
-import Main from "../pages/Main";
-import Login from "../pages/Login";
-import Signup from "../pages/Signup";
-import PostWrite from "../pages/PostWrite";
-import PostDetail from "../pages/PostDetail";
+import Main from '../pages/Main';
+import Login from '../pages/Login';
+import Signup from '../pages/Signup';
+import PostWrite from '../pages/PostWrite';
+import PostDetail from '../pages/PostDetail';
 
-import Button from "../elements/Button";
-import Grid from "../elements/Grid";
+import Button from '../elements/Button';
+import Grid from '../elements/Grid';
+import Header from '../components/Header';
 
 function App() {
   return (
     <>
-      <Grid>
+      <Header></Header>
+      <Grid margin="5rem 0">
         <Route path="/" exact component={Main}></Route>
         <Route path="/login" exact component={Login}></Route>
         <Route path="/signup" exact component={Signup}></Route>
