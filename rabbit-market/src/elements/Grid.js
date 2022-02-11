@@ -38,6 +38,7 @@ const GridBox = styled.div`
   height: 100%;
   //넓이에 보더 굵기 같은 것도 포함할래? yes
   box-sizing: border-box;
+  ${(props) => (props.width ? `width:${props.width};` : "")}
   ${(props) => (props.padding ? `padding:${props.padding};` : "")}
   ${(props) => (props.margin ? `margin:${props.margin};` : "")}
   ${(props) => (props.bg ? `background-color:${props.bg};` : "")}

@@ -1,9 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Text, Grid } from "./index";
+import Text from "./Text";
+import Grid from "./Grid";
 const Input = (props) => {
-  const { label, placeholder, _onChange, type, multiLine, value } = props;
+  const {
+    label,
+    placeholder,
+    _onChange,
+    type,
+    multiLine,
+    value,
+    border,
+    border_radius,
+  } = props;
 
   if (multiLine) {
     return (
@@ -14,6 +24,8 @@ const Input = (props) => {
           value={value}
           placeholder={placeholder}
           onChange={_onChange}
+          border={border}
+          border_radius={border_radius}
         ></ElTextarea>
       </Grid>
     );
@@ -23,7 +35,13 @@ const Input = (props) => {
     <React.Fragment>
       <Grid>
         {label && <Text margin="0px">{label}</Text>}
-        <ElInput type={type} placeholder={placeholder} onChange={_onChange} />
+        <ElInput
+          type={type}
+          placeholder={placeholder}
+          onChange={_onChange}
+          border={border}
+          border_radius={border_radius}
+        />
       </Grid>
     </React.Fragment>
   );
@@ -34,6 +52,8 @@ Input.defaultProps = {
   label: false,
   placeholder: "텍스트를 입력해주세요.",
   type: "text",
+  border: false,
+  border_radius: false,
   value: "",
   _onChange: () => {},
 };
@@ -42,12 +62,20 @@ const ElTextarea = styled.textarea`
   border: 1px solid #212121;
   width: 100%;
   padding: 12px 4px;
+  margin: 5px 0px;
   box-sizing: border-box;
+  ${(props) => (props.border ? `border:${props.border};` : "")}
+  ${(props) =>
+    props.border_radius ? `border-radius:${props.border_radius};` : ""}
 `;
 const ElInput = styled.input`
   border: 1px solid #212121;
   width: 100%;
   padding: 12px 4px;
+  margin: 5px 0px;
   box-sizing: border-box;
+  ${(props) => (props.border ? `border:${props.border};` : "")}
+  ${(props) =>
+    props.border_radius ? `border-radius:${props.border_radius};` : ""}
 `;
 export default Input;

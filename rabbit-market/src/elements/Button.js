@@ -11,6 +11,7 @@ const Button = (props) => {
     width,
     padding,
     disabled,
+    border_radius,
   } = props;
   if (is_float) {
     return (
@@ -24,6 +25,7 @@ const Button = (props) => {
     margin: margin,
     width: width,
     padding: padding,
+    border_radius: border_radius,
   };
   return (
     <React.Fragment>
@@ -43,6 +45,7 @@ Button.defaultProps = {
   width: "100%",
   padding: "12px 0px",
   disabled: false,
+  border_radius: false,
 };
 
 const ElButton = styled.button`
@@ -52,6 +55,8 @@ const ElButton = styled.button`
   padding: ${(props) => props.padding};
   box-sizing: border-box;
   border: none;
+  ${(props) =>
+    props.border_radius ? `border-radius: ${props.border_radius};` : ""}
   ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
 `;
 
@@ -59,7 +64,7 @@ const FloatButton = styled.button`
   width: 50px;
   height: 50px;
   font-size: 40px;
-  background-color: #77ddab;
+  background-color: #6667ab;
   color: #fff;
   box-sizing: 36px;
   font-weight: 800;
