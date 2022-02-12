@@ -6,6 +6,10 @@ import Text from '../elements/Text';
 import Button from '../elements/Button';
 
 const Signup = () => {
+  const checkId = () => {
+    console.log('아이디 중복 체크 버튼 클릭');
+  };
+
   return (
     <>
       <Grid width="28rem" margin="auto" padding="3rem 1rem">
@@ -21,7 +25,13 @@ const Signup = () => {
             border_bottom="1px solid #6667ab"
             is_focus
           ></Input>
-          <Button width="5rem" border_radius="2rem">
+          <Button
+            width="5rem"
+            border_radius="2rem"
+            _onClick={() => {
+              checkId();
+            }}
+          >
             중복확인
           </Button>
         </Grid>

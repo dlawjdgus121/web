@@ -31,9 +31,10 @@ const P = styled.p`
   font-weight: ${(props) => (props.bold ? '600' : '400')};
   ${(props) => (props.margin ? `margin: ${props.margin};` : '')}
   ${(props) => (props.is_end ? `text-align: end;` : '')}
-  white-space: wrap;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  ${(props) => (props.is_contents ? 'word-break: break-all;' : '')}
+  ${(props) =>
+    props.is_contents ? 'word-break: break-all; white-space: nowrap;' : ''}
 `;
 export default Text;
