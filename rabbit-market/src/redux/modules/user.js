@@ -3,14 +3,6 @@ import { produce } from 'immer';
 
 import { setCookie, getCookie, deleteCookie } from '../../shared/Cookie';
 
-import { auth } from '../../shared/firebase';
-import {
-  updateProfile,
-  signInWithEmailAndPassword,
-  setPersistence,
-  browserSessionPersistence,
-} from 'firebase/auth';
-
 //actions
 const LOG_IN = 'LOG_IN';
 const LOG_OUT = 'LOG_OUT';
