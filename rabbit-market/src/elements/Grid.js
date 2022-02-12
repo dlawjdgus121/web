@@ -12,6 +12,7 @@ const Grid = (props) => {
     center,
     _onClick,
     is_header,
+    border,
   } = props;
 
   const styles = {
@@ -22,6 +23,7 @@ const Grid = (props) => {
     bg: bg,
     center: center,
     is_header: is_header,
+    border: border,
   };
 
   if (is_header) {
@@ -29,11 +31,9 @@ const Grid = (props) => {
   }
 
   return (
-    <React.Fragment>
-      <GridBox {...styles} onClick={_onClick}>
-        {children}
-      </GridBox>
-    </React.Fragment>
+    <GridBox {...styles} onClick={_onClick}>
+      {children}
+    </GridBox>
   );
 };
 
@@ -47,6 +47,7 @@ Grid.defaultProps = {
   center: false,
   is_header: false,
   _onClick: () => {},
+  border: null,
 };
 
 const GridBox = styled.div`
@@ -63,6 +64,8 @@ const GridBox = styled.div`
       ? `display:flex; align-items: center; justify-content:space-between`
       : ''}
   ${(props) => (props.center ? `text-align: center;` : '')}
+  ${(props) => (props.border ? `border: 2px solid rgb(200, 200, 200);` : '')}
+  gap: 1.5rem;
 `;
 
 const HeaderBox = styled.div`
@@ -72,7 +75,7 @@ const HeaderBox = styled.div`
   align-items: center;
   justify-content: space-between;
   background-color: #fff;
-  gap: 1.5rem;
+  /* gap: 1.5rem; */
 `;
 
 export default Grid;

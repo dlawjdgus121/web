@@ -94,9 +94,9 @@ const ElInput = styled.input`
 
 const HeaderInput = styled.input`
   border: 1px solid #212121;
-  width: 40%;
+  width: 100%;
   padding: 12px 4px;
-  margin: 5px 0px;
+  margin: 1rem 0;
   box-sizing: border-box;
   ${(props) => (props.border ? `border:${props.border};` : '')}
   ${(props) =>

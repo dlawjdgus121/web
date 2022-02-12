@@ -16,7 +16,7 @@ function App() {
   return (
     <>
       <Header></Header>
-      <Grid margin="5rem 0">
+      <Grid margin="5.8rem 0" padding="0 5vw">
         <Route path="/" exact component={Main}></Route>
         <Route path="/login" exact component={Login}></Route>
         <Route path="/signup" exact component={Signup}></Route>

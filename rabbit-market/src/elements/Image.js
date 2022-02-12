@@ -29,7 +29,7 @@ Image.defaultProps = {
 };
 const AspectOuter = styled.div`
   width: 100%;
-  min-width: 250px;
+  min-width: 20vw;
   --size: ${(props) => props.size}vw;
   width: var(--size);
   height: var(--size);
@@ -50,7 +50,6 @@ const Logo = styled.div`
   background-image: url('${(props) => props.src}');
   background-size: contain; // 이미지 잘리기 방지
   background-repeat: no-repeat; // 이미지 반복 방지
-  background-position: center; // 이미지 수직 가운데 정렬
   margin: 4px;
 `;
 
