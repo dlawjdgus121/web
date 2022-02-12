@@ -3,14 +3,6 @@ import { produce } from 'immer';
 
 import { setCookie, getCookie, deleteCookie } from '../../shared/Cookie';
 
-import { auth } from '../../shared/firebase';
-import {
-  updateProfile,
-  signInWithEmailAndPassword,
-  setPersistence,
-  browserSessionPersistence,
-} from 'firebase/auth';
-
 //actions
 const LOG_IN = 'LOG_IN';
 const LOG_OUT = 'LOG_OUT';
@@ -38,18 +30,8 @@ const user_initial = {
 //reducer
 export default handleActions(
   {
-    [SET_USER]: (state, action) =>
-      produce(state, (draft) => {
-        setCookie('is_login', 'success');
-        draft.user = action.payload.user;
-        draft.is_login = true;
-      }),
-    [LOG_OUT]: (state, action) =>
-      produce(state, (draft) => {
-        deleteCookie('is_login');
-        draft.user = null;
-        draft.is_login = false;
-      }),
+    [SET_USER]: (state, action) => produce(state, (draft) => {}),
+    [LOG_OUT]: (state, action) => produce(state, (draft) => {}),
     [GET_USER]: (state, action) => produce(state, (draft) => {}),
   },
   initialState

@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Router } from 'react-router-dom';
-// import { ConnectedRouter } from "connected-react-router";
-// import { history } from "../redux/configureStore";
+import { ConnectedRouter } from 'connected-react-router';
+import { history } from '../redux/configureStore';
 
 import Main from '../pages/Main';
 import Login from '../pages/Login';
