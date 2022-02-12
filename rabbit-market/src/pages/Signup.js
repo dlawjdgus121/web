@@ -4,20 +4,17 @@ import Grid from '../elements/Grid';
 import Input from '../elements/Input';
 import Text from '../elements/Text';
 import Button from '../elements/Button';
-import Image from '../elements/Image';
-
-import { FaUserAlt } from 'react-icons/fa';
 
 const Signup = () => {
   return (
     <>
-      <Grid width="80vw" margin="auto">
+      <Grid width="28rem" margin="auto" padding="3rem 1rem">
         <Grid padding="16px" center>
           <Text size="2rem" bold>
-            토끼 장터
+            회원가입
           </Text>
         </Grid>
-        <Grid is_flex>
+        <Grid is_flex padding="0px 1rem">
           <Input
             placeholder="아이디"
             border="none"
@@ -28,10 +25,10 @@ const Signup = () => {
             중복확인
           </Button>
         </Grid>
-        <Grid>
+        <Grid padding="0px 1rem">
           <Text size="0.5rem">아이디 중복체크를 해주세요 :)</Text>
         </Grid>
-        <Grid>
+        <Grid padding="0px 1rem">
           <Input
             placeholder="닉네임"
             border="none"
@@ -39,7 +36,7 @@ const Signup = () => {
             is_focus
           ></Input>
         </Grid>
-        <Grid>
+        <Grid padding="0px 1rem">
           <Input
             placeholder="비밀번호"
             border="none"
@@ -47,7 +44,7 @@ const Signup = () => {
             is_focus
           ></Input>
         </Grid>
-        <Grid>
+        <Grid padding="0px 1rem">
           <Input
             placeholder="비밀번호 확인"
             border="none"
@@ -55,7 +52,7 @@ const Signup = () => {
             is_focus
           ></Input>
         </Grid>
-        <Grid padding="5px 16px">
+        <Grid padding="5px 1rem">
           <Button border_radius="30px">가입하기</Button>
         </Grid>
       </Grid>
