@@ -23,7 +23,7 @@ const PostWrite = (props) => {
   }
   // 글 쓰기 페이지
   return (
-    <Grid border padding="2rem">
+    <Grid padding="0 13vw">
       {/* 글 제목 */}
       <Grid padding="16px" is_flex border_bottom>
         <Text font=".7rem" bold>

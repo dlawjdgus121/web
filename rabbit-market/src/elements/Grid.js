@@ -14,6 +14,8 @@ const Grid = (props) => {
     is_header,
     border,
     border_bottom,
+    is_parents,
+    is_child,
   } = props;
 
   const styles = {
@@ -26,6 +28,8 @@ const Grid = (props) => {
     is_header: is_header,
     border: border,
     border_bottom: border_bottom,
+    is_parents: is_parents,
+    is_child: is_child,
   };
 
   if (is_header) {
@@ -51,6 +55,8 @@ Grid.defaultProps = {
   _onClick: () => {},
   border: null,
   border_bottom: false,
+  is_parents: false,
+  is_child: false,
 };
 
 const GridBox = styled.div`
@@ -72,8 +78,7 @@ const GridBox = styled.div`
     props.border_bottom
       ? `border-bottom: 1px solid rgb(200, 200, 200);`
       : ''} /* 이따가 물어보기 */
-  /* ${(props) =>
-    props.border_bottom ? `border-bottom:${props.border_bottom};` : ''} */
+  ${(props) => (props.is_parents ? 'position: relative;' : '')}
 `;
 
 const HeaderBox = styled.div`

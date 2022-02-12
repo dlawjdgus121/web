@@ -8,7 +8,7 @@ import styled from 'styled-components';
 const Header = () => {
   return (
     <HeaderBox>
-      <Grid is_flex padding="4px 16px" is_header>
+      <Grid is_flex is_header>
         {/* 로고 이미지 */}
         <Grid width="20%">
           <Image shape="logo" src={'/img/logo2.png'} />
@@ -46,7 +46,7 @@ const HeaderBox = styled.div`
   top: 0;
   left: 0;
   z-index: 10;
-  padding: 0 5vw;
+  padding: 0 13vw;
 `;
 
 export default Header;

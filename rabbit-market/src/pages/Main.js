@@ -1,6 +1,7 @@
 import React from 'react';
 import Grid from '../elements/Grid';
 import Post from '../components/Post';
+import Image from '../elements/Image';
 
 const Main = () => {
   return (
