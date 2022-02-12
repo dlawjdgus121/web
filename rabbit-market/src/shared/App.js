@@ -1,4 +1,9 @@
-import { BrowserRouter, Route, Router } from 'react-router-dom';
+import {
+  BrowserRouter as BrowserRouter,
+  Router,
+  Routes,
+  Route,
+} from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../redux/configureStore';
 
@@ -11,10 +16,11 @@ import PostDetail from '../pages/PostDetail';
 import Button from '../elements/Button';
 import Grid from '../elements/Grid';
 import Header from '../components/Header';
+import React from 'react';
 
 function App() {
   return (
-    <>
+    <BrowserRouter>
       <Header></Header>
       <Grid margin="5.8rem 0">
         <Route path="/" exact component={Main}></Route>
@@ -34,7 +40,7 @@ function App() {
           // history.push("/write");
         }}
       ></Button>
-    </>
+    </BrowserRouter>
   );
 }
 
