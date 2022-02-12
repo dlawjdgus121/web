@@ -1,8 +1,8 @@
-import React from "react";
-import Grid from "../elements/Grid";
-import Input from "../elements/Input";
-import Text from "../elements/Text";
-import Button from "../elements/Button";
+import React from 'react';
+import Grid from '../elements/Grid';
+import Input from '../elements/Input';
+import Text from '../elements/Text';
+import Button from '../elements/Button';
 
 const Login = () => {
   return (
@@ -33,6 +33,12 @@ const Login = () => {
 
         <Grid padding="5px 16px">
           <Button border_radius="30px">로그인</Button>
+        </Grid>
+        <Grid padding="5px 16px" border="1px solid #d3d3d3" center>
+          <Text>
+            아직 토끼장터 회원이 아니시라면?{' '}
+            <a href="http://www.naver.com">로그인</a>
+          </Text>
         </Grid>
       </Grid>
     </>

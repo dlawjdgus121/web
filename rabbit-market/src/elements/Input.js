@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-import Text from "./Text";
-import Grid from "./Grid";
+import Text from './Text';
+import Grid from './Grid';
 const Input = (props) => {
   const {
     label,
@@ -13,6 +13,8 @@ const Input = (props) => {
     value,
     border,
     border_radius,
+    border_bottom,
+    is_focus,
   } = props;
 
   if (multiLine) {
@@ -26,6 +28,7 @@ const Input = (props) => {
           onChange={_onChange}
           border={border}
           border_radius={border_radius}
+          border_bottom={border_bottom}
         ></ElTextarea>
       </Grid>
     );
@@ -41,6 +44,8 @@ const Input = (props) => {
           onChange={_onChange}
           border={border}
           border_radius={border_radius}
+          border_bottom={border_bottom}
+          is_focus={is_focus}
         />
       </Grid>
     </React.Fragment>
@@ -50,11 +55,13 @@ const Input = (props) => {
 Input.defaultProps = {
   multiLine: false,
   label: false,
-  placeholder: "텍스트를 입력해주세요.",
-  type: "text",
+  placeholder: '텍스트를 입력해주세요.',
+  type: 'text',
   border: false,
   border_radius: false,
-  value: "",
+  border_bottom: false,
+  is_focus: false,
+  value: '',
   _onChange: () => {},
 };
 
@@ -64,9 +71,12 @@ const ElTextarea = styled.textarea`
   padding: 12px 4px;
   margin: 5px 0px;
   box-sizing: border-box;
-  ${(props) => (props.border ? `border:${props.border};` : "")}
+  ${(props) => (props.border ? `border:${props.border};` : '')}
   ${(props) =>
-    props.border_radius ? `border-radius:${props.border_radius};` : ""}
+    props.border_radius ? `border-radius:${props.border_radius};` : ''}
+  ${(props) =>
+    props.border_bottom ? `border-bottom:${props.border_bottom};` : ''}
+  ${(props) => (props.is_focus ? `&:focus{outline: none;}` : '')}
 `;
 const ElInput = styled.input`
   border: 1px solid #212121;
@@ -74,8 +84,11 @@ const ElInput = styled.input`
   padding: 12px 4px;
   margin: 5px 0px;
   box-sizing: border-box;
-  ${(props) => (props.border ? `border:${props.border};` : "")}
+  ${(props) => (props.border ? `border:${props.border};` : '')}
   ${(props) =>
-    props.border_radius ? `border-radius:${props.border_radius};` : ""}
+    props.border_radius ? `border-radius:${props.border_radius};` : ''}
+  ${(props) =>
+    props.border_bottom ? `border-bottom:${props.border_bottom};` : ''}
+  ${(props) => (props.is_focus ? `&:focus{outline: none;}` : '')}
 `;
 export default Input;
