@@ -6,7 +6,7 @@ import Text from '../elements/Text';
 const CommentList = () => {
   return (
     <React.Fragment>
-      <Grid padding="16px">
+      <Grid padding="2vh 0 0">
         <CommentItem />
         <CommentItem />
         <CommentItem />

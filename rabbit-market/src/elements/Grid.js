@@ -16,6 +16,8 @@ const Grid = (props) => {
     border_bottom,
     is_wrap,
     only_flex,
+    is_parents,
+    is_child,
   } = props;
 
   const styles = {
@@ -30,6 +32,8 @@ const Grid = (props) => {
     border_bottom: border_bottom,
     is_wrap: is_wrap,
     only_flex: only_flex,
+    is_parents: is_parents,
+    is_child: is_child,
   };
 
   if (is_header) {
@@ -57,6 +61,8 @@ Grid.defaultProps = {
   border_bottom: false,
   is_wrap: false,
   only_flex: false,
+  is_parents: false,
+  is_child: false,
 };
 
 const GridBox = styled.div`
@@ -79,6 +85,7 @@ const GridBox = styled.div`
     props.border_bottom ? `border-bottom: 1px solid rgb(200, 200, 200);` : ''}
   ${(props) => (props.is_wrap ? `flex-wrap:wrap;` : '')}
   ${(props) => (props.only_flex ? `display:flex; align-items: center;` : '')}
+  ${(props) => (props.is_parents ? 'position: relative;' : '')}
 `;
 
 const HeaderBox = styled.div`

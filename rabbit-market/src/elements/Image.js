@@ -14,7 +14,7 @@ const Image = (props) => {
   }
   if (shape === 'rectangle') {
     return (
-      <AspectOuter>
+      <AspectOuter size={size}>
         <AspectInner {...styles}></AspectInner>
       </AspectOuter>
     );
@@ -42,6 +42,10 @@ const AspectInner = styled.div`
   background-image: url('${(props) => props.src}');
   background-size: cover;
   background-position: center;
+  object-fit: fill;
+  --size: ${(props) => props.size}vw;
+  width: var(--size);
+  height: var(--size);
 `;
 
 //원의 형태 잡아주기
