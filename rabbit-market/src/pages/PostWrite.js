@@ -43,7 +43,7 @@ const PostWrite = (props) => {
           가격
         </Text>
         <Grid margin="2vw">
-          <Input type="text" placeholder="숫자만 입력해주세요." />
+          <Input type="number" placeholder="숫자만 입력해주세요." />
         </Grid>
         <Grid>
           <Grid>
@@ -77,7 +77,8 @@ const PostWrite = (props) => {
       <Grid padding="16px">
         <Input
           value={contents}
-          // _onChange={}
+          type="text"
+          _onChange={console.log('동작하나염')}
           label="설명"
           placeholder="상품 설명을 입력해주세요."
           multiLine
