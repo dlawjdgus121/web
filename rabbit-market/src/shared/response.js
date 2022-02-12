@@ -2,7 +2,6 @@
 export const RESP = {
   POSTS: {
     ok: true,
-
     posts: [
       {
         postId: 'aalasdf',
@@ -20,7 +19,6 @@ export const RESP = {
   },
   POST: {
     ok: true,
-
     post: {
       postId: 'aalasdf',
       title: '아이폰 10',

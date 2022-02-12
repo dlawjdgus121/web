@@ -1,8 +1,14 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
+import { RESP } from '../../shared/response';
+
+// MOCK API
+const respSignUp = RESP.SIGNUP;
+const respCheckId = RESP.CHECK_ID;
+const respLogIn = RESP.LOGIN;
 
 //actions
-const LOG_IN = 'LOG_IN';
+// const LOG_IN = 'LOG_IN';
 const LOG_OUT = 'LOG_OUT';
 const GET_USER = 'GET_USER';
 const SET_USER = 'SET_USER';
@@ -23,6 +29,19 @@ const user_initial = {
   user_name: 'jun park',
 };
 
+const logInAPI = () => {
+  console.log(respLogIn.token);
+
+  // 받은 토큰을 로컬스토리지에 저장
+  if (respLogIn.token) {
+    localStorage.setItem('login-token', respLogIn.token);
+  }
+};
+
+const hi = () => {
+  return console.log('hi');
+};
+
 //reducer
 export default handleActions(
   {
@@ -31,6 +50,7 @@ export default handleActions(
         draft.user = action.payload.user;
         draft.is_login = true;
       }),
+
     [LOG_OUT]: (state, action) =>
       produce(state, (draft) => {
         draft.user = null;
@@ -43,8 +63,8 @@ export default handleActions(
 
 //action creator export
 const actionCreators = {
-  logOut,
-  getUser,
+  logInAPI,
+  hi,
 };
 
 export { actionCreators };

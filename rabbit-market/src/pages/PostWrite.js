@@ -1,4 +1,6 @@
 import React from 'react';
+
+// component import
 import Grid from '../elements/Grid';
 import Text from '../elements/Text';
 import Button from '../elements/Button';
@@ -8,6 +10,20 @@ import Input from '../elements/Input';
 const PostWrite = (props) => {
   const [is_edit, setIsEdit] = React.useState(false);
   const [contents, setContent] = React.useState('');
+  const [price, setPrice] = React.useState('');
+  const [title, setTitle] = React.useState('');
+
+  const changePrice = (e) => {
+    setPrice(e.target.value);
+  };
+
+  const changeContents = (e) => {
+    setContent(e.target.value);
+  };
+
+  const changeTitle = (e) => {
+    setContent(e.target.value);
+  };
 
   // 로그인 상태 체크
   if (false) {
@@ -30,7 +46,7 @@ const PostWrite = (props) => {
           제목
         </Text>
         <Grid margin="2vw">
-          <Input type="text" />
+          <Input type="text" value={title} _onChange={changeTitle} />
         </Grid>
 
         <Text font=".7rem" bold>
@@ -43,7 +59,13 @@ const PostWrite = (props) => {
           가격
         </Text>
         <Grid margin="2vw">
-          <Input type="number" placeholder="숫자만 입력해주세요." />
+          {/* 가격 */}
+          <Input
+            type="text"
+            placeholder="숫자만 입력해주세요."
+            value={price}
+            _onChange={changePrice}
+          />
         </Grid>
         <Grid>
           <Grid>
@@ -77,8 +99,7 @@ const PostWrite = (props) => {
       <Grid padding="16px">
         <Input
           value={contents}
-          type="text"
-          _onChange={console.log('동작하나염')}
+          _onChange={changeContents}
           label="설명"
           placeholder="상품 설명을 입력해주세요."
           multiLine

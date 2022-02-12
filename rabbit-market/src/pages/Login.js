@@ -4,7 +4,17 @@ import Input from '../elements/Input';
 import Text from '../elements/Text';
 import Button from '../elements/Button';
 
+// redux import
+import { useDispatch } from 'react-redux';
+import { actionCreators as userActions } from '../redux/modules/user'; // as : 별명 주는거
+
 const Login = () => {
+  const dispatch = useDispatch();
+
+  const login = () => {
+    dispatch(userActions.logInAPI);
+  };
+
   return (
     <>
       <Grid width="28rem" margin="auto" padding="3rem 1rem">
@@ -32,7 +42,14 @@ const Login = () => {
         </Grid>
 
         <Grid padding="5px 16px">
-          <Button border_radius="30px">가입하기</Button>
+          <Button
+            border_radius="30px"
+            _onClick={() => {
+              login();
+            }}
+          >
+            로그인
+          </Button>
         </Grid>
         <Grid
           margin="1.5rem 0px"
