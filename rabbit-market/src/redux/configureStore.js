@@ -5,7 +5,7 @@ import { connectRouter } from 'connected-react-router';
 
 import User from './modules/user';
 import Post from './modules/post';
-import Image from './modules/image';
+import comment from './modules/comment';
 
 // 1. 히스토리 객체 생성
 
@@ -14,7 +14,7 @@ export const history = createBrowserHistory();
 const rootReducer = combineReducers({
   user: User,
   post: Post,
-  image: Image,
+  comment: comment,
   // 2. 리덕스에 넣어준다.
   router: connectRouter(history),
 });
