@@ -8,6 +8,7 @@ import Post from './modules/post';
 import Image from './modules/image';
 
 // 1. 히스토리 객체 생성
+
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
@@ -18,7 +19,7 @@ const rootReducer = combineReducers({
   router: connectRouter(history),
 });
 
-// const middlewares = [thunk];
+//미들웨어 준비
 const middlewares = [thunk.withExtraArgument({ history: history })];
 
 // 지금이 어느 환경인 지 알려줘요. (개발환경, 프로덕션(배포)환경 ...)
@@ -32,6 +33,7 @@ if (env === 'development') {
 }
 
 // 리덕스 데브툴즈 사용설정
+//redux devTools 설정
 const composeEnhancers =
   typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
@@ -42,6 +44,7 @@ const composeEnhancers =
 // 지금까지 위에 있던 미들웨어들을 묶어준다.
 const enhancer = composeEnhancers(applyMiddleware(...middlewares));
 
+//스토어 만들기
 let store = (initialStore) => createStore(rootReducer, enhancer);
 
 export default store();
