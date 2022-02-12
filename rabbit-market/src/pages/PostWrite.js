@@ -24,7 +24,38 @@ const PostWrite = (props) => {
   // 글 쓰기 페이지
   return (
     <Grid border padding="2rem">
-      <Grid padding="16px" is_flex>
+      {/* 글 제목 */}
+      <Grid padding="16px" is_flex border_bottom>
+        <Text font=".7rem" bold>
+          제목
+        </Text>
+        <Grid margin="2vw">
+          <Input type="text" />
+        </Grid>
+
+        <Text font=".7rem" bold>
+          0/40
+        </Text>
+      </Grid>
+      {/* 판매 가격 */}
+      <Grid padding="16px" is_flex border_bottom>
+        <Text font=".7rem" bold>
+          가격
+        </Text>
+        <Grid margin="2vw">
+          <Input type="text" placeholder="숫자만 입력해주세요." />
+        </Grid>
+        <Grid>
+          <Grid>
+            <Text font=".7rem" bold>
+              원
+            </Text>
+          </Grid>
+        </Grid>
+      </Grid>
+
+      {/* 상품 이미지 */}
+      <Grid padding="16px" is_flex border_bottom>
         <Grid width="20%">
           <Text font=".7rem" bold>
             상품 이미지
@@ -42,26 +73,27 @@ const PostWrite = (props) => {
           />
         </Grid>
       </Grid>
+      {/* 게시글 작성 */}
       <Grid padding="16px">
         <Input
           value={contents}
           // _onChange={}
           label="설명"
-          placeholder="게시글 작성"
+          placeholder="상품 설명을 입력해주세요."
           multiLine
         ></Input>
       </Grid>
 
-      <Grid padding="16px">
+      <Grid padding="16px" is_right>
         {is_edit ? (
           <Button
-            text="게시글 수정"
+            text="상품 수정하기"
             _onClick={console.log('게시글 수정 버튼 클릭')}
             disabled={contents === '' ? true : false}
           ></Button>
         ) : (
           <Button
-            text="게시글 작성"
+            text="상품 등록하기"
             _onClick={console.log('게시글 작성 버튼 클릭')}
             disabled={contents === '' ? true : false}
           ></Button>

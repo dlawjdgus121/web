@@ -13,6 +13,7 @@ const Grid = (props) => {
     _onClick,
     is_header,
     border,
+    border_bottom,
   } = props;
 
   const styles = {
@@ -24,6 +25,7 @@ const Grid = (props) => {
     center: center,
     is_header: is_header,
     border: border,
+    border_bottom: border_bottom,
   };
 
   if (is_header) {
@@ -61,11 +63,12 @@ const GridBox = styled.div`
   ${(props) => (props.bg ? `background-color:${props.bg};` : '')}
   ${(props) =>
     props.is_flex
-      ? `display:flex; align-items: center; justify-content:space-between`
+      ? `display:flex; align-items: center; justify-content:space-between;`
       : ''}
   ${(props) => (props.center ? `text-align: center;` : '')}
   ${(props) => (props.border ? `border: 2px solid rgb(200, 200, 200);` : '')}
-  gap: 1.5rem;
+  ${(props) =>
+    props.border_bottom ? `border-bottom: 1px solid rgb(200, 200, 200);` : ''}
 `;
 
 const HeaderBox = styled.div`

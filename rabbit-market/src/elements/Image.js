@@ -51,6 +51,7 @@ const Logo = styled.div`
   background-size: contain; // 이미지 잘리기 방지
   background-repeat: no-repeat; // 이미지 반복 방지
   margin: 4px;
+  background-position: center;
 `;
 
 export default Image;
