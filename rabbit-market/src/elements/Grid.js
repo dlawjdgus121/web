@@ -10,9 +10,10 @@ const Grid = (props) => {
     bg,
     children,
     center,
+    _onClick,
+    is_header,
     border,
     border_bottom,
-    _onClick,
   } = props;
 
   const styles = {
@@ -22,15 +23,19 @@ const Grid = (props) => {
     padding: padding,
     bg: bg,
     center: center,
-    border_bottom: border_bottom,
+    is_header: is_header,
     border: border,
+    border_bottom: border_bottom,
   };
+
+  if (is_header) {
+    return <HeaderBox>{children}</HeaderBox>;
+  }
+
   return (
-    <React.Fragment>
-      <GridBox {...styles} onClick={_onClick}>
-        {children}
-      </GridBox>
-    </React.Fragment>
+    <GridBox {...styles} onClick={_onClick}>
+      {children}
+    </GridBox>
   );
 };
 
@@ -42,8 +47,9 @@ Grid.defaultProps = {
   margin: false,
   bg: false,
   center: false,
+  is_header: false,
   _onClick: () => {},
-  border: false,
+  border: null,
   border_bottom: false,
 };
 
@@ -52,17 +58,32 @@ const GridBox = styled.div`
   height: 100%;
   //넓이에 보더 굵기 같은 것도 포함할래? yes
   box-sizing: border-box;
-  ${(props) => (props.border ? `border:${props.border};` : '')}
   ${(props) => (props.width ? `width:${props.width};` : '')}
   ${(props) => (props.padding ? `padding:${props.padding};` : '')}
   ${(props) => (props.margin ? `margin:${props.margin};` : '')}
   ${(props) => (props.bg ? `background-color:${props.bg};` : '')}
   ${(props) =>
     props.is_flex
-      ? `display:flex; align-items: center; justify-content:space-between`
+      ? `display:flex; align-items: center; justify-content:space-between;`
       : ''}
   ${(props) => (props.center ? `text-align: center;` : '')}
+  ${(props) => (props.border ? `border: 2px solid rgb(200, 200, 200);` : '')}
   ${(props) =>
-    props.border_bottom ? `border-bottom:${props.border_bottom};` : ''}
+    props.border_bottom
+      ? `border-bottom: 1px solid rgb(200, 200, 200);`
+      : ''} /* 이따가 물어보기 */
+  /* ${(props) =>
+    props.border_bottom ? `border-bottom:${props.border_bottom};` : ''} */
 `;
+
+const HeaderBox = styled.div`
+  width: ${(props) => props.width};
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  /* gap: 1.5rem; */
+`;
+
 export default Grid;

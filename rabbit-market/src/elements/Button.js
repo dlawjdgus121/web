@@ -58,6 +58,8 @@ const ElButton = styled.button`
   ${(props) =>
     props.border_radius ? `border-radius: ${props.border_radius};` : ''}
   ${(props) => (props.margin ? `margin: ${props.margin};` : '')}
+  font-size: 1em;
+  white-space: nowrap;
 `;
 
 const FloatButton = styled.button`

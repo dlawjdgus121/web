@@ -9,8 +9,8 @@ const Image = (props) => {
     size: size,
   };
   //만약 모양이 원이면 서클을 적용해 주세용
-  if (shape === 'circle') {
-    return <ImageCircle {...styles}></ImageCircle>;
+  if (shape === 'logo') {
+    return <Logo {...styles}></Logo>;
   }
   if (shape === 'rectangle') {
     return (
@@ -23,14 +23,14 @@ const Image = (props) => {
 };
 
 Image.defaultProps = {
-  shape: 'circle',
+  shape: 'rectangle',
   src: 'https://s1.best-wallpaper.net/wallpaper/m/1812/Portugal-Porto-river-bridge-city-morning_m.jpg',
   size: 36,
 };
 const AspectOuter = styled.div`
   width: 100%;
-  min-width: 250px;
-  --size: ${(props) => props.size}px;
+  min-width: 20vw;
+  --size: ${(props) => props.size}vw;
   width: var(--size);
   height: var(--size);
 `;
@@ -45,14 +45,13 @@ const AspectInner = styled.div`
 `;
 
 //원의 형태 잡아주기
-const ImageCircle = styled.div`
-  --size: ${(props) => props.size}px;
-  width: var(--size);
-  height: var(--size);
-  border-radius: var(--size);
+const Logo = styled.div`
+  height: 50px;
   background-image: url('${(props) => props.src}');
-  background-size: cover;
+  background-size: contain; // 이미지 잘리기 방지
+  background-repeat: no-repeat; // 이미지 반복 방지
   margin: 4px;
+  background-position: center;
 `;
 
 export default Image;

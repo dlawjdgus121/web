@@ -15,7 +15,20 @@ const Input = (props) => {
     border_radius,
     border_bottom,
     is_focus,
+    is_header,
   } = props;
+
+  if (is_header) {
+    return (
+      <HeaderInput
+        type={type}
+        placeholder={placeholder}
+        onChange={_onChange}
+        border={border}
+        border_radius={border_radius}
+      ></HeaderInput>
+    );
+  }
 
   if (multiLine) {
     return (
@@ -91,4 +104,17 @@ const ElInput = styled.input`
     props.border_bottom ? `border-bottom:${props.border_bottom};` : ''}
   ${(props) => (props.is_focus ? `&:focus{outline: none;}` : '')}
 `;
+
+const HeaderInput = styled.input`
+  border: 1px solid #212121;
+  width: 100%;
+  padding: 12px 4px;
+  margin: 1rem 0;
+  box-sizing: border-box;
+  ${(props) => (props.border ? `border:${props.border};` : '')}
+  ${(props) =>
+    props.border_radius ? `border-radius:${props.border_radius};` : ''}
+  border: 0.3rem solid #6667ab;
+`;
+
 export default Input;
