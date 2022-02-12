@@ -14,6 +14,8 @@ const Grid = (props) => {
     is_header,
     border,
     border_bottom,
+    is_wrap,
+    only_flex,
   } = props;
 
   const styles = {
@@ -26,6 +28,8 @@ const Grid = (props) => {
     is_header: is_header,
     border: border,
     border_bottom: border_bottom,
+    is_wrap: is_wrap,
+    only_flex: only_flex,
   };
 
   if (is_header) {
@@ -51,9 +55,12 @@ Grid.defaultProps = {
   _onClick: () => {},
   border: null,
   border_bottom: false,
+  is_wrap: false,
+  only_flex: false,
 };
 
 const GridBox = styled.div`
+  overflow: hidden;
   width: ${(props) => props.width};
   height: 100%;
   //넓이에 보더 굵기 같은 것도 포함할래? yes
@@ -69,11 +76,9 @@ const GridBox = styled.div`
   ${(props) => (props.center ? `text-align: center;` : '')}
   ${(props) => (props.border ? `border: 2px solid rgb(200, 200, 200);` : '')}
   ${(props) =>
-    props.border_bottom
-      ? `border-bottom: 1px solid rgb(200, 200, 200);`
-      : ''} /* 이따가 물어보기 */
-  /* ${(props) =>
-    props.border_bottom ? `border-bottom:${props.border_bottom};` : ''} */
+    props.border_bottom ? `border-bottom: 1px solid rgb(200, 200, 200);` : ''}
+  ${(props) => (props.is_wrap ? `flex-wrap:wrap;` : '')}
+  ${(props) => (props.only_flex ? `display:flex; align-items: center;` : '')}
 `;
 
 const HeaderBox = styled.div`

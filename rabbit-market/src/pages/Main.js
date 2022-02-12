@@ -1,18 +1,24 @@
 import React from 'react';
 import Grid from '../elements/Grid';
 import Post from '../components/Post';
+import Image from '../elements/Image';
+import Text from '../elements/Text';
 
 const Main = () => {
   return (
-    <React.Fragment>
-      <Grid bg={'#EFF6FF'} padding="20px 0px">
-        {/* <Post /> */}
-
-        <Grid bg="#ffffff" margin="8px 0px" _onClick={() => {}}>
-          <Post is_me />
-        </Grid>
+    <>
+      <Grid height="10%">
+        <img
+          src="https://user-images.githubusercontent.com/82128525/153698807-45fde35c-0ce8-499b-864b-14d6b439968d.jpeg"
+          alt="나이키 이미지"
+          style={{ height: '20rem', width: '100%' }}
+        />
       </Grid>
-    </React.Fragment>
+      <Grid padding="2vw 13vw 0vw 13vw">
+        <Text size="2rem">상품들이 깡충깡충</Text>
+      </Grid>
+      <Post></Post>
+    </>
   );
 };
 
