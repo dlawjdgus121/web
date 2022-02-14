@@ -11,8 +11,20 @@ import { actionCreators as userActions } from '../redux/modules/user'; // as : �
 const Login = () => {
   const dispatch = useDispatch();
 
+  const [id, setId] = React.useState('');
+  const [pwd, setPwd] = React.useState('');
+
+  const changeId = (e) => {
+    setId(e.target.value);
+  };
+
+  const changePwd = (e) => {
+    setPwd(e.target.value);
+  };
+
   const login = () => {
-    dispatch(userActions.logInAPI);
+    dispatch(userActions.setLoginDB(id, pwd));
+    // console.log(id, pwd);
   };
 
   return (
@@ -25,6 +37,8 @@ const Login = () => {
         </Grid>
         <Grid is_flex padding="0px 1rem">
           <Input
+            value={id}
+            _onChange={changeId}
             placeholder="아이디"
             border="none"
             border_bottom="1px solid #6667ab"
@@ -34,6 +48,8 @@ const Login = () => {
 
         <Grid padding="0px 1rem">
           <Input
+            value={pwd}
+            _onChange={changePwd}
             placeholder="비밀번호"
             border="none"
             border_bottom="1px solid #6667ab"

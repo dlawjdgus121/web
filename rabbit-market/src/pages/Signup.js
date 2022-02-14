@@ -11,8 +11,21 @@ import { actionCreators as userActions } from '../redux/modules/user'; // as : �
 const Signup = () => {
   const dispatch = useDispatch();
 
+  const [isCheckId, setIsCheckId] = React.useState(false);
+  const [id, setId] = React.useState('');
+  const [nickname, setNickname] = React.useState('');
+  const [pwd, setPwd] = React.useState('');
+  const [rePwd, setRePwd] = React.useState('');
+
   const checkId = () => {
-    dispatch(userActions.checkIdAPI);
+    dispatch(userActions.checkIdDB(id));
+  };
+
+  const _signUp = () => {
+    if (id === '' || nickname === '' || pwd === '' || rePwd === '') {
+      alert('빈칸을 다 채워주세요.');
+    } else if (pwd !== rePwd)
+      alert('비밀번호와 비밀번호 확인이 서로 다릅니다. 다시 적어주세요.');
   };
 
   return (
@@ -29,6 +42,9 @@ const Signup = () => {
             border="none"
             border_bottom="1px solid #6667ab"
             is_focus
+            _onChange={(e) => {
+              setId(e.target.value);
+            }}
           ></Input>
           <Button
             width="5rem"
@@ -49,6 +65,9 @@ const Signup = () => {
             border="none"
             border_bottom="1px solid #6667ab"
             is_focus
+            _onChange={(e) => {
+              setNickname(e.target.value);
+            }}
           ></Input>
         </Grid>
         <Grid padding="0px 1rem">
@@ -57,6 +76,9 @@ const Signup = () => {
             border="none"
             border_bottom="1px solid #6667ab"
             is_focus
+            _onChange={(e) => {
+              setPwd(e.target.value);
+            }}
           ></Input>
         </Grid>
         <Grid padding="0px 1rem">
@@ -65,10 +87,20 @@ const Signup = () => {
             border="none"
             border_bottom="1px solid #6667ab"
             is_focus
+            _onChange={(e) => {
+              setRePwd(e.target.value);
+            }}
           ></Input>
         </Grid>
         <Grid padding="5px 1rem">
-          <Button border_radius="30px">가입하기</Button>
+          <Button
+            border_radius="30px"
+            _onClick={() => {
+              _signUp();
+            }}
+          >
+            가입하기
+          </Button>
         </Grid>
       </Grid>
     </>

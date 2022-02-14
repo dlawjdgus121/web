@@ -1,11 +1,7 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 import { RESP } from '../../shared/response';
-
-// MOCK API
-const respLogIn = RESP.LOGIN;
-const respCheckId = RESP.CHECK_ID;
-const respSignUp = RESP.SIGNUP;
+import { apis } from '../../shared/api';
 
 //actions
 // const LOG_IN = 'LOG_IN';
@@ -16,7 +12,7 @@ const SET_USER = 'SET_USER';
 
 //action creators
 
-const checkid = createAction(CHECK_ID, () => ({}));
+const checkid = createAction(CHECK_ID, (is_check_id) => ({ is_check_id }));
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
 const getUser = createAction(GET_USER, (user) => ({ user }));
 const setUser = createAction(SET_USER, (user) => ({ user }));
@@ -25,27 +21,51 @@ const setUser = createAction(SET_USER, (user) => ({ user }));
 const initialState = {
   user: null,
   is_login: false,
+  is_check_id: false,
 };
 
-const user_initial = {
-  user_name: 'jun park',
+// 회원가입
+const registerDB = (id, nickname, pw, pwcheck) => {
+  return function (dispatch, getState, { history }) {
+    apis
+      .signup(id, nickname, pw, pwcheck)
+      .then((res) => {
+        history.push('/login');
+      })
+      .catch((err) => {
+        window.alert('이미 존재하는 아이디 또는 이메일입니다.');
+      });
+  };
 };
 
-const logInAPI = () => {
-  console.log(respLogIn.token);
-
-  // 받은 토큰을 로컬스토리지에 저장
-  if (respLogIn.token) {
-    localStorage.setItem('login-token', respLogIn.token);
-  }
+// 로그인
+const setLoginDB = (id, pwd) => {
+  return function (dispatch, { history }) {
+    apis
+      .login(id, pwd)
+      .then((res) => {
+        localStorage.setItem('idToken', res.data[0].token);
+        dispatch(setUser({ id: id }));
+        history.replace('/');
+      })
+      .catch((err) => {
+        window.alert('없는 회원정보 입니다! 회원가입을 해주세요!');
+      });
+  };
 };
 
-const checkIdAPI = () => {
-  if (respCheckId.ok) {
-    alert('사용 가능한 아이디입니다.');
-    return true;
-  }
-  alert('이미 존재하는 아이디입니다.');
+const checkIdDB = (id) => {
+  return function (dispatch) {
+    apis
+      .checkId(id)
+      .then((res) => {
+        window.alert('사용 가능한 아이디입니다.');
+        dispatch(checkid());
+      })
+      .catch((err) => {
+        window.alert('이미 존재하는 아이디입니다.');
+      });
+  };
 };
 
 //reducer
@@ -69,8 +89,10 @@ export default handleActions(
 
 //action creator export
 const actionCreators = {
-  logInAPI,
-  checkIdAPI,
+  registerDB,
+  setLoginDB,
+  logOut,
+  checkIdDB,
 };
 
 export { actionCreators };
