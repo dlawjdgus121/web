@@ -1,7 +1,5 @@
 import { createAction, handleActions } from 'redux-actions';
-import { produce } from 'immer';
-
-import moment from 'moment';
+import { immerable, produce } from 'immer';
 
 const SET_POST = 'SET_POST';
 const ADD_POST = 'ADD_POST';
@@ -21,20 +19,43 @@ const initialState = {
 };
 
 const initialPost = {
-  // id: "",
-  // user_info: {
-  //   user_name: "jun",
-  //   user_profile:
-  //     "https://s1.best-wallpaper.net/wallpaper/m/1812/Portugal-Porto-river-bridge-city-morning_m.jpg",
-  // },
-  image_url:
-    'https://s1.best-wallpaper.net/wallpaper/m/1812/Portugal-Porto-river-bridge-city-morning_m.jpg',
-  contents: '포르투!!!!',
-  comment_cnt: 0,
-  insert_dt: moment().format('YYYY-MM-DD hh:mm:ss'),
-  user_like: [],
+  postId: 'aalasdf',
+  title: '아이폰 10',
+  content: '아이폰 팔아요',
+  price: 1000,
+  imgurl: 'http://gi.esmplus.com/dodomae/NAR/Monami/pluspen3000.jpg',
+  createdAt: '2022-02-22',
+  updatedAt: '2022-02-25',
+  nickname: 'fasdfasdf',
+  userId: 'id',
+  isSold: true,
 };
 
+//middleware
+
+//전체 상품 조회
+const getPostAPI = () => {
+  return async function (dispatch, useState, { history }) {
+    const token = localStorage.getItem('login-token');
+    console.log(token);
+    console.log(initialPost);
+  };
+};
+//판매 상품 등록
+const addPostAPI = () => {
+  return async function (dispatch, useState, { history }) {
+    const token = localStorage.getItem('login-token');
+    console.log(token);
+  };
+};
+//판매 상품 수정
+const eidtPostAPI = () => {
+  return async function (dispatch, useState, { history }) {};
+};
+//판매 상품 삭제
+const deletePostAPI = () => {
+  return async function (dispatch, useState, { history }) {};
+};
 export default handleActions(
   {
     [SET_POST]: (state, action) =>
@@ -67,6 +88,7 @@ const actionCreators = {
   addPost,
   editPost,
   deletePost,
+  getPostAPI,
 };
 
 export { actionCreators };

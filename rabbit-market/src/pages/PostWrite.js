@@ -22,7 +22,7 @@ const PostWrite = (props) => {
   };
 
   const changeTitle = (e) => {
-    setContent(e.target.value);
+    setTitle(e.target.value);
   };
 
   // 로그인 상태 체크
@@ -61,7 +61,7 @@ const PostWrite = (props) => {
         <Grid margin="2vw">
           {/* 가격 */}
           <Input
-            type="text"
+            type="number"
             placeholder="숫자만 입력해주세요."
             value={price}
             _onChange={changePrice}
