@@ -3,18 +3,20 @@ import { produce } from 'immer';
 import { RESP } from '../../shared/response';
 
 // MOCK API
-const respSignUp = RESP.SIGNUP;
-const respCheckId = RESP.CHECK_ID;
 const respLogIn = RESP.LOGIN;
+const respCheckId = RESP.CHECK_ID;
+const respSignUp = RESP.SIGNUP;
 
 //actions
 // const LOG_IN = 'LOG_IN';
+const CHECK_ID = 'CHECK_ID';
 const LOG_OUT = 'LOG_OUT';
 const GET_USER = 'GET_USER';
 const SET_USER = 'SET_USER';
 
 //action creators
 
+const checkid = createAction(CHECK_ID, () => ({}));
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
 const getUser = createAction(GET_USER, (user) => ({ user }));
 const setUser = createAction(SET_USER, (user) => ({ user }));
@@ -38,8 +40,12 @@ const logInAPI = () => {
   }
 };
 
-const hi = () => {
-  return console.log('hi');
+const checkIdAPI = () => {
+  if (respCheckId.ok) {
+    alert('사용 가능한 아이디입니다.');
+    return true;
+  }
+  alert('이미 존재하는 아이디입니다.');
 };
 
 //reducer
@@ -64,7 +70,7 @@ export default handleActions(
 //action creator export
 const actionCreators = {
   logInAPI,
-  hi,
+  checkIdAPI,
 };
 
 export { actionCreators };

@@ -42,22 +42,29 @@ const PostWrite = (props) => {
     <Grid padding="0 13vw">
       {/* 글 제목 */}
       <Grid padding="16px" is_flex border_bottom>
-        <Text font=".7rem" bold>
-          제목
-        </Text>
+        <Grid width="6rem">
+          <Text font=".7rem" bold>
+            제목
+          </Text>
+        </Grid>
+
         <Grid margin="2vw">
           <Input type="text" value={title} _onChange={changeTitle} />
         </Grid>
-
-        <Text font=".7rem" bold>
-          0/40
-        </Text>
+        <Grid width="6rem">
+          <Text font=".7rem" bold>
+            0/40
+          </Text>
+        </Grid>
       </Grid>
       {/* 판매 가격 */}
       <Grid padding="16px" is_flex border_bottom>
-        <Text font=".7rem" bold>
-          가격
-        </Text>
+        <Grid width="10rem">
+          <Text font=".7rem" bold>
+            가격
+          </Text>
+        </Grid>
+
         <Grid margin="2vw">
           {/* 가격 */}
           <Input
@@ -68,7 +75,7 @@ const PostWrite = (props) => {
           />
         </Grid>
         <Grid>
-          <Grid>
+          <Grid width="10vw">
             <Text font=".7rem" bold>
               원
             </Text>
@@ -78,7 +85,7 @@ const PostWrite = (props) => {
 
       {/* 상품 이미지 */}
       <Grid padding="16px" is_flex border_bottom>
-        <Grid width="20%">
+        <Grid width="13rem">
           <Text font=".7rem" bold>
             상품 이미지
           </Text>

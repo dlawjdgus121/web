@@ -1,9 +1,4 @@
-import {
-  BrowserRouter as BrowserRouter,
-  Router,
-  Routes,
-  Route,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../redux/configureStore';
 
@@ -20,19 +15,22 @@ import React from 'react';
 
 function App() {
   return (
-    <BrowserRouter>
+    <React.Fragment>
       <Header></Header>
-      <Grid margin="5.8rem 0">
-        <Route path="/" exact component={Main}></Route>
-        <Route path="/login" exact component={Login}></Route>
-        <Route path="/signup" exact component={Signup}></Route>
-        {/* 게시물 작성 */}
-        <Route path="/write" exact component={PostWrite}></Route>
-        {/* 게시물 수정 */}
-        <Route path="/write/:id" exact component={PostWrite}></Route>
-        {/* 상세 페이지 */}
-        <Route path="/post/:id" exact component={PostDetail}></Route>
-      </Grid>
+      <ConnectedRouter history={history}>
+        <Grid margin="5.8rem 0">
+          <Route path="/" exact component={Main}></Route>
+          <Route path="/login" exact component={Login}></Route>
+          <Route path="/signup" exact component={Signup}></Route>
+          {/* 게시물 작성 */}
+          <Route path="/write" exact component={PostWrite}></Route>
+          {/* 게시물 수정 */}
+          <Route path="/write/:id" exact component={PostWrite}></Route>
+          {/* 상세 페이지 */}
+          <Route path="/post/:id" exact component={PostDetail}></Route>
+        </Grid>
+      </ConnectedRouter>
+
       <Button
         is_float
         text="+"
@@ -40,7 +38,7 @@ function App() {
           // history.push("/write");
         }}
       ></Button>
-    </BrowserRouter>
+    </React.Fragment>
   );
 }
 

@@ -5,9 +5,14 @@ import Input from '../elements/Input';
 import Text from '../elements/Text';
 import Button from '../elements/Button';
 
+import { useDispatch } from 'react-redux';
+import { actionCreators as userActions } from '../redux/modules/user'; // as : 별명 주는거
+
 const Signup = () => {
+  const dispatch = useDispatch();
+
   const checkId = () => {
-    console.log('아이디 중복 체크 버튼 클릭');
+    dispatch(userActions.checkIdAPI);
   };
 
   return (
