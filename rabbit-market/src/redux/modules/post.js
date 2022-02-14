@@ -1,5 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import { immerable, produce } from 'immer';
+import axios from 'axios';
 
 const SET_POST = 'SET_POST';
 const ADD_POST = 'ADD_POST';
@@ -28,7 +29,7 @@ const initialPost = {
   updatedAt: '2022-02-25',
   nickname: 'fasdfasdf',
   userId: 'id',
-  isSold: true,
+  isSold: false,
 };
 
 //middleware
@@ -36,17 +37,15 @@ const initialPost = {
 //전체 상품 조회
 const getPostAPI = () => {
   return async function (dispatch, useState, { history }) {
-    const token = localStorage.getItem('login-token');
-    console.log(token);
-    console.log(initialPost);
+    await axios.get('http://52.79.160.167/api/posts').then(function (res) {
+      console.log('addPostAPI : ', res);
+      dispatch(setPost(res));
+    });
   };
 };
 //판매 상품 등록
 const addPostAPI = () => {
-  return async function (dispatch, useState, { history }) {
-    const token = localStorage.getItem('login-token');
-    console.log(token);
-  };
+  return async function (dispatch, useState, { history }) {};
 };
 //판매 상품 수정
 const eidtPostAPI = () => {
