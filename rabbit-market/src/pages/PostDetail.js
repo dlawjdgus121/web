@@ -20,7 +20,7 @@ const PostDetail = (props) => {
   const postId = props.match.params.id;
   console.log(props);
 
-  const post = useSelector((store) => store.post.list);
+  const post = useSelector((store) => store.post.post);
   console.log(post, '포스트입니다');
 
   // 판매 상태 수정 함수

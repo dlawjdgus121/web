@@ -21,6 +21,7 @@ const getOnePost = createAction(ONE_POST, (post) => ({ post }));
 
 const initialState = {
   list: [],
+  post: [],
 };
 
 const initialPost = {
@@ -90,7 +91,7 @@ export default handleActions(
     [ONE_POST]: (state, action) =>
       produce(state, (draft) => {
         console.log(action.payload.post, '뭔데');
-        draft.list = action.payload.post;
+        draft.post = action.payload.post;
       }),
     [ADD_POST]: (state, action) =>
       produce(state, (draft) => {
@@ -123,6 +124,7 @@ const actionCreators = {
   addPostAPI,
   editPostAPI,
   deletePostAPI,
+  getOnePostAPI,
 };
 
 export { actionCreators };
