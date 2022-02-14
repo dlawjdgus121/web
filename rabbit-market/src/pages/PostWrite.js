@@ -141,7 +141,9 @@ const PostWrite = (props) => {
         ) : (
           <Button
             text="상품 등록하기"
-            _onClick={addPost()}
+            _onClick={() => {
+              addPost();
+            }}
             // disabled={contents === '' ? true : false}
           ></Button>
         )}

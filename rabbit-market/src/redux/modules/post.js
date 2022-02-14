@@ -47,7 +47,7 @@ const getPostAPI = () => {
 };
 //판매 상품 등록
 const addPostAPI = (token, title, price, imgurl, content) => {
-  return async function (dispatch, useState, { history }) {
+  return function (dispatch, useState, { history }) {
     const form = new FormData();
     const token = localStorage.getItem('login-token');
 
@@ -57,7 +57,7 @@ const addPostAPI = (token, title, price, imgurl, content) => {
     form.append('content', content);
     console.log(form);
 
-    await apis
+    apis
       .add(form, {
         headers: { Authorization: `Bearer ${token}` },
       })
