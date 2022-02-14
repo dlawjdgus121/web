@@ -25,8 +25,8 @@ export const apis = {
   // post
   posts: () => api.get('/api/posts'),
   post: (postId) => api.get(`/api/posts/${postId}`),
-  add: (token, title, price, imgurl, content) =>
-    api.post('/api/posts', { token, title, price, imgurl, content }),
+  add: (title, price, imgurl, content) =>
+    api.post('/api/posts', title, price, imgurl, content),
   image: (file) => api.post('/api/image', { file }),
   edit: (postId, title, price, imgurl, content, token) =>
     api.put(`/api/posts`, {

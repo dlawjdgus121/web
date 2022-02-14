@@ -32,9 +32,16 @@ const PostWrite = (props) => {
   const changeTitle = (e) => {
     setTitle(e.target.value);
   };
-  console.log(contents, price, title);
+
   const addPost = () => {
-    dispatch(postActions.addPostAPI(contents, price, title));
+    dispatch(
+      postActions.addPostAPI(
+        title,
+        price,
+        'https://user-images.githubusercontent.com/82128525/153698807-45fde35c-0ce8-499b-864b-14d6b439968d.jpeg',
+        contents
+      )
+    );
   };
 
   // 로그인 상태 체크
@@ -141,7 +148,9 @@ const PostWrite = (props) => {
         ) : (
           <Button
             text="상품 등록하기"
-            _onClick={addPost()}
+            _onClick={() => {
+              addPost();
+            }}
             // disabled={contents === '' ? true : false}
           ></Button>
         )}

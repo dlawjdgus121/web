@@ -46,21 +46,19 @@ const getPostAPI = () => {
   };
 };
 //판매 상품 등록
-const addPostAPI = (token, title, price, imgurl, content) => {
-  return async function (dispatch, useState, { history }) {
-    const form = new FormData();
+const addPostAPI = (title, price, imgurl, content) => {
+  return function (dispatch, useState, { history }) {
     const token = localStorage.getItem('login-token');
 
-    form.append('title', title);
-    form.append('price', price);
-    form.append('imgurl', imgurl);
-    form.append('content', content);
-    console.log(form);
+    // console.log({ title, price, content, imgurl });
 
-    await apis
-      .add(form, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+    apis
+      .add(
+        { title, price, imgurl, content },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then(function (res) {
         console.log(res);
       });

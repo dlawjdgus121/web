@@ -23,9 +23,6 @@ const Header = () => {
     console.log(isLogin);
   }, [isLogin]);
 
-  React.useEffect(() => {}, []);
-  // 상태 변환일때만
-
   if (is_token) {
     return (
       <HeaderBox>

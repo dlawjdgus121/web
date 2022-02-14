@@ -63,11 +63,12 @@ const checkIdDB = (id) => {
   };
 };
 
+// 로그아웃
 const logoutDB = () => {
   return function (dispatch, getState, { history }) {
     localStorage.removeItem('login-token');
     dispatch(logOut());
-    history.replace('/');
+    window.location.replace('/');
   };
 };
 

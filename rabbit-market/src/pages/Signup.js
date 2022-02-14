@@ -34,8 +34,6 @@ const Signup = (props) => {
     dispatch(userActions.registerDB(id, pwd, nickname));
   };
 
-  const _checkid = () => {};
-
   return (
     <>
       <Grid width="28rem" margin="auto" padding="3rem 1rem">

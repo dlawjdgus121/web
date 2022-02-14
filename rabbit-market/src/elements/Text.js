@@ -54,6 +54,9 @@ const P = styled.p`
   text-overflow: ellipsis;
   ${(props) =>
     props.is_contents ? 'word-break: break-all; white-space: nowrap;' : ''}
-  ${(props) => (props.is_deco ? '&:hover{text-decoration: underline;}' : ``)}
+  ${(props) =>
+    props.is_deco
+      ? '&:hover{text-decoration: underline;   cursor: pointer; color:blue}'
+      : ``}
 `;
 export default Text;
