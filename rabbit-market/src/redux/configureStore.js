@@ -8,7 +8,6 @@ import Post from './modules/post';
 import comment from './modules/comment';
 
 // 1. 히스토리 객체 생성
-
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({

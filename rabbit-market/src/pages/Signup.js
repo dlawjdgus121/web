@@ -8,7 +8,7 @@ import Button from '../elements/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user'; // as : 별명 주는거
 
-const Signup = () => {
+const Signup = (props) => {
   const dispatch = useDispatch();
 
   const [id, setId] = React.useState('');

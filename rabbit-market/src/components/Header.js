@@ -5,10 +5,15 @@ import Button from '../elements/Button';
 import Input from '../elements/Input';
 import Image from '../elements/Image';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { actionCreators as userActions } from '../redux/modules/user'; // as : 별명 주는거
+
+// 페이지 이동
+import { history } from '../redux/configureStore';
 
 const Header = () => {
-  // const is_login = useSelector((state) => state.user.is_login);
+  const dispatch = useDispatch();
+
   const is_tokken = localStorage.getItem('login-token') ? true : false;
 
   if (is_tokken) {
@@ -16,27 +21,36 @@ const Header = () => {
       <HeaderBox>
         <Grid is_flex is_header>
           {/* 로고 이미지 */}
-          <Grid width="20%">
+          <Grid
+            width="20rem"
+            _onClick={() => {
+              history.push('/');
+            }}
+          >
             <Image shape="logo" src={'/img/logo2.png'} />
           </Grid>
           {/* 검색창, 로그인 회원가입 버튼 */}
-          <Grid is_flex width="75%">
-            <Grid margin="0 15vw 0 0">
-              <Input placeholder="상품명 입력" is_header />
-            </Grid>
-            <Grid is_flex width="40%">
+          <Grid margin="0 5vh" margin="0 1vw">
+            <Input placeholder="상품명 입력" is_header />
+          </Grid>
+          <Grid is_flex width="30rem">
+            <Grid>
               <Button
                 text="내 정보"
-                margin="0 2%"
+                margin="0 1px"
                 _onClick={() => {}}
                 border_radius="2px"
-              ></Button>
+              />
+            </Grid>
+            <Grid>
               <Button
                 text="로그아웃"
-                margin="0 2%"
-                _onClick={() => {}}
+                margin="0 2px"
+                _onClick={() => {
+                  dispatch(userActions.logoutDB());
+                }}
                 border_radius="2px"
-              ></Button>
+              />
             </Grid>
           </Grid>
         </Grid>
@@ -47,27 +61,38 @@ const Header = () => {
       <HeaderBox>
         <Grid is_flex is_header>
           {/* 로고 이미지 */}
-          <Grid width="20%">
+          <Grid
+            width="20rem"
+            _onClick={() => {
+              history.push('/');
+            }}
+          >
             <Image shape="logo" src={'/img/logo2.png'} />
           </Grid>
           {/* 검색창, 로그인 회원가입 버튼 */}
-          <Grid is_flex width="75%">
-            <Grid margin="0 15vw 0 0">
-              <Input placeholder="상품명 입력" is_header />
-            </Grid>
-            <Grid is_flex width="40%">
+          <Grid margin="0 5vh" margin="0 1vw">
+            <Input placeholder="상품명 입력" is_header />
+          </Grid>
+          <Grid is_flex width="30rem">
+            <Grid>
               <Button
                 text="로그인"
-                margin="0 2%"
-                _onClick={() => {}}
+                margin="0 1px"
+                _onClick={() => {
+                  history.push('/login');
+                }}
                 border_radius="2px"
-              ></Button>
+              />
+            </Grid>
+            <Grid>
               <Button
                 text="회원가입"
-                margin="0 2%"
-                _onClick={() => {}}
+                margin="0 2px"
+                _onClick={() => {
+                  history.push('/signup');
+                }}
                 border_radius="2px"
-              ></Button>
+              />
             </Grid>
           </Grid>
         </Grid>

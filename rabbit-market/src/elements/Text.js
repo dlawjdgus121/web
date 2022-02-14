@@ -11,6 +11,7 @@ const Text = (props) => {
     is_contents,
     children,
     is_hidden,
+    is_deco,
   } = props;
 
   const styles = {
@@ -21,6 +22,7 @@ const Text = (props) => {
     is_end: is_end,
     is_contents: is_contents,
     is_hidden: is_hidden,
+    is_deco: is_deco,
   };
   return (
     <P {...styles} hidden={is_hidden}>
@@ -38,6 +40,7 @@ Text.defaultProps = {
   is_end: false,
   is_contents: false,
   is_hidden: false,
+  is_deco: false,
 };
 
 const P = styled.p`

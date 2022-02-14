@@ -8,23 +8,14 @@ import Button from '../elements/Button';
 import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user'; // as : 별명 주는거
 
-const Login = () => {
+const Login = (props) => {
   const dispatch = useDispatch();
 
   const [id, setId] = React.useState('');
   const [pwd, setPwd] = React.useState('');
 
-  const changeId = (e) => {
-    setId(e.target.value);
-  };
-
-  const changePwd = (e) => {
-    setPwd(e.target.value);
-  };
-
   const login = () => {
     dispatch(userActions.setLoginDB(id, pwd));
-    // console.log(id, pwd);
   };
 
   return (
@@ -38,7 +29,9 @@ const Login = () => {
         <Grid is_flex padding="0px 1rem">
           <Input
             value={id}
-            _onChange={changeId}
+            _onChange={(e) => {
+              setId(e.target.value);
+            }}
             placeholder="아이디"
             border="none"
             border_bottom="1px solid #6667ab"
@@ -49,7 +42,9 @@ const Login = () => {
         <Grid padding="0px 1rem">
           <Input
             value={pwd}
-            _onChange={changePwd}
+            _onChange={(e) => {
+              setPwd(e.target.value);
+            }}
             placeholder="비밀번호"
             border="none"
             border_bottom="1px solid #6667ab"
@@ -74,8 +69,8 @@ const Login = () => {
           center
         >
           <Text>
-            아직 토끼장터 회원이 아니시라면?{' '}
-            <a href="http://www.naver.com">회원가입</a>
+            아직 토끼장터 회원이 아니시라면?
+            <Text is_deco>회원가입</Text>
           </Text>
         </Grid>
       </Grid>

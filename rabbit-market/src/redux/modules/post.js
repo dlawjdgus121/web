@@ -39,6 +39,7 @@ const getPostAPI = () => {
   return async function (dispatch, useState, { history }) {
     await axios.get('http://52.79.160.167/api/posts').then(function (res) {
       console.log('addPostAPI : ', res);
+      console.log(history);
       dispatch(setPost(res));
     });
   };
