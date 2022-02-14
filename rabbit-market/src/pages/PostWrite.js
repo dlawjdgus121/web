@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
 import { history } from '../redux/configureStore';
 
@@ -13,6 +14,7 @@ import { actionCreators as postActions } from '../redux/modules/post';
 
 const PostWrite = (props) => {
   const token = localStorage.getItem('login-token');
+  const dispatch = useDispatch(null);
 
   const [is_edit, setIsEdit] = React.useState(false);
   const [contents, setContent] = React.useState('');
@@ -32,7 +34,7 @@ const PostWrite = (props) => {
   };
   console.log(contents, price, title);
   const addPost = () => {
-    dispatchEvent(postActions.addPostAPI(contents, price, title));
+    dispatch(postActions.addPostAPI(contents, price, title));
   };
 
   // 로그인 상태 체크
@@ -140,7 +142,7 @@ const PostWrite = (props) => {
           <Button
             text="상품 등록하기"
             _onClick={addPost()}
-            disabled={contents === '' ? true : false}
+            // disabled={contents === '' ? true : false}
           ></Button>
         )}
       </Grid>
