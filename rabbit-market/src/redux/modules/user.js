@@ -1,21 +1,19 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
-import { RESP } from '../../shared/response';
 import { apis } from '../../shared/api';
 
 //actions
 // const LOG_IN = 'LOG_IN';
 const CHECK_ID = 'CHECK_ID';
 const LOG_OUT = 'LOG_OUT';
-const GET_USER = 'GET_USER';
 const SET_USER = 'SET_USER';
+// const GET_USER = 'GET_USER';
 
 //action creators
-
-const checkid = createAction(CHECK_ID, (is_check_id) => ({ is_check_id }));
+const checkid = createAction(CHECK_ID, () => ({}));
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
-const getUser = createAction(GET_USER, (user) => ({ user }));
 const setUser = createAction(SET_USER, (user) => ({ user }));
+// const getUser = createAction(GET_USER, (user) => ({ user }));
 
 //initialState
 const initialState = {
@@ -25,35 +23,32 @@ const initialState = {
 };
 
 // 회원가입
-const registerDB = (id, nickname, pw, pwcheck) => {
-  return function (dispatch, getState, { history }) {
-    apis
-      .signup(id, nickname, pw, pwcheck)
-      .then((res) => {
-        history.push('/login');
-      })
-      .catch((err) => {
-        window.alert('이미 존재하는 아이디 또는 이메일입니다.');
-      });
+const registerDB = (id, pw, nickname) => {
+  return function ({ history }) {
+    apis.signup(id, pw, nickname).then((res) => {
+      if (!res.data.ok) {
+        alert(res.data.result);
+        return;
+      }
+    });
   };
 };
 
 // 로그인
 const setLoginDB = (id, pwd) => {
-  return function (dispatch, { history }) {
-    apis
-      .login(id, pwd)
-      .then((res) => {
-        localStorage.setItem('idToken', res.data[0].token);
-        dispatch(setUser({ id: id }));
-        history.replace('/');
-      })
-      .catch((err) => {
-        window.alert('없는 회원정보 입니다! 회원가입을 해주세요!');
-      });
+  return function (dispatch, getState, { history }) {
+    apis.login(id, pwd).then((res) => {
+      localStorage.setItem('login-token', res.data.token);
+      dispatch(setUser({ id: id }));
+      history.push('/');
+
+      if (res.statusText !== 'OK')
+        alert('없는 회원정보 입니다! 회원가입을 해주세요!');
+    });
   };
 };
 
+// 아이디 체크
 const checkIdDB = (id) => {
   return function (dispatch) {
     apis
@@ -68,9 +63,22 @@ const checkIdDB = (id) => {
   };
 };
 
+const logoutDB = () => {
+  return function (dispatch, getState, { history }) {
+    localStorage.removeItem('login-token');
+    dispatch(logOut());
+    history.replace('/');
+  };
+};
+
 //reducer
 export default handleActions(
   {
+    [CHECK_ID]: (state, action) =>
+      produce(state, (draft) => {
+        draft.is_check_id = true;
+      }),
+
     [SET_USER]: (state, action) =>
       produce(state, (draft) => {
         draft.user = action.payload.user;
@@ -82,7 +90,7 @@ export default handleActions(
         draft.user = null;
         draft.is_login = false;
       }),
-    [GET_USER]: (state, action) => produce(state, (draft) => {}),
+    // [GET_USER]: (state, action) => produce(state, (draft) => {}),
   },
   initialState
 );
@@ -91,7 +99,7 @@ export default handleActions(
 const actionCreators = {
   registerDB,
   setLoginDB,
-  logOut,
+  logoutDB,
   checkIdDB,
 };
 
