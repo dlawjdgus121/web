@@ -68,10 +68,8 @@ const Login = (props) => {
           border="1px solid #d3d3d3"
           center
         >
-          <Text>
-            아직 토끼장터 회원이 아니시라면?
-            <Text is_deco>회원가입</Text>
-          </Text>
+          <Text>아직 토끼장터 회원이 아니시라면?</Text>
+          <Text is_deco>회원가입</Text>
         </Grid>
       </Grid>
     </>

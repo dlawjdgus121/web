@@ -53,28 +53,32 @@ const PostDetail = (props) => {
       </Grid>
       <CommentWrite />
       <CommentList />
-      {/* <Permit> */}
-      <Grid is_flex margin="10vh 0 0">
-        <Grid width="10rem" padding="1px">
-          <Button text="상품 삭제" _onClick={() => {}} border_radius="2px" />
-        </Grid>
-        <Grid is_flex width="20rem">
-          <Grid padding="1px">
-            <Button text="상품 수정" _onClick={() => {}} border_radius="2px" />
+      <Permit>
+        <Grid is_flex margin="10vh 0 0">
+          <Grid width="10rem" padding="1px">
+            <Button text="상품 삭제" _onClick={() => {}} border_radius="2px" />
           </Grid>
+          <Grid is_flex width="20rem">
+            <Grid padding="1px">
+              <Button
+                text="상품 수정"
+                _onClick={() => {}}
+                border_radius="2px"
+              />
+            </Grid>
 
-          <Grid padding="1px">
-            <Button
-              text={isSold ? '판매 완료' : '판매중'}
-              _onClick={() => {
-                setState();
-              }}
-              border_radius="2px"
-            />
+            <Grid padding="1px">
+              <Button
+                text={isSold ? '판매 완료' : '판매중'}
+                _onClick={() => {
+                  setState();
+                }}
+                border_radius="2px"
+              />
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
-      {/* </Permit> */}
+      </Permit>
     </Grid>
   );
 };
