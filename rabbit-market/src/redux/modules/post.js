@@ -74,7 +74,7 @@ const getOnePostAPI = (postId) => {
   };
 };
 //판매 상품 수정
-const eidtPostAPI = () => {
+const editPostAPI = () => {
   return async function (dispatch, useState, { history }) {};
 };
 //판매 상품 삭제
@@ -121,7 +121,8 @@ const actionCreators = {
   getOnePost,
   getPostAPI,
   addPostAPI,
-  getOnePostAPI,
+  editPostAPI,
+  deletePostAPI,
 };
 
 export { actionCreators };
