@@ -40,7 +40,8 @@ const Main = (props) => {
             <Grid
               key={p.id}
               width="30%"
-              margin="0.5rem  0.5rem"
+              min_width="8.7rem"
+              margin="0.5rem 0"
               _onClick={() => {
                 history.push(`/post/${p.id}`);
               }}

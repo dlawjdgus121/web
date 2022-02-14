@@ -2,11 +2,12 @@ import styled from 'styled-components';
 import React from 'react';
 
 const Image = (props) => {
-  const { shape, src, size } = props;
+  const { shape, src, size, is_main } = props;
   //스타일만 모아주기
   const styles = {
     src: src,
     size: size,
+    is_main: is_main,
   };
   //만약 모양이 원이면 서클을 적용해 주세용
   if (shape === 'logo') {
@@ -14,7 +15,7 @@ const Image = (props) => {
   }
   if (shape === 'rectangle') {
     return (
-      <AspectOuter size={size}>
+      <AspectOuter size={size} is_main={is_main}>
         <AspectInner {...styles}></AspectInner>
       </AspectOuter>
     );
@@ -25,13 +26,15 @@ const Image = (props) => {
 Image.defaultProps = {
   shape: 'rectangle',
   src: 'https://s1.best-wallpaper.net/wallpaper/m/1812/Portugal-Porto-river-bridge-city-morning_m.jpg',
-  size: 36,
+  size: '36',
+  is_main: false,
 };
 const AspectOuter = styled.div`
   width: 100%;
-  min-width: 20vw;
   --size: ${(props) => props.size}vw;
-  width: var(--size);
+
+  /* width: var(--size); */
+  ${(props) => (props.is_main ? 'width:100%;' : 'width: var(--size);')}
   height: var(--size);
 `;
 
@@ -43,8 +46,9 @@ const AspectInner = styled.div`
   background-size: cover;
   background-position: center;
   object-fit: fill;
+  width: 100%;
   --size: ${(props) => props.size}vw;
-  width: var(--size);
+  ${(props) => (props.is_main ? 'width:100%;' : 'width: var(--size);')}
   height: var(--size);
 `;
 

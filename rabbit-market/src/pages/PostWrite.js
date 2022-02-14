@@ -83,28 +83,28 @@ const PostWrite = (props) => {
         </Grid>
       </Grid>
       {/* 판매 가격 */}
-      <Grid padding="16px" is_flex border_bottom>
-        <Grid width="10rem">
-          <Text font=".7rem" bold>
-            가격
-          </Text>
-        </Grid>
-
-        <Grid margin="2vw">
-          {/* 가격 */}
-          <Input
-            type="number"
-            placeholder="숫자만 입력해주세요."
-            value={price}
-            _onChange={changePrice}
-          />
-        </Grid>
-        <Grid>
-          <Grid width="10vw">
+      <Grid padding="16px" only_flex border_bottom>
+        <Grid is_flex width="50%">
+          <Grid width="6rem">
             <Text font=".7rem" bold>
-              원
+              가격
             </Text>
           </Grid>
+
+          <Grid margin="2vw">
+            <Input
+              type="number"
+              placeholder="숫자만 입력해주세요."
+              value={price}
+              _onChange={changePrice}
+            />
+          </Grid>
+        </Grid>
+
+        <Grid width="6rem">
+          <Text font=".7rem" bold>
+            원
+          </Text>
         </Grid>
       </Grid>
 

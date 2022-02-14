@@ -28,36 +28,15 @@ export const apis = {
   add: (title, price, imgurl, content) =>
     api.post('/api/posts', title, price, imgurl, content),
   image: (file) => api.post('/api/image', { file }),
-  edit: (postId, title, price, imgurl, content, token) =>
-    api.put(`/api/posts`, {
-      postId,
-      title,
-      price,
-      imgurl,
-      content,
-      token,
-    }),
-  del: (token, postId) =>
+  edit: (postId, title, price, imgurl, content) =>
+    api.put(`/api/posts`, postId, title, price, imgurl, content),
+  del: (postId) =>
     api.delete(`api/posts`, {
-      token,
       postId,
     }),
 
   // comment
-  addComment: (token, postId, comment) =>
-    api.post(`/api/comments`, {
-      token,
-      postId,
-      comment,
-    }),
-  delComment: (token, commentId) =>
-    api.delete(`/api/comments`, {
-      token,
-      commentId,
-    }),
-  editComment: (token, postId) =>
-    api.patch(`/api/status`, {
-      token,
-      postId,
-    }),
+  addComment: (postId, comment) => api.post(`/api/comments`, postId, comment),
+  delComment: (commentId) => api.delete(`/api/comments`, commentId),
+  editComment: (postId) => api.patch(`/api/status`, postId),
 };

@@ -18,9 +18,13 @@ const Grid = (props) => {
     only_flex,
     is_parents,
     is_child,
+    is_grid,
+    min_width,
+    height,
   } = props;
 
   const styles = {
+    is_grid: is_grid,
     is_flex: is_flex,
     width: width,
     margin: margin,
@@ -34,6 +38,8 @@ const Grid = (props) => {
     only_flex: only_flex,
     is_parents: is_parents,
     is_child: is_child,
+    min_width: min_width,
+    height: height,
   };
 
   if (is_header) {
@@ -63,6 +69,9 @@ Grid.defaultProps = {
   only_flex: false,
   is_parents: false,
   is_child: false,
+  is_grid: false,
+  min_width: false,
+  height: '100%',
 };
 
 const GridBox = styled.div`
@@ -84,8 +93,12 @@ const GridBox = styled.div`
   ${(props) =>
     props.border_bottom ? `border-bottom: 1px solid rgb(200, 200, 200);` : ''}
   ${(props) => (props.is_wrap ? `flex-wrap:wrap;` : '')}
-  ${(props) => (props.only_flex ? `display:flex; align-items: center;` : '')}
-  ${(props) => (props.is_parents ? 'position: relative;' : '')}
+  ${(props) =>
+    props.only_flex ? `display:flex; align-items: center; gap:2vw;` : ''}
+  ${(props) => (props.is_parents ? 'position: relative;' : '')} /* ${(props) =>
+    props.is_grid ? `display:flex; place-content:flex-start;` : ''} */
+  ${(props) => (props.min_width ? `min-width:${props.min_width};` : '')}
+  ${(props) => (props.height ? `height:${props.height}` : '')}
 `;
 
 const HeaderBox = styled.div`

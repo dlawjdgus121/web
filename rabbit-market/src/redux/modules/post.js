@@ -65,7 +65,7 @@ const addPostAPI = (title, price, imgurl, content) => {
   };
 };
 //판매 상품 수정
-const eidtPostAPI = () => {
+const editPostAPI = () => {
   return async function (dispatch, useState, { history }) {};
 };
 //판매 상품 삭제
@@ -106,6 +106,8 @@ const actionCreators = {
   deletePost,
   getPostAPI,
   addPostAPI,
+  editPostAPI,
+  deletePostAPI,
 };
 
 export { actionCreators };
