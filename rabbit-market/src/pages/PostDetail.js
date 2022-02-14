@@ -1,5 +1,6 @@
 import React from 'react';
 
+//컴포넌트 임포트
 import CommentWrite from '../components/CommentWrite';
 import CommentList from '../components/CommentList';
 import Grid from '../elements/Grid';
@@ -8,14 +9,28 @@ import Text from '../elements/Text';
 import Button from '../elements/Button';
 import Permit from '../shared/Permit';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCreators as postActions } from '../redux/modules/post';
+
 const PostDetail = (props) => {
+  const dispatch = useDispatch();
   // 판매 상태 저장 state
   const [isSold, setIsSold] = React.useState(false);
+  // 포스트 아이디 찾아내기
+  const postId = props.match.params.id;
+  console.log(props);
+
+  const post = useSelector((store) => store.post.list);
+  console.log(post, '포스트입니다');
 
   // 판매 상태 수정 함수
   function setState() {
     setIsSold(!isSold);
   }
+
+  React.useEffect(() => {
+    dispatch(postActions.getOnePostAPI(postId));
+  }, []);
 
   return (
     <Grid padding="0 13vw">
@@ -26,15 +41,15 @@ const PostDetail = (props) => {
         <Grid width="57%">
           <Grid border_bottom>
             <Text size="2.5vw" bold>
-              글제목은 20자까지
+              {post.title}
             </Text>
             <Text size="3vw" bold>
-              100,000,000,000 원
+              {post.price} 원
             </Text>
           </Grid>
           <Text size="3vw" bold></Text>
           <Text size="1.5vw" is_end>
-            2022.01.01
+            {post.createdAt}
           </Text>
           <Text size="1.5vw" is_end>
             {isSold ? '판매 완료' : '판매중'}
@@ -47,8 +62,7 @@ const PostDetail = (props) => {
           상품 정보
         </Text>
         <Text Text size="1.5vw" is_contents>
-          안녕하세요 이 상품은 뭘까?? 뭐지뭐지뭐지 줄 바꿈도 저장해야 하는데
-          어떡하지 왜
+          {post.content}
         </Text>
       </Grid>
       <CommentWrite />

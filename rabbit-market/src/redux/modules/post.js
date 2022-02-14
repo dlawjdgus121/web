@@ -8,6 +8,7 @@ const SET_POST = 'SET_POST';
 const ADD_POST = 'ADD_POST';
 const EDIT_POST = 'EDIT_POST';
 const DELETE_POST = 'DELETE_POST';
+const ONE_POST = 'ONE_POST';
 
 const setPost = createAction(SET_POST, (post_list) => ({ post_list }));
 const addPost = createAction(ADD_POST, (post) => ({ post }));
@@ -16,6 +17,7 @@ const editPost = createAction(EDIT_POST, (post_id, post) => ({
   post,
 }));
 const deletePost = createAction(DELETE_POST, (post_idx) => ({ post_idx }));
+const getOnePost = createAction(ONE_POST, (post) => ({ post }));
 
 const initialState = {
   list: [],
@@ -50,8 +52,6 @@ const addPostAPI = (title, price, imgurl, content) => {
   return function (dispatch, useState, { history }) {
     const token = localStorage.getItem('login-token');
 
-    // console.log({ title, price, content, imgurl });
-
     apis
       .add(
         { title, price, imgurl, content },
@@ -62,6 +62,15 @@ const addPostAPI = (title, price, imgurl, content) => {
       .then(function (res) {
         console.log(res);
       });
+  };
+};
+//판매 상품 하나만 가져오기
+const getOnePostAPI = (postId) => {
+  return async function (dispatch, useState, { history }) {
+    await apis.post(postId).then(function (res) {
+      console.log(res);
+      dispatch(getOnePost(res.data.post));
+    });
   };
 };
 //판매 상품 수정
@@ -77,6 +86,11 @@ export default handleActions(
     [SET_POST]: (state, action) =>
       produce(state, (draft) => {
         draft.list = action.payload.post_list;
+      }),
+    [ONE_POST]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(action.payload.post, '뭔데');
+        draft.list = action.payload.post;
       }),
     [ADD_POST]: (state, action) =>
       produce(state, (draft) => {
@@ -104,8 +118,10 @@ const actionCreators = {
   addPost,
   editPost,
   deletePost,
+  getOnePost,
   getPostAPI,
   addPostAPI,
+  getOnePostAPI,
 };
 
 export { actionCreators };

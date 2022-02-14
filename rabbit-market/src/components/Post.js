@@ -12,7 +12,7 @@ import { useSelector } from 'react-redux';
 const Post = (props) => {
   return (
     <>
-      <Image src={props.imgurl}></Image>
+      <Image size={22} src={props.imgurl}></Image>
       <Text bold size="1rem">
         상품명 : {props.title}
       </Text>
