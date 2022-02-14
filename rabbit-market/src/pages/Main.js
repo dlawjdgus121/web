@@ -13,6 +13,8 @@ const Main = (props) => {
   const post_list = useSelector((state) => state.post.list);
   console.log('main post : ', post_list);
 
+  const { history } = props;
+
   React.useEffect(() => {
     if (post_list.length === 0) {
       dispatch(postActions.getPostAPI());
@@ -34,7 +36,18 @@ const Main = (props) => {
 
       <Grid padding="2vw 13vw 0vw 13vw" only_flex is_wrap>
         {post_list.map((p, idx) => {
-          return <Post key={p.id} {...p}></Post>;
+          return (
+            <Grid
+              key={p.id}
+              width="30%"
+              margin="0.5rem  0.5rem"
+              _onClick={() => {
+                history.push(`/post/${p.id}`);
+              }}
+            >
+              <Post key={p.id} {...p}></Post>
+            </Grid>
+          );
         })}
       </Grid>
     </>

@@ -12,14 +12,12 @@ import { useSelector } from 'react-redux';
 const Post = (props) => {
   return (
     <>
-      <Grid width="30%" margin="0.5rem  0.5rem">
-        <Image src={props.imgurl}></Image>
-        <Text bold size="1rem">
-          상품명 : {props.title}
-        </Text>
-        <Text size=".9rem">가격 : {props.price}</Text>
-        <Text size=".7rem">작성시간 : {props.createdAt}</Text>
-      </Grid>
+      <Image src={props.imgurl}></Image>
+      <Text bold size="1rem">
+        상품명 : {props.title}
+      </Text>
+      <Text size=".9rem">가격 : {props.price}</Text>
+      <Text size=".7rem">작성시간 : {props.createdAt}</Text>
     </>
   );
 };

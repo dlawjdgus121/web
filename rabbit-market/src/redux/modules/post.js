@@ -2,6 +2,8 @@ import { createAction, handleActions } from 'redux-actions';
 import { immerable, produce } from 'immer';
 import axios from 'axios';
 
+import { apis } from '../../shared/api';
+
 const SET_POST = 'SET_POST';
 const ADD_POST = 'ADD_POST';
 const EDIT_POST = 'EDIT_POST';
@@ -37,15 +39,17 @@ const initialPost = {
 //전체 상품 조회
 const getPostAPI = () => {
   return async function (dispatch, useState, { history }) {
-    await axios.get('http://52.79.160.167/api/posts').then(function (res) {
+    await apis.posts().then(function (res) {
       console.log('addPostAPI : ', res);
       dispatch(setPost(res.data.posts));
     });
   };
 };
 //판매 상품 등록
-const addPostAPI = () => {
-  return async function (dispatch, useState, { history }) {};
+const addPostAPI = (contents, price, title) => {
+  return async function (dispatch, useState, { history }) {
+    await apis.add(contents, price, title).then(function (res) {});
+  };
 };
 //판매 상품 수정
 const eidtPostAPI = () => {
@@ -88,6 +92,7 @@ const actionCreators = {
   editPost,
   deletePost,
   getPostAPI,
+  addPostAPI,
 };
 
 export { actionCreators };
