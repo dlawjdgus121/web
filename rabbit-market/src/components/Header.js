@@ -5,7 +5,7 @@ import Button from '../elements/Button';
 import Input from '../elements/Input';
 import Image from '../elements/Image';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user'; // as : 별명 주는거
 
 // 페이지 이동
@@ -14,9 +14,19 @@ import { history } from '../redux/configureStore';
 const Header = () => {
   const dispatch = useDispatch();
 
-  const is_tokken = localStorage.getItem('login-token') ? true : false;
+  const is_token = localStorage.getItem('login-token') ? true : false;
 
-  if (is_tokken) {
+  // 로그인 체크
+  const isLogin = useSelector((state) => state.user.is_login);
+
+  React.useEffect(() => {
+    console.log(isLogin);
+  }, [isLogin]);
+
+  React.useEffect(() => {}, []);
+  // 상태 변환일때만
+
+  if (is_token) {
     return (
       <HeaderBox>
         <Grid is_flex is_header>

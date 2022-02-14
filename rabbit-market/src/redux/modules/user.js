@@ -40,7 +40,7 @@ const setLoginDB = (id, pwd) => {
     apis.login(id, pwd).then((res) => {
       localStorage.setItem('login-token', res.data.token);
       dispatch(setUser({ id: id }));
-      history.push('/');
+      history.replace('/');
 
       if (res.statusText !== 'OK')
         alert('없는 회원정보 입니다! 회원가입을 해주세요!');
