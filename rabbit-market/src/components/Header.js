@@ -8,10 +8,10 @@ import Image from '../elements/Image';
 import { useSelector, useDispatch } from 'react-redux';
 
 const Header = () => {
-  const is_login = useSelector((state) => state.user.is_login);
+  // const is_login = useSelector((state) => state.user.is_login);
   const is_tokken = localStorage.getItem('login-token') ? true : false;
 
-  if (is_login && is_tokken) {
+  if (is_tokken) {
     return (
       <HeaderBox>
         <Grid is_flex is_header>
