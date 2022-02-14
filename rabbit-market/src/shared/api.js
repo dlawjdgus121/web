@@ -8,12 +8,6 @@ const api = axios.create({
   },
 });
 
-// api.interceptors.request.use(function (config) {
-//   const accessToken = document.cookie.split('=')[1];
-//   config.headers.common['X-AUTH-TOKEN'] = `${accessToken}`;
-//   return config;
-// });
-
 export const apis = {
   // user
   login: (id, pw) => api.post('/api/login', { loginId: id, password: pw }),
