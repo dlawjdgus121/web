@@ -1,4 +1,7 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+
+import { history } from '../redux/configureStore';
 
 // component import
 import Grid from '../elements/Grid';
@@ -7,7 +10,12 @@ import Button from '../elements/Button';
 import Image from '../elements/Image';
 import Input from '../elements/Input';
 
+import { actionCreators as postActions } from '../redux/modules/post';
+
 const PostWrite = (props) => {
+  const token = localStorage.getItem('login-token');
+  const dispatch = useDispatch(null);
+
   const [is_edit, setIsEdit] = React.useState(false);
   const [contents, setContent] = React.useState('');
   const [price, setPrice] = React.useState('');
@@ -24,19 +32,29 @@ const PostWrite = (props) => {
   const changeTitle = (e) => {
     setTitle(e.target.value);
   };
+  console.log(contents, price, title);
+  const addPost = () => {
+    dispatch(postActions.addPostAPI(contents, price, title));
+  };
 
   // 로그인 상태 체크
-  if (false) {
-    return (
-      <Grid margin="100px 0px" padding="16px" center>
-        <Text size="32px" bold>
-          앗! 잠깐!
-        </Text>
-        <Text size="16px">로그인 후에만 글을 쓸 수 있어요!</Text>
-        <Button _onClick={() => {}}>로그인하러 가기</Button>
-      </Grid>
-    );
-  }
+  // if (token === null) {
+  //   return (
+  //     <Grid margin="100px 0px" padding="16px" center>
+  //       <Text size="32px" bold>
+  //         앗! 잠깐!
+  //       </Text>
+  //       <Text size="16px">로그인 후에만 글을 쓸 수 있어요!</Text>
+  //       <Button
+  //         _onClick={() => {
+  //           history.replace('/login');
+  //         }}
+  //       >
+  //         로그인하러 가기
+  //       </Button>
+  //     </Grid>
+  //   );
+  // }
   // 글 쓰기 페이지
   return (
     <Grid padding="0 13vw">
@@ -123,8 +141,8 @@ const PostWrite = (props) => {
         ) : (
           <Button
             text="상품 등록하기"
-            _onClick={console.log('게시글 작성 버튼 클릭')}
-            disabled={contents === '' ? true : false}
+            _onClick={addPost()}
+            // disabled={contents === '' ? true : false}
           ></Button>
         )}
       </Grid>
