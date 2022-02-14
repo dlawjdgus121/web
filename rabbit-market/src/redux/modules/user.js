@@ -1,6 +1,5 @@
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
-import { RESP } from '../../shared/response';
 import { apis } from '../../shared/api';
 
 //actions
@@ -12,7 +11,7 @@ const SET_USER = 'SET_USER';
 
 //action creators
 
-const checkid = createAction(CHECK_ID, (is_check_id) => ({ is_check_id }));
+const checkid = createAction(CHECK_ID, () => ({}));
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
 const getUser = createAction(GET_USER, (user) => ({ user }));
 const setUser = createAction(SET_USER, (user) => ({ user }));
@@ -25,16 +24,15 @@ const initialState = {
 };
 
 // 회원가입
-const registerDB = (id, nickname, pw, pwcheck) => {
-  return function (dispatch, getState, { history }) {
-    apis
-      .signup(id, nickname, pw, pwcheck)
-      .then((res) => {
-        history.push('/login');
-      })
-      .catch((err) => {
-        window.alert('이미 존재하는 아이디 또는 이메일입니다.');
-      });
+const registerDB = (id, pw, nickname) => {
+  console.log(id, pw, nickname);
+  return function ({ history }) {
+    apis.signup(id, pw, nickname).then((res) => {
+      console.log(res);
+      if (!res.data.ok) {
+        alert(res.data.result);
+      }
+    });
   };
 };
 
@@ -54,6 +52,7 @@ const setLoginDB = (id, pwd) => {
   };
 };
 
+// 아이디 체크
 const checkIdDB = (id) => {
   return function (dispatch) {
     apis
@@ -71,6 +70,11 @@ const checkIdDB = (id) => {
 //reducer
 export default handleActions(
   {
+    [CHECK_ID]: (state, action) =>
+      produce(state, (draft) => {
+        draft.is_check_id = true;
+      }),
+
     [SET_USER]: (state, action) =>
       produce(state, (draft) => {
         draft.user = action.payload.user;

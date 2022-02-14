@@ -5,28 +5,36 @@ import Input from '../elements/Input';
 import Text from '../elements/Text';
 import Button from '../elements/Button';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user'; // as : 별명 주는거
 
 const Signup = () => {
   const dispatch = useDispatch();
 
-  const [isCheckId, setIsCheckId] = React.useState(false);
   const [id, setId] = React.useState('');
   const [nickname, setNickname] = React.useState('');
   const [pwd, setPwd] = React.useState('');
   const [rePwd, setRePwd] = React.useState('');
 
   const checkId = () => {
+    if (id === '') {
+      alert('아이디를 입력해 주세요.');
+      return;
+    }
     dispatch(userActions.checkIdDB(id));
   };
-
   const _signUp = () => {
     if (id === '' || nickname === '' || pwd === '' || rePwd === '') {
       alert('빈칸을 다 채워주세요.');
-    } else if (pwd !== rePwd)
+      return;
+    } else if (pwd !== rePwd) {
       alert('비밀번호와 비밀번호 확인이 서로 다릅니다. 다시 적어주세요.');
+      return;
+    }
+    dispatch(userActions.registerDB(id, pwd, nickname));
   };
+
+  const _checkid = () => {};
 
   return (
     <>
@@ -52,12 +60,18 @@ const Signup = () => {
             _onClick={() => {
               checkId();
             }}
+            is_disabled={useSelector((state) => state.user.is_check_id)}
           >
             중복확인
           </Button>
         </Grid>
         <Grid padding="0px 1rem">
-          <Text size="0.5rem">아이디 중복체크를 해주세요 :)</Text>
+          <Text
+            size="0.5rem"
+            is_hidden={useSelector((state) => state.user.is_check_id)}
+          >
+            아이디 중복체크를 해주세요 :)
+          </Text>
         </Grid>
         <Grid padding="0px 1rem">
           <Input
@@ -98,6 +112,9 @@ const Signup = () => {
             _onClick={() => {
               _signUp();
             }}
+            is_disabled={
+              id === '' || nickname === '' || pwd === '' || rePwd === ''
+            }
           >
             가입하기
           </Button>

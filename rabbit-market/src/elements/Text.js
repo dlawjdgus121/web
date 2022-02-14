@@ -2,7 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Text = (props) => {
-  const { bold, color, size, margin, is_end, is_contents, children } = props;
+  const {
+    bold,
+    color,
+    size,
+    margin,
+    is_end,
+    is_contents,
+    children,
+    is_hidden,
+  } = props;
 
   const styles = {
     bold: bold,
@@ -11,8 +20,13 @@ const Text = (props) => {
     margin: margin,
     is_end: is_end,
     is_contents: is_contents,
+    is_hidden: is_hidden,
   };
-  return <P {...styles}>{children}</P>;
+  return (
+    <P {...styles} hidden={is_hidden}>
+      {children}
+    </P>
+  );
 };
 
 Text.defaultProps = {
@@ -23,6 +37,7 @@ Text.defaultProps = {
   margin: false,
   is_end: false,
   is_contents: false,
+  is_hidden: false,
 };
 
 const P = styled.p`
