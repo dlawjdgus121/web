@@ -34,12 +34,12 @@ const Main = (props) => {
         <Text size="2rem">상품들이 깡충깡충</Text>
       </Grid>
 
-      <Grid padding="2vw 13vw 0vw 13vw" only_flex is_wrap>
+      <Grid padding="2vw 13vw 0vw 13vw" is_grid is_wrap>
         {post_list.map((p, idx) => {
           return (
             <Grid
               key={p.id}
-              width="30%"
+              width="100%"
               min_width="8.7rem"
               margin="0.5rem 0"
               _onClick={() => {

@@ -95,8 +95,14 @@ const GridBox = styled.div`
   ${(props) => (props.is_wrap ? `flex-wrap:wrap;` : '')}
   ${(props) =>
     props.only_flex ? `display:flex; align-items: center; gap:2vw;` : ''}
-  ${(props) => (props.is_parents ? 'position: relative;' : '')} /* ${(props) =>
-    props.is_grid ? `display:flex; place-content:flex-start;` : ''} */
+  ${(props) => (props.is_parents ? 'position: relative;' : '')}
+   ${(props) =>
+    props.is_grid
+      ? `display:grid; grid-template-columns: repeat(3,1fr); place-items: center; gap:2vw;
+      @media (max-width: 595px) {
+        grid-template-columns: repeat(2, 1fr)
+      };`
+      : ''}
   ${(props) => (props.min_width ? `min-width:${props.min_width};` : '')}
   ${(props) => (props.height ? `height:${props.height}` : '')}
 `;
