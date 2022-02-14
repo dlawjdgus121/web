@@ -13,11 +13,12 @@ const Main = (props) => {
   const post_list = useSelector((state) => state.post.list);
   console.log('main post : ', post_list);
 
-  // React.useEffect(() => {
-  //   if (post_list.length === 0) {
-  //     dispatch(postActions.getPostAPI());
-  //   }
-  // }, []);
+  React.useEffect(() => {
+    if (post_list.length === 0) {
+      dispatch(postActions.getPostAPI());
+    }
+  }, []);
+
   return (
     <>
       <Grid height="10%">
