@@ -11,12 +11,13 @@ import { actionCreators as postActions } from '../redux/modules/post';
 const Main = (props) => {
   const dispatch = useDispatch();
   const post_list = useSelector((state) => state.post.list);
+  console.log('main post : ', post_list);
 
-  React.useEffect(() => {
-    if (post_list.length === 0) {
-      dispatch(postActions.getPostAPI());
-    }
-  }, []);
+  // React.useEffect(() => {
+  //   if (post_list.length === 0) {
+  //     dispatch(postActions.getPostAPI());
+  //   }
+  // }, []);
   return (
     <>
       <Grid height="10%">
@@ -29,7 +30,12 @@ const Main = (props) => {
       <Grid padding="2vw 13vw 0vw 13vw">
         <Text size="2rem">상품들이 깡충깡충</Text>
       </Grid>
-      <Post></Post>
+
+      <Grid padding="2vw 13vw 0vw 13vw" only_flex is_wrap>
+        {post_list.map((p, idx) => {
+          return <Post key={p.id} {...p}></Post>;
+        })}
+      </Grid>
     </>
   );
 };
