@@ -60,6 +60,7 @@ const addPostAPI = (title, price, imgurl, content) => {
         }
       )
       .then(function (res) {
+        history.replace('/');
         console.log(res);
       });
   };

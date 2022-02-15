@@ -19,6 +19,8 @@ const PostDetail = (props) => {
   const dispatch = useDispatch();
   // 판매 상태 저장 state
   const [isSold, setIsSold] = React.useState(false);
+  const [isId, setIsId] = React.useState('');
+  console.log(isId);
 
   //클릭한 포스트 정보 가져오기
   const post = useSelector((store) => store.post.post);
@@ -26,11 +28,13 @@ const PostDetail = (props) => {
   // 포스트 아이디 파람으로 받아오기
   const postId = props.match.params.id;
 
-  //토큰으로 아이디 가져오기
+  //store.post의 유저아이디 받아오기
+  const writeUserId = post.userId;
+  console.log(writeUserId);
 
+  //토큰으로 아이디 가져와서 useState로 넘겨주기
   function checkLogin() {
     const token = localStorage.getItem('login-token');
-    console.log(token);
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -39,8 +43,9 @@ const PostDetail = (props) => {
     apis
       .checkLogin(config)
       .then(function (res) {
-        console.log('로그인체크', res);
-        return res.data.user.userId;
+        const get_id = res.data.user.userId;
+        setIsId(get_id);
+        return setIsId;
       })
       .catch((error) => {
         console.log(error);
@@ -49,16 +54,6 @@ const PostDetail = (props) => {
   React.useEffect(() => {
     checkLogin();
   }, []);
-  // apis
-  //   .add(
-  //     { title: 'title', price: 1243124, imgurl: '', content: 'content' },
-  //     {
-  //       headers: { Authorization: `Bearer ${token}` },
-  //     }
-  //   )
-  //   .then(function (res) {
-  //     console.log(res);
-  //   });
 
   // 판매 상태 수정 함수
   function setState() {
@@ -104,7 +99,8 @@ const PostDetail = (props) => {
       </Grid>
       <CommentWrite />
       <CommentList />
-      <Permit>
+
+      {isId === writeUserId ? (
         <Grid is_flex margin="10vh 0 0">
           <Grid width="10rem" padding="1px">
             <Button text="상품 삭제" _onClick={() => {}} border_radius="2px" />
@@ -129,7 +125,9 @@ const PostDetail = (props) => {
             </Grid>
           </Grid>
         </Grid>
-      </Permit>
+      ) : (
+        ''
+      )}
     </Grid>
   );
 };
