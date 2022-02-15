@@ -13,7 +13,7 @@ import Input from '../elements/Input';
 import { actionCreators as postActions } from '../redux/modules/post';
 
 const PostWrite = (props) => {
-  const token = localStorage.getItem('login-token');
+  const is_token = localStorage.getItem('login-token') ? true : false;
   const dispatch = useDispatch(null);
 
   const [is_edit, setIsEdit] = React.useState(false);
@@ -45,23 +45,23 @@ const PostWrite = (props) => {
   };
 
   // 로그인 상태 체크
-  // if (token === null) {
-  //   return (
-  //     <Grid margin="100px 0px" padding="16px" center>
-  //       <Text size="32px" bold>
-  //         앗! 잠깐!
-  //       </Text>
-  //       <Text size="16px">로그인 후에만 글을 쓸 수 있어요!</Text>
-  //       <Button
-  //         _onClick={() => {
-  //           history.replace('/login');
-  //         }}
-  //       >
-  //         로그인하러 가기
-  //       </Button>
-  //     </Grid>
-  //   );
-  // }
+  if (!is_token) {
+    return (
+      <Grid margin="100px 0px" padding="16px" center>
+        <Text size="32px" bold>
+          앗! 잠깐!
+        </Text>
+        <Text size="16px">로그인 후에만 글을 쓸 수 있어요!</Text>
+        <Button
+          _onClick={() => {
+            history.replace('/login');
+          }}
+        >
+          로그인하러 가기
+        </Button>
+      </Grid>
+    );
+  }
   // 글 쓰기 페이지
   return (
     <Grid padding="0 13vw">

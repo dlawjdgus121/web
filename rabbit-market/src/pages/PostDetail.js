@@ -16,17 +16,18 @@ import { actionCreators as postActions } from '../redux/modules/post';
 import { useEffect } from 'react';
 
 const PostDetail = (props) => {
+  console.log(props);
   const dispatch = useDispatch();
   // 판매 상태 저장 state
   const [isSold, setIsSold] = React.useState(false);
   const [isId, setIsId] = React.useState('');
   console.log(isId);
 
+  // 포스트 아이디 찾아내기
+  const postId = props.match.params.id;
+
   //클릭한 포스트 정보 가져오기
   const post = useSelector((store) => store.post.post);
-
-  // 포스트 아이디 파람으로 받아오기
-  const postId = props.match.params.id;
 
   //store.post의 유저아이디 받아오기
   const writeUserId = post.userId;
@@ -101,6 +102,9 @@ const PostDetail = (props) => {
       <CommentList />
 
       {isId === writeUserId ? (
+        // <CommentWrite postId={postId} />
+        // <CommentList postId={postId} />
+
         <Grid is_flex margin="10vh 0 0">
           <Grid width="10rem" padding="1px">
             <Button text="상품 삭제" _onClick={() => {}} border_radius="2px" />
