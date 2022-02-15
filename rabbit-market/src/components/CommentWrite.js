@@ -5,11 +5,14 @@ import Input from '../elements/Input';
 import Button from '../elements/Button';
 
 import { actionCreators as commentActions } from '../redux/modules/post';
-import { useDispatch } from 'react-redux';
+
+import { useDispatch, useSelector } from 'react-redux';
 
 const CommentWrite = (props) => {
   const [comment, setComment] = React.useState();
   const dispatch = useDispatch(null);
+
+  const user = useSelector((state) => state.user);
 
   const _setComment = (e) => {
     setComment(e.target.value);
@@ -31,10 +34,11 @@ const CommentWrite = (props) => {
         ></Input>
         <Button
           width="50px"
-          margin="0px 2px 0px 2px"
+          margin="0px 2px"
           _onClick={() => {
             writeComment();
           }}
+          border_radius="5px"
         >
           작성
         </Button>

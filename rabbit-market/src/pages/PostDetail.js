@@ -21,7 +21,7 @@ const PostDetail = (props) => {
   // 판매 상태 저장 state
   const [isSold, setIsSold] = React.useState(false);
   const [isId, setIsId] = React.useState('');
-  console.log(isId);
+  const [nickname, setnickname] = React.useState('');
 
   // 포스트 아이디 찾아내기
   const postId = props.match.params.id;
@@ -31,7 +31,6 @@ const PostDetail = (props) => {
 
   //store.post의 유저아이디 받아오기
   const writeUserId = post.userId;
-  console.log(writeUserId);
 
   //토큰으로 아이디 가져와서 useState로 넘겨주기
   function checkLogin() {
@@ -46,12 +45,14 @@ const PostDetail = (props) => {
       .then(function (res) {
         const get_id = res.data.user.userId;
         setIsId(get_id);
+        setnickname(res.data.user.nickname);
         return setIsId;
       })
       .catch((error) => {
         console.log(error);
       });
   }
+
   React.useEffect(() => {
     checkLogin();
   }, []);
@@ -100,7 +101,7 @@ const PostDetail = (props) => {
       </Grid>
 
       <CommentWrite postId={postId} />
-      <CommentList postId={postId} />
+      <CommentList postId={postId} userId={isId} />
       {isId === writeUserId ? (
         <Grid is_flex margin="10vh 0 0">
           <Grid width="10rem" padding="1px">

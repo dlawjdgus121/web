@@ -16,8 +16,10 @@ const Input = (props) => {
     border_bottom,
     is_focus,
     is_header,
+    defaultvalue,
   } = props;
 
+  // 헤더 검색창
   if (is_header) {
     return (
       <HeaderInput
@@ -30,6 +32,7 @@ const Input = (props) => {
     );
   }
 
+  // 여러줄 입력창
   if (multiLine) {
     return (
       <Grid>
@@ -60,6 +63,7 @@ const Input = (props) => {
           border_radius={border_radius}
           border_bottom={border_bottom}
           is_focus={is_focus}
+          defaultValue={defaultvalue}
         />
       </Grid>
     </React.Fragment>

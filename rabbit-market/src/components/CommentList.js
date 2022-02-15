@@ -1,17 +1,36 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
 import Grid from '../elements/Grid';
 import Text from '../elements/Text';
+import Button from '../elements/Button';
+import Input from '../elements/Input';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCreators as userActions } from '../redux/modules/user';
+import { actionCreators as postActions } from '../redux/modules/post';
+
+import { transformDate } from '../shared/transformDate';
 
 const CommentList = (props) => {
   // 해당 포스트의 댓글 정보
   const comments = useSelector((store) => store.post.comments);
+  const user = useSelector((store) => store.user.user);
+  const uploading = useSelector((store) => store.user.uploading);
+
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    if (!uploading) dispatch(userActions.checkLoginDB());
+    return;
+  }, []);
+
   return (
     <React.Fragment>
       <Grid padding="2vh 0 0">
-        {comments.map((comment) => {
-          return <CommentItem key={comment.commentId} {...comment} />;
+        {comments.map((comment, idx) => {
+          if (props.userId === comment.userId)
+            return <CommentItem key={idx} {...comment} isMe />;
+          else return <CommentItem key={idx} {...comment} />;
         })}
       </Grid>
     </React.Fragment>
@@ -21,18 +40,102 @@ const CommentList = (props) => {
 export default CommentList;
 
 const CommentItem = (props) => {
-  const { nickname, comment, createdAt } = props;
-  return (
-    <Grid is_flex>
-      <Grid width="10vw">
-        <Text bold>{nickname}</Text>
+  const { nickname, comment, updatedAt, isMe, commentId } = props;
+  const dispatch = useDispatch();
+
+  const [isEdit, setIsEdit] = React.useState(false);
+  const [edComment, setEdComment] = React.useState(comment);
+
+  // 댓글 삭제
+  const delComment = () => {
+    dispatch(postActions.delCommentAPI(commentId));
+  };
+
+  // 댓글 수정
+  const editComment = () => {
+    setIsEdit(true);
+    console.log(isEdit);
+  };
+
+  // 댓글 수정 완료
+  const completeEdit = () => {
+    console.log(edComment);
+    dispatch(postActions.editCommentAPI(commentId, edComment));
+
+    setIsEdit(false);
+  };
+
+  if (isMe)
+    // 내가 쓴 댓글일 경우
+    return (
+      <>
+        <Grid is_flex margin="1px 0">
+          <Grid width="5rem">
+            <Text bold>{nickname}</Text>
+          </Grid>
+          <Grid is_flex margin="0px 4px">
+            <Text margin="0px">{comment}</Text>
+            <Text margin="0px">{transformDate(updatedAt)}</Text>
+          </Grid>
+          <Grid is_flex width="10rem" height="1.5rem">
+            <Button
+              text="수정"
+              margin="1px"
+              border_radius="1rem"
+              _onClick={() => {
+                editComment();
+              }}
+            />
+            <Button
+              text="삭제"
+              margin="1px"
+              border_radius="1rem"
+              _onClick={() => {
+                delComment();
+              }}
+            />
+          </Grid>
+        </Grid>
+        {isEdit ? (
+          <Grid is_flex margin="1px 0">
+            <Grid padding="5px">
+              <Input
+                defaultvalue={comment}
+                _onChange={(e) => {
+                  setEdComment(e.target.value);
+                }}
+              />
+            </Grid>
+            <Grid width="5rem">
+              <Button
+                _onClick={() => {
+                  completeEdit();
+                }}
+                text="수정 완료"
+                border_radius="5px"
+                margin="0 2px"
+              />
+            </Grid>
+          </Grid>
+        ) : (
+          ''
+        )}
+      </>
+    );
+  else {
+    // 다른 사람이 작성한 댓글일 경우
+    return (
+      <Grid is_flex>
+        <Grid width="5rem">
+          <Text bold>{nickname}</Text>
+        </Grid>
+        <Grid is_flex margin="0px 4px">
+          <Text margin="0px">{comment}</Text>
+          <Text margin="0px">{transformDate(updatedAt)}</Text>
+        </Grid>
       </Grid>
-      <Grid is_flex margin="0px 4px">
-        <Text margin="0px">{comment}</Text>
-        <Text margin="0px">{createdAt}</Text>
-      </Grid>
-    </Grid>
-  );
+    );
+  }
 };
 
 CommentItem.defaultProps = {

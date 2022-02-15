@@ -36,5 +36,6 @@ export const apis = {
   // comment
   addComment: (postId, comment) => api.post(`/api/comments`, postId, comment),
   delComment: (commentId) => api.delete(`/api/comments`, commentId),
-  editComment: (postId) => api.patch(`/api/status`, postId),
+  editComment: (commentId, comment) =>
+    api.patch(`/api/comments`, commentId, comment),
 };

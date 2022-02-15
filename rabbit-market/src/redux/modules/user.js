@@ -3,17 +3,17 @@ import { produce } from 'immer';
 import { apis } from '../../shared/api';
 
 //actions
-// const LOG_IN = 'LOG_IN';
+const UPLOADING = 'UPLOADING';
 const CHECK_ID = 'CHECK_ID';
 const LOG_OUT = 'LOG_OUT';
 const SET_USER = 'SET_USER';
 // const GET_USER = 'GET_USER';
 
 //action creators
+const uploading = createAction(UPLOADING, (uploading) => ({ uploading }));
 const checkid = createAction(CHECK_ID, () => ({}));
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
 const setUser = createAction(SET_USER, (user) => ({ user }));
-// const getUser = createAction(GET_USER, (user) => ({ user }));
 
 //initialState
 const initialState = {
@@ -44,7 +44,7 @@ const setLoginDB = (id, pwd) => {
         return;
       }
       localStorage.setItem('login-token', res.data.token);
-      dispatch(setUser({ id: id }));
+      dispatch(setUser({ userId: id }));
       history.replace('/');
     });
   };
@@ -74,11 +74,35 @@ const logoutDB = () => {
   };
 };
 
+// 회원 정보 확인
+function checkLoginDB() {
+  return function (dispatch, useState, { history }) {
+    dispatch(uploading(true));
+
+    const token = localStorage.getItem('login-token');
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    apis
+      .checkLogin(config)
+      .then(function (res) {
+        dispatch(setUser({ ...res.data.user }));
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch(uploading(false));
+      });
+  };
+}
+
 //reducer
 export default handleActions(
   {
     [CHECK_ID]: (state, action) =>
       produce(state, (draft) => {
+        console.log(action.payload);
         draft.is_check_id = true;
       }),
 
@@ -86,6 +110,8 @@ export default handleActions(
       produce(state, (draft) => {
         draft.user = action.payload.user;
         draft.is_login = true;
+        console.log(draft.user.userId);
+        draft.uploading = false;
       }),
 
     [LOG_OUT]: (state, action) =>
@@ -93,7 +119,12 @@ export default handleActions(
         draft.user = null;
         draft.is_login = false;
       }),
-    // [GET_USER]: (state, action) => produce(state, (draft) => {}),
+
+    // 업로딩하는 중간에 또 업로드 이미지하는 것을 막아주기 위해서..!
+    [UPLOADING]: (state, action) =>
+      produce(state, (draft) => {
+        draft.uploading = action.payload.uploading;
+      }),
   },
   initialState
 );
@@ -104,6 +135,7 @@ const actionCreators = {
   setLoginDB,
   logoutDB,
   checkIdDB,
+  checkLoginDB,
 };
 
 export { actionCreators };

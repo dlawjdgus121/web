@@ -3,12 +3,17 @@ import { immerable, produce } from 'immer';
 
 import { apis } from '../../shared/api';
 
+// post
 const SET_POST = 'SET_POST';
 const ADD_POST = 'ADD_POST';
 const EDIT_POST = 'EDIT_POST';
 const DELETE_POST = 'DELETE_POST';
 const ONE_POST = 'ONE_POST';
+
+// comment
 const GET_COMMENTS = 'GET_COMMENTS';
+const SET_COMMENTS = 'SET_COMMENTS';
+const DEL_COMMENTS = 'DEL_COMMENTS';
 
 const setPost = createAction(SET_POST, (post_list) => ({ post_list }));
 const addPost = createAction(ADD_POST, (post) => ({ post }));
@@ -20,7 +25,17 @@ const deletePost = createAction(DELETE_POST, (post_id) => ({ post_id }));
 const getOnePost = createAction(ONE_POST, (post) => ({ post }));
 
 const getComments = createAction(GET_COMMENTS, (comments) => ({ comments }));
-
+const setComments = createAction(
+  SET_COMMENTS,
+  (comment, nickname, updatedAt, userId, commentId) => ({
+    comment,
+    nickname,
+    updatedAt,
+    userId,
+    commentId,
+  })
+);
+const delComment = createAction(DEL_COMMENTS, (del_idx) => ({ del_idx }));
 const initialState = {
   list: [],
   post: [],
@@ -116,7 +131,8 @@ const deletePostAPI = (post_id) => {
   };
 };
 
-// 댓글 추가하기
+// 댓글 #######################################################3
+
 // 댓글 등록
 const addCommentAPI = (postId, comment) => {
   return function (dispatch, useState, { history }) {
@@ -130,8 +146,54 @@ const addCommentAPI = (postId, comment) => {
         }
       )
       .then(function (res) {
-        // setcomment 추가하기
+        console.log(res);
+        dispatch(
+          setComments(
+            comment,
+            res.data.result.nickname,
+            res.data.result.updatedAt,
+            res.data.result.userId,
+            res.data.result.commentId
+          )
+        );
       });
+  };
+};
+
+// 댓글 삭제하기
+const delCommentAPI = (commentId) => {
+  return function (dispatch, useState, { history }) {
+    const token = localStorage.getItem('login-token');
+
+    apis
+      .delComment({
+        data: { commentId },
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then(function (res) {
+        const del_idx = useState().post.comments.findIndex(
+          (c) => c.commentId === commentId
+        );
+        console.log(del_idx);
+        // 삭제 액션 수행
+        dispatch(delComment(del_idx));
+      });
+  };
+};
+
+// 댓글 수정하기
+const editCommentAPI = (commentId, comment) => {
+  return function (dispatch, useState, { history }) {
+    const token = localStorage.getItem('login-token');
+
+    apis
+      .editComment(
+        { commentId, comment },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .then(function (res) {});
   };
 };
 
@@ -163,8 +225,21 @@ export default handleActions(
       }),
     [GET_COMMENTS]: (state, action) =>
       produce(state, (draft) => {
-        console.log('룰루 댓글 얏호', action.payload);
         draft.comments = action.payload.comments;
+      }),
+
+    [SET_COMMENTS]: (state, action) =>
+      produce(state, (draft) => {
+        draft.comments.unshift(action.payload);
+        console.log(action.payload);
+      }),
+
+    [DEL_COMMENTS]: (state, action) =>
+      produce(state, (draft) => {
+        let deleted = draft.comments.filter((e, i) => {
+          return parseInt(action.payload.del_idx) !== i;
+        });
+        draft.comments = deleted;
       }),
   },
   initialState
@@ -182,7 +257,10 @@ const actionCreators = {
   editPostAPI,
   deletePostAPI,
   getOnePostAPI,
+
   addCommentAPI,
+  delCommentAPI,
+  editCommentAPI,
 };
 
 export { actionCreators };

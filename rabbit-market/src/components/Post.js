@@ -9,6 +9,8 @@ import { history } from '../redux/configureStore';
 
 import { useSelector } from 'react-redux';
 
+import { transformDate } from '../shared/transformDate';
+
 const Post = (props) => {
   return (
     <>
@@ -17,7 +19,7 @@ const Post = (props) => {
         상품명 : {props.title}
       </Text>
       <Text size=".9rem">가격 : {props.price}</Text>
-      <Text size=".7rem">작성시간 : {props.createdAt}</Text>
+      <Text size=".7rem">작성시간 : {transformDate(props.createdAt)}</Text>
     </>
   );
 };
