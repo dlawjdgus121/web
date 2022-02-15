@@ -16,7 +16,7 @@ const editPost = createAction(EDIT_POST, (post_id, post) => ({
   post_id,
   post,
 }));
-const deletePost = createAction(DELETE_POST, (post_idx) => ({ post_idx }));
+const deletePost = createAction(DELETE_POST, (post_id) => ({ post_id }));
 const getOnePost = createAction(ONE_POST, (post) => ({ post }));
 
 const getComments = createAction(GET_COMMENTS, (comments) => ({ comments }));
@@ -85,8 +85,24 @@ const editPostAPI = () => {
   return async function (dispatch, useState, { history }) {};
 };
 //판매 상품 삭제
-const deletePostAPI = () => {
-  return async function (dispatch, useState, { history }) {};
+const deletePostAPI = (post_id = null) => {
+  return async function (dispatch, useState, { history }) {
+    const token = localStorage.getItem('login-token');
+
+    apis
+      .del(
+        { postId: post_id },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then(function (res) {
+        console.log(res);
+        history.replace('/');
+      });
+  };
 };
 
 // 댓글 추가하기
@@ -157,7 +173,6 @@ const actionCreators = {
   editPostAPI,
   deletePostAPI,
   getOnePostAPI,
-
   addCommentAPI,
 };
 

@@ -31,10 +31,7 @@ export const apis = {
   image: (file) => api.post('/api/image', { file }),
   edit: (postId, title, price, imgurl, content) =>
     api.put(`/api/posts`, postId, title, price, imgurl, content),
-  del: (postId) =>
-    api.delete(`api/posts`, {
-      postId,
-    }),
+  del: (postId) => api.delete(`api/posts/`, postId),
 
   // comment
   addComment: (postId, comment) => api.post(`/api/comments`, postId, comment),

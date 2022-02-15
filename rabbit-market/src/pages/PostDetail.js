@@ -102,7 +102,13 @@ const PostDetail = (props) => {
       {isId === writeUserId ? (
         <Grid is_flex margin="10vh 0 0">
           <Grid width="10rem" padding="1px">
-            <Button text="상품 삭제" _onClick={() => {}} border_radius="2px" />
+            <Button
+              text="상품 삭제"
+              _onClick={() => {
+                dispatch(postActions.deletePostAPI(postId));
+              }}
+              border_radius="2px"
+            />
           </Grid>
           <Grid is_flex width="20rem">
             <Grid padding="1px">
