@@ -68,6 +68,11 @@ const PostWrite = (props) => {
       )
     );
   };
+  const [fileImage, setFileImage] = React.useState('');
+  const saveFileImage = (e) => {
+    setFileImage(URL.createObjectURL(e.target.files[0]));
+  };
+  console.log(fileImage);
 
   // 로그인 상태 체크
   if (!is_token) {
@@ -141,15 +146,10 @@ const PostWrite = (props) => {
           </Text>
         </Grid>
         <Grid margin="2vw">
-          <Input type="file" />
+          <Input type="file" _onChange={saveFileImage} />
         </Grid>
         <Grid margin="2vw">
-          <Image
-            shape="rectangle"
-            src={
-              'https://w7.pngwing.com/pngs/767/518/png-transparent-color-vantablack-light-graphy-white-paper-blue-white-text-thumbnail.png'
-            }
-          />
+          <Image shape="rectangle" src={fileImage} />
         </Grid>
       </Grid>
       {/* 게시글 작성 */}
