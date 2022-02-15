@@ -5,11 +5,15 @@ import Input from '../elements/Input';
 import Button from '../elements/Button';
 
 import { actionCreators as commentActions } from '../redux/modules/post';
-import { useDispatch } from 'react-redux';
+import { actionCreators as userActions } from '../redux/modules/user'; // as : 별명 주는거
+
+import { useDispatch, useSelector } from 'react-redux';
 
 const CommentWrite = (props) => {
   const [comment, setComment] = React.useState();
   const dispatch = useDispatch(null);
+
+  const user = useSelector((state) => state.user);
 
   const _setComment = (e) => {
     setComment(e.target.value);

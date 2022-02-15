@@ -7,11 +7,12 @@ import Text from '../elements/Text';
 const CommentList = (props) => {
   // 해당 포스트의 댓글 정보
   const comments = useSelector((store) => store.post.comments);
+  console.log(comments);
   return (
     <React.Fragment>
       <Grid padding="2vh 0 0">
-        {comments.map((comment) => {
-          return <CommentItem key={comment.commentId} {...comment} />;
+        {comments.map((comment, idx) => {
+          return <CommentItem key={idx} {...comment} />;
         })}
       </Grid>
     </React.Fragment>
