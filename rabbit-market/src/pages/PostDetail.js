@@ -97,13 +97,10 @@ const PostDetail = (props) => {
           {post.content}
         </Text>
       </Grid>
-      <CommentWrite />
-      <CommentList />
 
+      <CommentWrite postId={postId} />
+      <CommentList postId={postId} />
       {isId === writeUserId ? (
-        // <CommentWrite postId={postId} />
-        // <CommentList postId={postId} />
-
         <Grid is_flex margin="10vh 0 0">
           <Grid width="10rem" padding="1px">
             <Button text="상품 삭제" _onClick={() => {}} border_radius="2px" />
