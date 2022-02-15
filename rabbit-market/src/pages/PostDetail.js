@@ -13,12 +13,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions } from '../redux/modules/post';
 
 const PostDetail = (props) => {
+  console.log(props);
   const dispatch = useDispatch();
   // 판매 상태 저장 state
   const [isSold, setIsSold] = React.useState(false);
   // 포스트 아이디 찾아내기
   const postId = props.match.params.id;
-  console.log(props);
 
   const post = useSelector((store) => store.post.post);
   console.log(post, '포스트입니다');
@@ -65,8 +65,8 @@ const PostDetail = (props) => {
           {post.content}
         </Text>
       </Grid>
-      <CommentWrite />
-      <CommentList />
+      <CommentWrite postId={postId} />
+      <CommentList postId={postId} />
       <Permit>
         <Grid is_flex margin="10vh 0 0">
           <Grid width="10rem" padding="1px">

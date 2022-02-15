@@ -38,12 +38,14 @@ const registerDB = (id, pw, nickname) => {
 const setLoginDB = (id, pwd) => {
   return function (dispatch, getState, { history }) {
     apis.login(id, pwd).then((res) => {
+      console.log(res);
+      if (res.data.ok === false) {
+        alert('없는 회원정보 입니다! 회원가입을 해주세요!');
+        return;
+      }
       localStorage.setItem('login-token', res.data.token);
       dispatch(setUser({ id: id }));
       history.replace('/');
-
-      if (res.statusText !== 'OK')
-        alert('없는 회원정보 입니다! 회원가입을 해주세요!');
     });
   };
 };

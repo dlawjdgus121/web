@@ -1,9 +1,10 @@
 import React from 'react';
+
 import Grid from '../elements/Grid';
-import Image from '../elements/Image';
 import Text from '../elements/Text';
 
-const CommentList = () => {
+const CommentList = (props) => {
+  console.log(props);
   return (
     <React.Fragment>
       <Grid padding="2vh 0 0">
@@ -21,12 +22,11 @@ const CommentList = () => {
 export default CommentList;
 
 const CommentItem = (props) => {
-  const { user_profile, user_name, user_id, contents, post_id, insert_dt } =
-    props;
+  // console.log(props);
+  const { user_name, contents, insert_dt } = props;
   return (
     <Grid is_flex>
-      <Grid is_flex width="auto">
-        <Image shape="circle"></Image>
+      <Grid width="10vw">
         <Text bold>{user_name}</Text>
       </Grid>
       <Grid is_flex margin="0px 4px">
