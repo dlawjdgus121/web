@@ -98,8 +98,8 @@ const PostDetail = (props) => {
         </Text>
       </Grid>
 
-      <CommentWrite postId={postId} nickname={nickname} />
-      <CommentList postId={postId} />
+      <CommentWrite postId={postId} />
+      <CommentList postId={postId} userId={isId} />
       {isId === writeUserId ? (
         <Grid is_flex margin="10vh 0 0">
           <Grid width="10rem" padding="1px">
