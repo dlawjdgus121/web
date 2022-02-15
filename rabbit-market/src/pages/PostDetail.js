@@ -13,7 +13,6 @@ import Permit from '../shared/Permit';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions } from '../redux/modules/post';
-import { useEffect } from 'react';
 
 const PostDetail = (props) => {
   const dispatch = useDispatch();
