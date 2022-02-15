@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { apis } from '../shared/api';
+
 //컴포넌트 임포트
 import CommentWrite from '../components/CommentWrite';
 import CommentList from '../components/CommentList';
@@ -11,17 +13,55 @@ import Permit from '../shared/Permit';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions } from '../redux/modules/post';
+import { useEffect } from 'react';
 
 const PostDetail = (props) => {
   console.log(props);
   const dispatch = useDispatch();
   // 판매 상태 저장 state
   const [isSold, setIsSold] = React.useState(false);
+
   // 포스트 아이디 찾아내기
   const postId = props.match.params.id;
 
+  //클릭한 포스트 정보 가져오기
   const post = useSelector((store) => store.post.post);
-  console.log(post, '포스트입니다');
+
+  // 포스트 아이디 파람으로 받아오기
+  const postId = props.match.params.id;
+
+  //토큰으로 아이디 가져오기
+  function checkLogin() {
+    const token = localStorage.getItem('login-token');
+    console.log(token);
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    apis
+      .checkLogin(config)
+      .then(function (res) {
+        console.log('로그인체크', res);
+        return res.data.user.userId;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  React.useEffect(() => {
+    checkLogin();
+  }, []);
+  // apis
+  //   .add(
+  //     { title: 'title', price: 1243124, imgurl: '', content: 'content' },
+  //     {
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     }
+  //   )
+  //   .then(function (res) {
+  //     console.log(res);
+  //   });
 
   // 판매 상태 수정 함수
   function setState() {
@@ -36,7 +76,7 @@ const PostDetail = (props) => {
     <Grid padding="0 13vw">
       {/* 판매 상품 이미지, 제목, 가격, 날짜, 판매 여부  */}
       <Grid is_flex border_bottom padding="2vh 0">
-        <Image size="30" />
+        <Image src={post.imgurl} size="30" />
 
         <Grid width="57%">
           <Grid border_bottom>
