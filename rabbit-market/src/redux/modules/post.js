@@ -256,7 +256,6 @@ const actionCreators = {
   addPostAPI,
   editPostAPI,
   deletePostAPI,
-  getOnePostAPI,
 
   addCommentAPI,
   delCommentAPI,

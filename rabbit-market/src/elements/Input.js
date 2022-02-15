@@ -16,7 +16,6 @@ const Input = (props) => {
     border_bottom,
     is_focus,
     is_header,
-    defaultvalue,
   } = props;
 
   // 헤더 검색창
@@ -63,7 +62,6 @@ const Input = (props) => {
           border_radius={border_radius}
           border_bottom={border_bottom}
           is_focus={is_focus}
-          defaultValue={defaultvalue}
         />
       </Grid>
     </React.Fragment>

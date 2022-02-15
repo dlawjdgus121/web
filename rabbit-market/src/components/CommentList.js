@@ -100,7 +100,7 @@ const CommentItem = (props) => {
           <Grid is_flex margin="1px 0">
             <Grid padding="5px">
               <Input
-                defaultvalue={comment}
+                value={edComment}
                 _onChange={(e) => {
                   setEdComment(e.target.value);
                 }}
