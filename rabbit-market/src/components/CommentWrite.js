@@ -4,7 +4,7 @@ import Grid from '../elements/Grid';
 import Input from '../elements/Input';
 import Button from '../elements/Button';
 
-import { actionCreators as commentActions } from '../redux/modules/comment';
+import { actionCreators as commentActions } from '../redux/modules/post';
 import { useDispatch } from 'react-redux';
 
 const CommentWrite = (props) => {

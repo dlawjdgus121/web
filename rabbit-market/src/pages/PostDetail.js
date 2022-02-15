@@ -16,7 +16,6 @@ import { actionCreators as postActions } from '../redux/modules/post';
 import { useEffect } from 'react';
 
 const PostDetail = (props) => {
-  console.log(props);
   const dispatch = useDispatch();
   // 판매 상태 저장 state
   const [isSold, setIsSold] = React.useState(false);
