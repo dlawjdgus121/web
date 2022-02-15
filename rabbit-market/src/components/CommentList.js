@@ -21,7 +21,7 @@ const CommentList = (props) => {
 export default CommentList;
 
 const CommentItem = (props) => {
-  const { nickname, comment, createdAt } = props;
+  const { nickname, comment, updatedAt } = props;
   return (
     <Grid is_flex>
       <Grid width="10vw">
@@ -29,7 +29,7 @@ const CommentItem = (props) => {
       </Grid>
       <Grid is_flex margin="0px 4px">
         <Text margin="0px">{comment}</Text>
-        <Text margin="0px">{createdAt}</Text>
+        <Text margin="0px">{updatedAt}</Text>
       </Grid>
     </Grid>
   );

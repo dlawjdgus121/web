@@ -44,7 +44,7 @@ const setLoginDB = (id, pwd) => {
         return;
       }
       localStorage.setItem('login-token', res.data.token);
-      dispatch(setUser({ id: id }));
+      dispatch(setUser({ userId: id }));
       history.replace('/');
     });
   };
@@ -74,11 +74,33 @@ const logoutDB = () => {
   };
 };
 
+// 회원 정보 확인
+function checkLogin() {
+  return function (dispatch, useState, { history }) {
+    const token = localStorage.getItem('login-token');
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    apis
+      .checkLogin(config)
+      .then(function (res) {
+        console.log('hello', res.data.user);
+        dispatch(setUser({ ...res.data.user }));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+}
+
 //reducer
 export default handleActions(
   {
     [CHECK_ID]: (state, action) =>
       produce(state, (draft) => {
+        console.log(action.payload);
         draft.is_check_id = true;
       }),
 
@@ -104,6 +126,7 @@ const actionCreators = {
   setLoginDB,
   logoutDB,
   checkIdDB,
+  checkLogin,
 };
 
 export { actionCreators };

@@ -9,6 +9,7 @@ const EDIT_POST = 'EDIT_POST';
 const DELETE_POST = 'DELETE_POST';
 const ONE_POST = 'ONE_POST';
 const GET_COMMENTS = 'GET_COMMENTS';
+const SET_COMMENTS = 'SET_COMMENTS';
 
 const setPost = createAction(SET_POST, (post_list) => ({ post_list }));
 const addPost = createAction(ADD_POST, (post) => ({ post }));
@@ -16,10 +17,18 @@ const editPost = createAction(EDIT_POST, (post_id, post) => ({
   post_id,
   post,
 }));
-const deletePost = createAction(DELETE_POST, (post_id) => ({ post_id }));
+const deletePost = createAction(DELETE_POST, (post_idx) => ({ post_idx }));
 const getOnePost = createAction(ONE_POST, (post) => ({ post }));
 
 const getComments = createAction(GET_COMMENTS, (comments) => ({ comments }));
+const setComments = createAction(
+  SET_COMMENTS,
+  (comment, nickname, updatedAt) => ({
+    comment,
+    nickname,
+    updatedAt,
+  })
+);
 
 const initialState = {
   list: [],
@@ -39,8 +48,6 @@ const initialPost = {
   userId: 'id',
   isSold: false,
 };
-
-//middleware
 
 //전체 상품 조회
 const getPostAPI = () => {
@@ -85,24 +92,8 @@ const editPostAPI = () => {
   return async function (dispatch, useState, { history }) {};
 };
 //판매 상품 삭제
-const deletePostAPI = (post_id = null) => {
-  return async function (dispatch, useState, { history }) {
-    const token = localStorage.getItem('login-token');
-
-    apis
-      .del(
-        { postId: post_id },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then(function (res) {
-        console.log(res);
-        history.replace('/');
-      });
-  };
+const deletePostAPI = () => {
+  return async function (dispatch, useState, { history }) {};
 };
 
 // 댓글 추가하기
@@ -119,7 +110,14 @@ const addCommentAPI = (postId, comment) => {
         }
       )
       .then(function (res) {
-        // setcomment 추가하기
+        console.log(res);
+        dispatch(
+          setComments(
+            comment,
+            res.data.result.nickname,
+            res.data.result.updatedAt
+          )
+        );
       });
   };
 };
@@ -152,10 +150,15 @@ export default handleActions(
         });
         draft.list = deleted;
       }),
+
     [GET_COMMENTS]: (state, action) =>
       produce(state, (draft) => {
-        console.log('룰루 댓글 얏호', action.payload);
         draft.comments = action.payload.comments;
+      }),
+
+    [SET_COMMENTS]: (state, action) =>
+      produce(state, (draft) => {
+        draft.comments.unshift(action.payload);
       }),
   },
   initialState
@@ -172,7 +175,7 @@ const actionCreators = {
   addPostAPI,
   editPostAPI,
   deletePostAPI,
-  getOnePostAPI,
+
   addCommentAPI,
 };
 
