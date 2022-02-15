@@ -1,6 +1,5 @@
 import { createAction, handleActions } from 'redux-actions';
 import { immerable, produce } from 'immer';
-import axios from 'axios';
 
 import { apis } from '../../shared/api';
 
@@ -43,7 +42,7 @@ const initialPost = {
 const getPostAPI = () => {
   return async function (dispatch, useState, { history }) {
     await apis.posts().then(function (res) {
-      console.log('addPostAPI : ', res);
+      // console.log('addPostAPI : ', res);
       dispatch(setPost(res.data.posts));
     });
   };
@@ -68,8 +67,8 @@ const addPostAPI = (title, price, imgurl, content) => {
 //판매 상품 하나만 가져오기
 const getOnePostAPI = (postId) => {
   return async function (dispatch, useState, { history }) {
-    await apis.post(postId).then(function (res) {
-      console.log(res);
+    await apis.post(postId).then(async function (res) {
+      console.log('현재 테스트', res.data.post);
       dispatch(getOnePost(res.data.post));
     });
   };
@@ -90,7 +89,7 @@ export default handleActions(
       }),
     [ONE_POST]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload.post, '뭔데');
+        // console.log(action.payload.post, '뭔데');
         draft.post = action.payload.post;
       }),
     [ADD_POST]: (state, action) =>

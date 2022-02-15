@@ -21,6 +21,7 @@ export const apis = {
     api.post('/api/checkid', {
       loginId: id,
     }),
+  checkLogin: (token) => api.get('/api/checklogin', token),
 
   // post
   posts: () => api.get('/api/posts'),
