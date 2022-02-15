@@ -14,7 +14,6 @@ const Main = (props) => {
   const post_list = useSelector((state) => state.post.list);
 
   const [cnt, setCnt] = React.useState(0);
-  console.log('main post : ', post_list);
 
   const { history } = props;
 
@@ -23,8 +22,6 @@ const Main = (props) => {
     dispatch(postActions.getPostAPI());
     // }
   }, []);
-
-  console.log(props);
 
   return (
     <>

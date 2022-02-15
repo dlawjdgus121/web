@@ -10,7 +10,6 @@ import { history } from '../redux/configureStore';
 import { useSelector } from 'react-redux';
 
 const Post = (props) => {
-  console.log(props);
   return (
     <>
       <Image src={props.imgurl} size="25" is_main={true} />

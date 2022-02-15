@@ -14,6 +14,8 @@ import Permit from '../shared/Permit';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions } from '../redux/modules/post';
 
+import { history } from '../redux/configureStore';
+
 const PostDetail = (props) => {
   const dispatch = useDispatch();
   // 판매 상태 저장 state
@@ -114,7 +116,9 @@ const PostDetail = (props) => {
             <Grid padding="1px">
               <Button
                 text="상품 수정"
-                _onClick={() => {}}
+                _onClick={() => {
+                  history.push(`/write/${postId}`);
+                }}
                 border_radius="2px"
               />
             </Grid>

@@ -81,23 +81,34 @@ const getOnePostAPI = (postId) => {
   };
 };
 //판매 상품 수정
-const editPostAPI = () => {
-  return async function (dispatch, useState, { history }) {};
-};
-//판매 상품 삭제
-const deletePostAPI = (post_id = null) => {
+const editPostAPI = (postId, title, price, imgurl, contents) => {
   return async function (dispatch, useState, { history }) {
     const token = localStorage.getItem('login-token');
-
+    console.log(postId, title, price, imgurl, contents);
     apis
-      .del(
-        { postId: post_id },
+      .edit(
+        { postId, title, price, imgurl, contents },
         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
         }
       )
+      .then(function (res) {
+        history.replace('/');
+        console.log(res);
+      });
+  };
+};
+//판매 상품 삭제
+const deletePostAPI = (post_id) => {
+  return async function (dispatch, useState, { history }) {
+    const token = localStorage.getItem('login-token');
+    console.log(token, 'dddddddddd');
+
+    apis
+      .del({
+        data: { postId: post_id },
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then(function (res) {
         console.log(res);
         history.replace('/');
@@ -141,9 +152,7 @@ export default handleActions(
       }),
     [EDIT_POST]: (state, action) =>
       produce(state, (draft) => {
-        let idx = draft.list.findIndex((p) => p.id === action.payload.post_id);
-        //우리가 뭔가 수정할 때 사진을 안바꾸고 게시글만 바꿀 수 있어서 스프레드로 처리
-        draft.list[idx] = { ...draft.list[idx], ...action.payload.post };
+        draft.list = action.payload;
       }),
     [DELETE_POST]: (state, action) =>
       produce(state, (draft) => {

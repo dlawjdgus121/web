@@ -53,6 +53,7 @@ const Input = (props) => {
         {label && <Text margin="0px">{label}</Text>}
         <ElInput
           type={type}
+          value={value}
           placeholder={placeholder}
           onChange={_onChange}
           border={border}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { history } from '../redux/configureStore';
 
@@ -13,13 +13,38 @@ import Input from '../elements/Input';
 import { actionCreators as postActions } from '../redux/modules/post';
 
 const PostWrite = (props) => {
-  const is_token = localStorage.getItem('login-token') ? true : false;
   const dispatch = useDispatch(null);
 
-  const [is_edit, setIsEdit] = React.useState(false);
-  const [contents, setContent] = React.useState('');
-  const [price, setPrice] = React.useState('');
-  const [title, setTitle] = React.useState('');
+  const post = useSelector((store) => store.post.post);
+  const is_token = localStorage.getItem('login-token') ? true : false;
+
+  const edit_id = props.match.params.id;
+  const [is_edit, setIsEdit] = React.useState(edit_id ? true : false);
+  console.log(is_edit);
+  const [contents, setContent] = React.useState(is_edit ? post.content : '');
+  console.log(contents, 'asdfasdfadsf');
+  const [price, setPrice] = React.useState(is_edit ? post.price : '');
+  const [title, setTitle] = React.useState(is_edit ? post.title : '');
+
+  const editPost = () => {
+    dispatch(
+      postActions.editPostAPI(
+        post.id,
+        title,
+        price,
+        'https://w7.pngwing.com/pngs/767/518/png-transparent-color-vantablack-light-graphy-white-paper-blue-white-text-thumbnail.png',
+        contents
+      )
+    );
+  };
+
+  //새로고침 시 데이터 유지하기 (나중에 할 일)
+  // React.useEffect(() => {
+  //   if (is_edit) {
+  //     dispatch(postActions.getOnePostAPI());
+  //     return;
+  //   }
+  // }, []);
 
   const changePrice = (e) => {
     setPrice(e.target.value);
@@ -93,9 +118,9 @@ const PostWrite = (props) => {
 
           <Grid margin="2vw">
             <Input
+              value={price}
               type="number"
               placeholder="숫자만 입력해주세요."
-              value={price}
               _onChange={changePrice}
             />
           </Grid>
@@ -142,8 +167,10 @@ const PostWrite = (props) => {
         {is_edit ? (
           <Button
             text="상품 수정하기"
-            _onClick={console.log('게시글 수정 버튼 클릭')}
-            disabled={contents === '' ? true : false}
+            _onClick={() => {
+              editPost();
+            }}
+            // disabled={contents === '' ? true : false}
           ></Button>
         ) : (
           <Button
