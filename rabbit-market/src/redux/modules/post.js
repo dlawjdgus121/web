@@ -131,6 +131,20 @@ const deletePostAPI = (post_id) => {
   };
 };
 
+// 이미지 #######################################################3
+
+// 이미지 등록하기 (url 받아오기)
+const imageAPI = (file) => {
+  for (const keyValue of file) console.log(keyValue);
+  return async function (dispatch, useState, { history }) {
+    const token = localStorage.getItem('login-token');
+
+    apis.image(file).then(function (res) {
+      console.log(res.data.imgurl);
+    });
+  };
+};
+
 // 댓글 #######################################################3
 
 // 댓글 등록
@@ -256,6 +270,8 @@ const actionCreators = {
   addPostAPI,
   editPostAPI,
   deletePostAPI,
+
+  imageAPI,
 
   addCommentAPI,
   delCommentAPI,

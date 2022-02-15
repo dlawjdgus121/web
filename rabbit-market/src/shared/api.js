@@ -28,7 +28,7 @@ export const apis = {
   post: (postId) => api.get(`/api/posts/${postId}`),
   add: (title, price, imgurl, content) =>
     api.post('/api/posts', title, price, imgurl, content),
-  image: (file) => api.post('/api/image', { file }),
+  image: (file) => api.post('/api/image', file),
   edit: (postId, title, price, imgurl, content) =>
     api.put(`/api/posts`, postId, title, price, imgurl, content),
   del: (postId) => api.delete(`/api/posts`, postId),
