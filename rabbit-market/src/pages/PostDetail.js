@@ -16,7 +16,6 @@ import { actionCreators as postActions } from '../redux/modules/post';
 import { useEffect } from 'react';
 
 const PostDetail = (props) => {
-  console.log(props);
   const dispatch = useDispatch();
   // 판매 상태 저장 state
   const [isSold, setIsSold] = React.useState(false);
@@ -26,9 +25,6 @@ const PostDetail = (props) => {
 
   //클릭한 포스트 정보 가져오기
   const post = useSelector((store) => store.post.post);
-
-  // 포스트 아이디 파람으로 받아오기
-  const postId = props.match.params.id;
 
   //토큰으로 아이디 가져오기
   function checkLogin() {
@@ -52,16 +48,6 @@ const PostDetail = (props) => {
   React.useEffect(() => {
     checkLogin();
   }, []);
-  // apis
-  //   .add(
-  //     { title: 'title', price: 1243124, imgurl: '', content: 'content' },
-  //     {
-  //       headers: { Authorization: `Bearer ${token}` },
-  //     }
-  //   )
-  //   .then(function (res) {
-  //     console.log(res);
-  //   });
 
   // 판매 상태 수정 함수
   function setState() {

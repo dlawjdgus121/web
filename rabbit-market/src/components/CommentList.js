@@ -1,19 +1,18 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import Grid from '../elements/Grid';
 import Text from '../elements/Text';
 
 const CommentList = (props) => {
-  console.log(props);
+  // 해당 포스트의 댓글 정보
+  const comments = useSelector((store) => store.post.comments);
   return (
     <React.Fragment>
       <Grid padding="2vh 0 0">
-        <CommentItem />
-        <CommentItem />
-        <CommentItem />
-        <CommentItem />
-        <CommentItem />
-        <CommentItem />
+        {comments.map((comment) => {
+          return <CommentItem key={comment.commentId} {...comment} />;
+        })}
       </Grid>
     </React.Fragment>
   );
@@ -22,26 +21,26 @@ const CommentList = (props) => {
 export default CommentList;
 
 const CommentItem = (props) => {
-  // console.log(props);
-  const { user_name, contents, insert_dt } = props;
+  const { nickname, comment, createdAt } = props;
   return (
     <Grid is_flex>
       <Grid width="10vw">
-        <Text bold>{user_name}</Text>
+        <Text bold>{nickname}</Text>
       </Grid>
       <Grid is_flex margin="0px 4px">
-        <Text margin="0px">{contents}</Text>
-        <Text margin="0px">{insert_dt}</Text>
+        <Text margin="0px">{comment}</Text>
+        <Text margin="0px">{createdAt}</Text>
       </Grid>
     </Grid>
   );
 };
 
 CommentItem.defaultProps = {
-  user_profile: '',
-  user_name: 'jun',
-  user_id: '',
-  contents: '석양이 예쁘네요',
-  post_id: 1,
-  insert_dt: '2022-01-01 19:00:00',
+  commentId: 'test123',
+  comment: '좋은 상품이네요',
+  postId: '123',
+  nickname: '쇼핑하는 토끼',
+  userId: 'user12345',
+  createdAt: '2022-02-12T15:40:03.201Z',
+  updatedAt: '2022-02-12T15:40:03.201Z',
 };

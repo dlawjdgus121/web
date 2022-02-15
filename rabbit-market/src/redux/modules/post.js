@@ -8,6 +8,7 @@ const ADD_POST = 'ADD_POST';
 const EDIT_POST = 'EDIT_POST';
 const DELETE_POST = 'DELETE_POST';
 const ONE_POST = 'ONE_POST';
+const GET_COMMENTS = 'GET_COMMENTS';
 
 const setPost = createAction(SET_POST, (post_list) => ({ post_list }));
 const addPost = createAction(ADD_POST, (post) => ({ post }));
@@ -18,9 +19,12 @@ const editPost = createAction(EDIT_POST, (post_id, post) => ({
 const deletePost = createAction(DELETE_POST, (post_idx) => ({ post_idx }));
 const getOnePost = createAction(ONE_POST, (post) => ({ post }));
 
+const getComments = createAction(GET_COMMENTS, (comments) => ({ comments }));
+
 const initialState = {
   list: [],
   post: [],
+  comments: [],
 };
 
 const initialPost = {
@@ -68,8 +72,10 @@ const addPostAPI = (title, price, imgurl, content) => {
 const getOnePostAPI = (postId) => {
   return async function (dispatch, useState, { history }) {
     await apis.post(postId).then(async function (res) {
-      console.log('현재 테스트', res.data.post);
+      console.log('현재 테스트', res);
       dispatch(getOnePost(res.data.post));
+      // 해당 글의 댓글 가져오기
+      dispatch(getComments(res.data.comments));
     });
   };
 };
@@ -81,6 +87,26 @@ const editPostAPI = () => {
 const deletePostAPI = () => {
   return async function (dispatch, useState, { history }) {};
 };
+
+// 댓글 추가하기
+// 댓글 등록
+const addCommentAPI = (postId, comment) => {
+  return function (dispatch, useState, { history }) {
+    const token = localStorage.getItem('login-token');
+
+    apis
+      .addComment(
+        { postId, comment },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .then(function (res) {
+        // setcomment 추가하기
+      });
+  };
+};
+
 export default handleActions(
   {
     [SET_POST]: (state, action) =>
@@ -109,6 +135,11 @@ export default handleActions(
         });
         draft.list = deleted;
       }),
+    [GET_COMMENTS]: (state, action) =>
+      produce(state, (draft) => {
+        console.log('룰루 댓글 얏호', action.payload);
+        draft.comments = action.payload.comments;
+      }),
   },
   initialState
 );
@@ -124,6 +155,8 @@ const actionCreators = {
   editPostAPI,
   deletePostAPI,
   getOnePostAPI,
+
+  addCommentAPI,
 };
 
 export { actionCreators };
