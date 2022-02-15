@@ -103,7 +103,8 @@ const deletePostAPI = () => {
   return async function (dispatch, useState, { history }) {};
 };
 
-// 댓글 추가하기
+// 댓글 #######################################################3
+
 // 댓글 등록
 const addCommentAPI = (postId, comment) => {
   return function (dispatch, useState, { history }) {
@@ -149,6 +150,22 @@ const delCommentAPI = (commentId) => {
         // 삭제 액션 수행
         dispatch(delComment(del_idx));
       });
+  };
+};
+
+// 댓글 수정하기
+const editCommentAPI = (commentId, comment) => {
+  return function (dispatch, useState, { history }) {
+    const token = localStorage.getItem('login-token');
+
+    apis
+      .editComment(
+        { commentId, comment },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .then(function (res) {});
   };
 };
 
@@ -217,6 +234,7 @@ const actionCreators = {
 
   addCommentAPI,
   delCommentAPI,
+  editCommentAPI,
 };
 
 export { actionCreators };

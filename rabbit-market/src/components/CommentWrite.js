@@ -5,7 +5,6 @@ import Input from '../elements/Input';
 import Button from '../elements/Button';
 
 import { actionCreators as commentActions } from '../redux/modules/post';
-import { actionCreators as userActions } from '../redux/modules/user'; // as : 별명 주는거
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -35,10 +34,11 @@ const CommentWrite = (props) => {
         ></Input>
         <Button
           width="50px"
-          margin="0px 2px 0px 2px"
+          margin="0px 2px"
           _onClick={() => {
             writeComment();
           }}
+          border_radius="5px"
         >
           작성
         </Button>
