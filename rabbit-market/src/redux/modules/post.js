@@ -72,8 +72,8 @@ const addPostAPI = (title, price, imgurl, content) => {
 //판매 상품 하나만 가져오기
 const getOnePostAPI = (postId) => {
   return async function (dispatch, useState, { history }) {
-    await apis.post(postId).then(async function (res) {
-      console.log('현재 테스트', res);
+    await apis.post(postId).then(function (res) {
+      console.log(res.data.post);
       dispatch(getOnePost(res.data.post));
       // 해당 글의 댓글 가져오기
       dispatch(getComments(res.data.comments));
@@ -151,6 +151,7 @@ const actionCreators = {
   editPost,
   deletePost,
   getOnePost,
+  getOnePostAPI,
   getPostAPI,
   addPostAPI,
   editPostAPI,

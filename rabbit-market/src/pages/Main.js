@@ -10,15 +10,21 @@ import { actionCreators as postActions } from '../redux/modules/post';
 
 const Main = (props) => {
   const dispatch = useDispatch();
-  const { history } = props;
-  //전체 상품 리스트 받아오기
+
   const post_list = useSelector((state) => state.post.list);
 
+  const [cnt, setCnt] = React.useState(0);
+  console.log('main post : ', post_list);
+
+  const { history } = props;
+
   React.useEffect(() => {
-    if (post_list.length === 0) {
-      dispatch(postActions.getPostAPI());
-    }
+    // if (post_list.length === 0) {
+    dispatch(postActions.getPostAPI());
+    // }
   }, []);
+
+  console.log(props);
 
   return (
     <>
