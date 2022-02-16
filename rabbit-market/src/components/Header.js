@@ -135,7 +135,7 @@ const HeaderBox = styled.div`
   z-index: 10;
   padding: 0 13vw;
   @media (max-width: 595px) {
-    padding: 0;
+    padding: 0 1vw;
   }
 `;
 
