@@ -16,8 +16,8 @@ const PostWrite = (props) => {
   const dispatch = useDispatch(null);
 
   const post = useSelector((store) => store.post.post);
-  const posts = useSelector((store) => store.list);
-  console.log(posts);
+  // const posts = useSelector((store) => store.post);
+  // console.log(posts, '확인좀하자');
   const is_token = localStorage.getItem('login-token') ? true : false;
 
   const edit_id = props.match.params.id;
@@ -29,7 +29,9 @@ const PostWrite = (props) => {
   const img_url = useSelector((store) => store.post.img);
 
   const editPost = () => {
-    dispatch(postActions.editPostAPI(post.id, title, price, img_url, contents));
+    dispatch(
+      postActions.editPostAPI(post.id, title, price, post.imgurl, contents)
+    );
   };
 
   // 새로고침 시 데이터 유지하기 (나중에 할 일)
