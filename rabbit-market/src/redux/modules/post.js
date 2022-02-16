@@ -18,6 +18,9 @@ const IMAGE_URL = 'IMAGE_URL';
 // search
 const SEARCH_TITLE = 'SEARCH_TITLE';
 
+// filter
+const SET_FILTER_STATE = 'SET_FILTER_STATE';
+
 // comment
 const GET_COMMENTS = 'GET_COMMENTS';
 const SET_COMMENTS = 'SET_COMMENTS';
@@ -34,10 +37,17 @@ const deletePost = createAction(DELETE_POST, (post_id) => ({ post_id }));
 const getOnePost = createAction(ONE_POST, (post) => ({ post }));
 const statePost = createAction(STATE_POST, () => ({}));
 
+// 이미지 url 저장
 const getImageUrl = createAction(IMAGE_URL, (img_url) => ({ img_url }));
 
+// 검색 결과 저장
 const searchTitle = createAction(SEARCH_TITLE, (search_res) => ({
   search_res,
+}));
+
+// filter
+const setFilterState = createAction(SET_FILTER_STATE, (filterState) => ({
+  filterState,
 }));
 
 const getComments = createAction(GET_COMMENTS, (comments) => ({ comments }));
@@ -60,6 +70,7 @@ const initialState = {
   comments: [],
   img: '',
   searchList: [],
+  filterState: 0, // 0 : 전체보기 1 : 판매 중 2: 판매 완료
 };
 
 const initialPost = {
@@ -149,6 +160,7 @@ const deletePostAPI = (post_id) => {
       });
   };
 };
+
 //상세페이지 판매 상태 변경
 const statePostAPI = (postId) => {
   return function (dispatch, useState, { history }) {
@@ -166,6 +178,21 @@ const searchAPI = (title) => {
       .get(`http://52.79.160.167/api/search?title=${title}`, { title })
       .then(function (res) {
         dispatch(searchTitle(res.data.posts));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+};
+
+const filterAPI = (number) => {
+  return function (dispatch, useState, { history }) {
+    const boolNum = number === 1 ? false : true;
+    axios
+      .get(`http://52.79.160.167/api/sales?isSold=${boolNum}`)
+      .then(function (res) {
+        console.log(res.data.posts);
+        dispatch(setPost(res.data.posts));
       })
       .catch(function (error) {
         console.log(error);
@@ -296,6 +323,12 @@ export default handleActions(
         draft.searchList = action.payload.search_res;
       }),
 
+    [SET_FILTER_STATE]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(action.payload.filterState);
+        draft.filterState = action.payload.filterState;
+      }),
+
     // 댓글
     [GET_COMMENTS]: (state, action) =>
       produce(state, (draft) => {
@@ -342,9 +375,12 @@ const actionCreators = {
   deletePostAPI,
   statePostAPI,
 
+  imageAPI,
+
   searchAPI,
 
-  imageAPI,
+  setFilterState,
+  filterAPI,
 
   addCommentAPI,
   delCommentAPI,

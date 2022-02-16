@@ -1,16 +1,24 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { history } from '../redux/configureStore';
+import { actionCreators as postActions } from '../redux/modules/post';
 
 const DropDown = (props) => {
   const [choice, setChoice] = React.useState('전체보기');
+  const dispatch = useDispatch();
+
+  const setFilter = (num) => {
+    setChoice(num === 0 ? '전체보기' : num === 1 ? '판매중' : '판매완료');
+    dispatch(postActions.setFilterState(num));
+  };
+
   return (
     <>
       <Ul>
         {choice}
-        <Li onClick={() => setChoice('전체보기')}>전체보기</Li>
-        <Li onClick={() => setChoice('판매중')}>판매중</Li>
-        <Li onClick={() => setChoice('판매완료')}>판매완료</Li>
+        <Li onClick={() => setFilter(0)}>전체보기</Li>
+        <Li onClick={() => setFilter(1)}>판매중</Li>
+        <Li onClick={() => setFilter(2)}>판매완료</Li>
       </Ul>
     </>
   );
