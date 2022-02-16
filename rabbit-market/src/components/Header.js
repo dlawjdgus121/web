@@ -4,6 +4,7 @@ import Grid from '../elements/Grid';
 import Button from '../elements/Button';
 import Input from '../elements/Input';
 import Image from '../elements/Image';
+import Text from '../elements/Text';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user'; // as : 별명 주는거
@@ -13,6 +14,7 @@ import { history } from '../redux/configureStore';
 
 // 리액트 아이콘
 import { BiSearchAlt2 } from 'react-icons/bi';
+import { BsCoin } from 'react-icons/bs';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -53,11 +55,17 @@ const Header = () => {
           <Grid is_flex width="30rem">
             <Grid>
               <Button
-                text="내 정보"
                 margin="0 1px"
-                _onClick={() => {}}
+                _onClick={() => {
+                  history.push('/write');
+                }}
                 border_radius="5px"
-              />
+              >
+                <Grid is_flex padding="0 1vw">
+                  <BsCoin size={25} />
+                  <span>판매하기</span>
+                </Grid>
+              </Button>
             </Grid>
             <Grid>
               <Button
