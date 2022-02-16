@@ -25,17 +25,10 @@ const PostWrite = (props) => {
   const [title, setTitle] = React.useState(is_edit ? post.title : '');
 
   const img_url = useSelector((store) => store.post.img);
+  console.log(img_url);
 
   const editPost = () => {
-    dispatch(
-      postActions.editPostAPI(
-        post.id,
-        title,
-        price,
-        'https://w7.pngwing.com/pngs/767/518/png-transparent-color-vantablack-light-graphy-white-paper-blue-white-text-thumbnail.png',
-        contents
-      )
-    );
+    dispatch(postActions.editPostAPI(post.id, title, price, img_url, contents));
   };
 
   //새로고침 시 데이터 유지하기 (나중에 할 일)
