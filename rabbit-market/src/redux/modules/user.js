@@ -56,6 +56,11 @@ const checkIdDB = (id) => {
     apis
       .checkId(id)
       .then((res) => {
+        console.log(res);
+        if (!res.data.ok) {
+          window.alert('이미 존재하는 아이디입니다.');
+          return;
+        }
         window.alert('사용 가능한 아이디입니다.');
         dispatch(checkid());
       })

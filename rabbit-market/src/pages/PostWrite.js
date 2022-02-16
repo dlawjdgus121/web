@@ -20,11 +20,11 @@ const PostWrite = (props) => {
 
   const edit_id = props.match.params.id;
   const [is_edit, setIsEdit] = React.useState(edit_id ? true : false);
-  console.log(is_edit);
   const [contents, setContent] = React.useState(is_edit ? post.content : '');
-  console.log(contents, 'asdfasdfadsf');
   const [price, setPrice] = React.useState(is_edit ? post.price : '');
   const [title, setTitle] = React.useState(is_edit ? post.title : '');
+
+  const img_url = useSelector((store) => store.post.img);
 
   const editPost = () => {
     dispatch(
@@ -59,14 +59,7 @@ const PostWrite = (props) => {
   };
 
   const addPost = () => {
-    dispatch(
-      postActions.addPostAPI(
-        title,
-        price,
-        'https://user-images.githubusercontent.com/82128525/153698807-45fde35c-0ce8-499b-864b-14d6b439968d.jpeg',
-        contents
-      )
-    );
+    dispatch(postActions.addPostAPI(title, price, img_url, contents));
   };
   const [fileImage, setFileImage] = React.useState(
     'https://w7.pngwing.com/pngs/767/518/png-transparent-color-vantablack-light-graphy-white-paper-blue-white-text-thumbnail.png'

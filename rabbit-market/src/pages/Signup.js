@@ -15,6 +15,7 @@ const Signup = (props) => {
   const [nickname, setNickname] = React.useState('');
   const [pwd, setPwd] = React.useState('');
   const [rePwd, setRePwd] = React.useState('');
+  let disabled = useSelector((state) => state.user.is_check_id);
 
   const checkId = () => {
     if (id === '') {
@@ -48,8 +49,10 @@ const Signup = (props) => {
             border="none"
             border_bottom="1px solid #6667ab"
             is_focus
+            value={id}
             _onChange={(e) => {
               setId(e.target.value);
+              console.log(disabled);
             }}
           ></Input>
           <Button
@@ -58,16 +61,13 @@ const Signup = (props) => {
             _onClick={() => {
               checkId();
             }}
-            is_disabled={useSelector((state) => state.user.is_check_id)}
+            is_disabled={disabled}
           >
             중복확인
           </Button>
         </Grid>
         <Grid padding="0px 1rem">
-          <Text
-            size="0.5rem"
-            is_hidden={useSelector((state) => state.user.is_check_id)}
-          >
+          <Text size="0.5rem" is_hidden={disabled}>
             아이디 중복체크를 해주세요 :)
           </Text>
         </Grid>
@@ -80,28 +80,33 @@ const Signup = (props) => {
             _onChange={(e) => {
               setNickname(e.target.value);
             }}
+            value={nickname}
           ></Input>
         </Grid>
         <Grid padding="0px 1rem">
           <Input
             placeholder="비밀번호"
             border="none"
+            type="password"
             border_bottom="1px solid #6667ab"
             is_focus
             _onChange={(e) => {
               setPwd(e.target.value);
             }}
+            value={pwd}
           ></Input>
         </Grid>
         <Grid padding="0px 1rem">
           <Input
             placeholder="비밀번호 확인"
             border="none"
+            type="password"
             border_bottom="1px solid #6667ab"
             is_focus
             _onChange={(e) => {
               setRePwd(e.target.value);
             }}
+            value={rePwd}
           ></Input>
         </Grid>
         <Grid padding="5px 1rem">

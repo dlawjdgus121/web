@@ -10,6 +10,9 @@ const EDIT_POST = 'EDIT_POST';
 const DELETE_POST = 'DELETE_POST';
 const ONE_POST = 'ONE_POST';
 
+// Image
+const IMAGE_URL = 'IMAGE_URL';
+
 // comment
 const GET_COMMENTS = 'GET_COMMENTS';
 const SET_COMMENTS = 'SET_COMMENTS';
@@ -23,6 +26,8 @@ const editPost = createAction(EDIT_POST, (post_id, post) => ({
 }));
 const deletePost = createAction(DELETE_POST, (post_id) => ({ post_id }));
 const getOnePost = createAction(ONE_POST, (post) => ({ post }));
+
+const getImageUrl = createAction(IMAGE_URL, (img_url) => ({ img_url }));
 
 const getComments = createAction(GET_COMMENTS, (comments) => ({ comments }));
 const setComments = createAction(
@@ -40,6 +45,7 @@ const initialState = {
   list: [],
   post: [],
   comments: [],
+  img: '',
 };
 
 const initialPost = {
@@ -141,6 +147,7 @@ const imageAPI = (file) => {
 
     apis.image(file).then(function (res) {
       console.log(res.data.imgurl);
+      dispatch(getImageUrl(res.data.imgurl));
     });
   };
 };
@@ -237,6 +244,13 @@ export default handleActions(
         });
         draft.list = deleted;
       }),
+    // 이미지
+    [IMAGE_URL]: (state, action) =>
+      produce(state, (draft) => {
+        draft.img = action.payload.img_url;
+      }),
+
+    // 댓글
     [GET_COMMENTS]: (state, action) =>
       produce(state, (draft) => {
         draft.comments = action.payload.comments;
