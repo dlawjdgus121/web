@@ -1,6 +1,7 @@
 import { createAction, handleActions } from 'redux-actions';
 import { immerable, produce } from 'immer';
 
+import axios from 'axios';
 import { apis } from '../../shared/api';
 
 // post
@@ -13,6 +14,9 @@ const STATE_POST = 'STATE_POST';
 
 // Image
 const IMAGE_URL = 'IMAGE_URL';
+
+// search
+const SEARCH_TITLE = 'SEARCH_TITLE';
 
 // comment
 const GET_COMMENTS = 'GET_COMMENTS';
@@ -31,6 +35,10 @@ const getOnePost = createAction(ONE_POST, (post) => ({ post }));
 const statePost = createAction(STATE_POST, () => ({}));
 
 const getImageUrl = createAction(IMAGE_URL, (img_url) => ({ img_url }));
+
+const searchTitle = createAction(SEARCH_TITLE, (search_res) => ({
+  search_res,
+}));
 
 const getComments = createAction(GET_COMMENTS, (comments) => ({ comments }));
 const setComments = createAction(
@@ -51,6 +59,7 @@ const initialState = {
   post: [],
   comments: [],
   img: '',
+  searchList: [],
 };
 
 const initialPost = {
@@ -147,6 +156,20 @@ const statePostAPI = (postId) => {
       dispatch(statePost());
       // history.replace(`/post/${postId}`);
     });
+  };
+};
+
+// 검색하기 기능
+const searchAPI = (title) => {
+  return function (dispatch, useState, { history }) {
+    axios
+      .get(`http://52.79.160.167/api/search?title=${title}`, { title })
+      .then(function (res) {
+        dispatch(searchTitle(res.data.posts));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 };
 
@@ -259,10 +282,18 @@ export default handleActions(
         // console.log(list);
         console.log(state.post);
       }),
+
     // 이미지
     [IMAGE_URL]: (state, action) =>
       produce(state, (draft) => {
         draft.img = action.payload.img_url;
+      }),
+
+    // 검색
+    [SEARCH_TITLE]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(action.payload.search_res);
+        draft.searchList = action.payload.search_res;
       }),
 
     // 댓글
@@ -291,7 +322,6 @@ export default handleActions(
           if (action.payload.comment.commentId !== c.commentId) edited.push(c);
           else edited.push(action.payload.comment);
         });
-
         draft.comments = edited;
       }),
   },
@@ -311,6 +341,8 @@ const actionCreators = {
   editPostAPI,
   deletePostAPI,
   statePostAPI,
+
+  searchAPI,
 
   imageAPI,
 
