@@ -8,6 +8,7 @@ import Text from '../elements/Text';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user'; // as : 별명 주는거
+import { actionCreators as postActions } from '../redux/modules/post'; // as : 별명 주는거
 
 // 페이지 이동
 import { history } from '../redux/configureStore';
@@ -21,12 +22,20 @@ const Header = () => {
 
   const is_token = localStorage.getItem('login-token') ? true : false;
 
+  const [searchWord, setSearchWord] = React.useState('');
+
   // 로그인 체크
   const isLogin = useSelector((state) => state.user.is_login);
 
   React.useEffect(() => {
     console.log(isLogin);
   }, [isLogin]);
+
+  const search = () => {
+    dispatch(postActions.searchAPI(searchWord));
+    history.push(`/search/${searchWord}`);
+    console.log(searchWord);
+  };
 
   if (is_token) {
     return (
@@ -44,10 +53,22 @@ const Header = () => {
           {/* 검색창, 로그인 회원가입 버튼 */}
           <Grid is_flex margin="0 5vw">
             <Grid>
-              <Input placeholder="상품명 입력" is_header />
+              <Input
+                placeholder="상품명 입력"
+                is_header
+                value={searchWord}
+                _onChange={(e) => {
+                  setSearchWord(e.target.value);
+                }}
+              />
             </Grid>
             <Grid width="5rem">
-              <Button border_radius="0 20% 20% 0">
+              <Button
+                border_radius="0 20% 20% 0"
+                _onClick={() => {
+                  search();
+                }}
+              >
                 <BiSearchAlt2 size={34} />
               </Button>
             </Grid>

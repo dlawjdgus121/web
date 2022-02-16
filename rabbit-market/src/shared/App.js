@@ -7,6 +7,7 @@ import Login from '../pages/Login';
 import Signup from '../pages/Signup';
 import PostWrite from '../pages/PostWrite';
 import PostDetail from '../pages/PostDetail';
+import Search from '../pages/Search';
 
 import Grid from '../elements/Grid';
 import Header from '../components/Header';
@@ -27,6 +28,8 @@ function App() {
           <Route path="/write/:id" exact component={PostWrite}></Route>
           {/* 상세 페이지 */}
           <Route path="/post/:id" exact component={PostDetail}></Route>
+          {/* 검색 결과 페이지 */}
+          <Route path="/search/:searchWord" exact component={Search}></Route>
         </Grid>
       </ConnectedRouter>
     </React.Fragment>
