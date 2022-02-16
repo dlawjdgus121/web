@@ -1,12 +1,10 @@
 import React from 'react';
 import Grid from '../elements/Grid';
 import Post from '../components/Post';
-import Image from '../elements/Image';
 import Button from '../elements/Button';
-
-import ControlledCarousel from '../components/ControlledCarousel';
-
 import Text from '../elements/Text';
+import ControlledCarousel from '../components/ControlledCarousel';
+import DropDown from '../components/DropDown';
 
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -16,8 +14,6 @@ const Main = (props) => {
   const dispatch = useDispatch();
 
   const post_list = useSelector((state) => state.post.list);
-
-  const [cnt, setCnt] = React.useState(0);
 
   const { history } = props;
 
@@ -32,7 +28,10 @@ const Main = (props) => {
       <ControlledCarousel />
 
       <Grid padding="2vw 13vw 0vw 13vw">
-        <Text size="2rem">상품들이 깡충깡충</Text>
+        <Text size="2rem" margin="0">
+          상품들이 깡충깡충
+        </Text>
+        <DropDown />
       </Grid>
       <Grid padding="2vw 13vw 0vw 13vw" is_grid is_wrap>
         {post_list.map((p, idx) => {
@@ -53,13 +52,6 @@ const Main = (props) => {
           );
         })}
       </Grid>
-      <Button
-        is_float
-        text="+"
-        _onClick={() => {
-          history.push('/write');
-        }}
-      ></Button>
     </>
   );
 };

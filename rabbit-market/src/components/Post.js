@@ -3,13 +3,9 @@ import React from 'react';
 import Grid from '../elements/Grid';
 import Text from '../elements/Text';
 import Image from '../elements/Image';
-import Button from '../elements/Button';
-
-import { history } from '../redux/configureStore';
-
-import { useSelector } from 'react-redux';
 
 import { transformDate } from '../shared/transformDate';
+import { numberWithCommas } from '../shared/numberWithCommas';
 
 const Post = (props) => {
   return (
@@ -19,7 +15,7 @@ const Post = (props) => {
         <Text bold size="1rem">
           상품명 : {props.title}
         </Text>
-        <Text size=".9rem">가격 : {props.price}</Text>
+        <Text size=".9rem">가격 : {numberWithCommas(props.price)}</Text>
         <Text size=".7rem">작성시간 : {transformDate(props.createdAt)}</Text>
       </Grid>
     </>

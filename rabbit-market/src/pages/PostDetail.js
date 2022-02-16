@@ -17,6 +17,8 @@ import { actionCreators as postActions } from '../redux/modules/post';
 
 import { history } from '../redux/configureStore';
 
+import { numberWithCommas } from '../shared/numberWithCommas';
+
 const PostDetail = (props) => {
   //클릭한 포스트 정보 가져오기
   const post = useSelector((store) => store.post.post);

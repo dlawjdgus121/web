@@ -4,12 +4,17 @@ import Grid from '../elements/Grid';
 import Button from '../elements/Button';
 import Input from '../elements/Input';
 import Image from '../elements/Image';
+import Text from '../elements/Text';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user'; // as : 별명 주는거
 
 // 페이지 이동
 import { history } from '../redux/configureStore';
+
+// 리액트 아이콘
+import { BiSearchAlt2 } from 'react-icons/bi';
+import { BsCoin } from 'react-icons/bs';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -37,17 +42,30 @@ const Header = () => {
             <Image shape="logo" src={'/img/logo2.png'} />
           </Grid>
           {/* 검색창, 로그인 회원가입 버튼 */}
-          <Grid margin="0 5vh" margin="0 1vw">
-            <Input placeholder="상품명 입력" is_header />
+          <Grid is_flex margin="0 5vw">
+            <Grid>
+              <Input placeholder="상품명 입력" is_header />
+            </Grid>
+            <Grid width="5rem">
+              <Button border_radius="0 20% 20% 0">
+                <BiSearchAlt2 size={34} />
+              </Button>
+            </Grid>
           </Grid>
           <Grid is_flex width="30rem">
             <Grid>
               <Button
-                text="내 정보"
                 margin="0 1px"
-                _onClick={() => {}}
-                border_radius="2px"
-              />
+                _onClick={() => {
+                  history.push('/write');
+                }}
+                border_radius="5px"
+              >
+                <Grid is_flex padding="0 1vw">
+                  <BsCoin size={25} />
+                  <span>판매하기</span>
+                </Grid>
+              </Button>
             </Grid>
             <Grid>
               <Button
@@ -56,7 +74,7 @@ const Header = () => {
                 _onClick={() => {
                   dispatch(userActions.logoutDB());
                 }}
-                border_radius="2px"
+                border_radius="5px"
               />
             </Grid>
           </Grid>
@@ -77,8 +95,15 @@ const Header = () => {
             <Image shape="logo" src={'/img/logo2.png'} />
           </Grid>
           {/* 검색창, 로그인 회원가입 버튼 */}
-          <Grid margin="0 5vh" margin="0 1vw">
-            <Input placeholder="상품명 입력" is_header />
+          <Grid is_flex margin="0 5vw">
+            <Grid>
+              <Input placeholder="상품명 입력" is_header />
+            </Grid>
+            <Grid width="5rem">
+              <Button border_radius="0 20% 20% 0">
+                <BiSearchAlt2 size={34} />
+              </Button>
+            </Grid>
           </Grid>
           <Grid is_flex width="30rem">
             <Grid>
@@ -88,7 +113,7 @@ const Header = () => {
                 _onClick={() => {
                   history.push('/login');
                 }}
-                border_radius="2px"
+                border_radius="5px"
               />
             </Grid>
             <Grid>
@@ -98,7 +123,7 @@ const Header = () => {
                 _onClick={() => {
                   history.push('/signup');
                 }}
-                border_radius="2px"
+                border_radius="5px"
               />
             </Grid>
           </Grid>
@@ -117,6 +142,9 @@ const HeaderBox = styled.div`
   left: 0;
   z-index: 10;
   padding: 0 13vw;
+  @media (max-width: 595px) {
+    padding: 0 1vw;
+  }
 `;
 
 export default Header;
