@@ -23,7 +23,6 @@ const PostDetail = (props) => {
   //클릭한 포스트 정보 가져오기
   const post = useSelector((store) => store.post.post);
   const comment_cnt = useSelector((store) => store.post.comments.length);
-  console.log(post.content);
 
   const dispatch = useDispatch();
 
@@ -105,7 +104,7 @@ const PostDetail = (props) => {
           상품 정보
         </Text>
         <Text Text size="1.5vw" is_contents>
-          {post.content}
+          {replaceBr(post.content)}
         </Text>
       </Grid>
 

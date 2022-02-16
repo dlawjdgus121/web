@@ -186,6 +186,7 @@ const searchAPI = (title) => {
   };
 };
 
+// 필터 기능
 const filterAPI = (number) => {
   return function (dispatch, useState, { history }) {
     const boolNum = number === 1 ? false : true;
@@ -194,6 +195,7 @@ const filterAPI = (number) => {
       .then(function (res) {
         console.log(res.data.posts);
         dispatch(setPost(res.data.posts));
+        dispatch(setFilterState(0));
       })
       .catch(function (error) {
         console.log(error);

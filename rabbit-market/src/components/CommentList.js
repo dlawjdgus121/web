@@ -54,7 +54,6 @@ const CommentItem = (props) => {
   // 댓글 수정 시작
   const editComment = () => {
     setIsEdit(true);
-    console.log(isEdit);
   };
 
   // 댓글 수정 완료
