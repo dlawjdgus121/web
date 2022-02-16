@@ -19,6 +19,10 @@ const Main = (props) => {
   const { history } = props;
 
   React.useEffect(() => {
+    dispatch(postActions.setFilterState(0));
+  }, []);
+
+  React.useEffect(() => {
     console.log(filterState);
 
     if (filterState === 0) dispatch(postActions.getPostAPI());
