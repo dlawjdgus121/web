@@ -97,7 +97,7 @@ const PostDetail = (props) => {
         </Grid>
       </Grid>
       {/* 상품 정보 */}
-      <Grid>
+      <Grid margin="2vh 0 0">
         <Text Text size="1.5vw" bold>
           상품 정보
         </Text>
