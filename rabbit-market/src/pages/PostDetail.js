@@ -18,17 +18,20 @@ import { actionCreators as postActions } from '../redux/modules/post';
 import { history } from '../redux/configureStore';
 
 const PostDetail = (props) => {
+  //클릭한 포스트 정보 가져오기
+  const post = useSelector((store) => store.post.post);
+
   const dispatch = useDispatch();
+
   // 판매 상태 저장 state
-  const [isSold, setIsSold] = React.useState(false);
+
+  const [isSold, setIsSold] = React.useState(post.isSold ? true : false);
   const [isId, setIsId] = React.useState('');
   const [nickname, setnickname] = React.useState('');
 
+  console.log('솔드확인', isSold);
   // 포스트 아이디 찾아내기
   const postId = props.match.params.id;
-
-  //클릭한 포스트 정보 가져오기
-  const post = useSelector((store) => store.post.post);
 
   //store.post의 유저아이디 받아오기
   const writeUserId = post.userId;
@@ -61,6 +64,8 @@ const PostDetail = (props) => {
   // 판매 상태 수정 함수
   function setState() {
     setIsSold(!isSold);
+    dispatch(postActions.statePostAPI(postId));
+    console.log(post.id);
   }
 
   React.useEffect(() => {

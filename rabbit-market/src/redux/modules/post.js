@@ -9,6 +9,7 @@ const ADD_POST = 'ADD_POST';
 const EDIT_POST = 'EDIT_POST';
 const DELETE_POST = 'DELETE_POST';
 const ONE_POST = 'ONE_POST';
+const STATE_POST = 'STATE_POST';
 
 // Image
 const IMAGE_URL = 'IMAGE_URL';
@@ -27,6 +28,7 @@ const editPost = createAction(EDIT_POST, (post_id, post) => ({
 }));
 const deletePost = createAction(DELETE_POST, (post_id) => ({ post_id }));
 const getOnePost = createAction(ONE_POST, (post) => ({ post }));
+const statePost = createAction(STATE_POST, (postId) => ({ postId }));
 
 const getImageUrl = createAction(IMAGE_URL, (img_url) => ({ img_url }));
 
@@ -141,6 +143,17 @@ const deletePostAPI = (post_id) => {
       });
   };
 };
+//상세페이지 판매 상태 변경
+const statePostAPI = (postId) => {
+  return function (dispatch, useState, { history }) {
+    const token = localStorage.getItem('login-token');
+
+    apis.changeStatus({ postId }).then(function (res) {
+      console.log(res);
+      dispatch(statePost(postId));
+    });
+  };
+};
 
 // 이미지 #######################################################3
 
@@ -164,25 +177,18 @@ const addCommentAPI = (postId, comment) => {
   return function (dispatch, useState, { history }) {
     const token = localStorage.getItem('login-token');
 
-    apis
-      .addComment(
-        { postId, comment },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
-      .then(function (res) {
-        console.log(res);
-        dispatch(
-          setComments(
-            comment,
-            res.data.result.nickname,
-            res.data.result.updatedAt,
-            res.data.result.userId,
-            res.data.result.commentId
-          )
-        );
-      });
+    apis.addComment({ postId, comment }).then(function (res) {
+      console.log(res);
+      dispatch(
+        setComments(
+          comment,
+          res.data.result.nickname,
+          res.data.result.updatedAt,
+          res.data.result.userId,
+          res.data.result.commentId
+        )
+      );
+    });
   };
 };
 
@@ -251,6 +257,10 @@ export default handleActions(
         });
         draft.list = deleted;
       }),
+    [STATE_POST]: (state, action) =>
+      produce(state, (draft) => {
+        console.log(state.post.isSold, '리듀서 확인');
+      }),
     // 이미지
     [IMAGE_URL]: (state, action) =>
       produce(state, (draft) => {
@@ -297,11 +307,13 @@ const actionCreators = {
   editPost,
   deletePost,
   getOnePost,
+  statePost,
   getOnePostAPI,
   getPostAPI,
   addPostAPI,
   editPostAPI,
   deletePostAPI,
+  statePostAPI,
 
   imageAPI,
 

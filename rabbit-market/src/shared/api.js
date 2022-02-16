@@ -1,10 +1,13 @@
 import axios from 'axios';
 
+const token = localStorage.getItem('login-token');
+
 const api = axios.create({
   baseURL: 'http://52.79.160.167',
   headers: {
     'content-type': 'application/json;charset=UTF-8',
     accept: 'application/json,',
+    Authorization: `Bearer ${token}`,
   },
 });
 
@@ -32,6 +35,7 @@ export const apis = {
   edit: (postId, title, price, imgurl, content) =>
     api.put(`/api/posts`, postId, title, price, imgurl, content),
   del: (postId) => api.delete(`/api/posts`, postId),
+  changeStatus: (postId) => api.patch(`/api/status`, postId),
 
   // comment
   addComment: (postId, comment) => api.post(`/api/comments`, postId, comment),
