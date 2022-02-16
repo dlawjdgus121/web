@@ -37,7 +37,8 @@ const Main = (props) => {
         {post_list.map((p, idx) => {
           return (
             <Grid
-              bg={p.isSold ? 'black' : 'yellow'}
+              bg={p.isSold ? '#868e96' : ''}
+              opacity={p.isSold ? '0.5' : ''}
               key={p.id}
               width="100%"
               min_width="8.7rem"

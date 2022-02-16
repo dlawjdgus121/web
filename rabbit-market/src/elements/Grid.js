@@ -22,6 +22,7 @@ const Grid = (props) => {
     min_width,
     height,
     is_fixed,
+    opacity,
   } = props;
 
   const styles = {
@@ -42,6 +43,7 @@ const Grid = (props) => {
     min_width: min_width,
     height: height,
     is_fixed: is_fixed,
+    opacity: opacity,
   };
 
   if (is_header) {
@@ -75,6 +77,7 @@ Grid.defaultProps = {
   min_width: false,
   height: '100%',
   is_fixed: null,
+  opacity: 1,
 };
 
 const GridBox = styled.div`
@@ -112,6 +115,7 @@ const GridBox = styled.div`
     props.is_fixed
       ? 'position: fixed;bottom: 60px;right: 60px;text-align: center;'
       : ''}
+  ${(props) => (props.opacity ? `opacity:${props.opacity};` : '')}
 `;
 
 const HeaderBox = styled.div`

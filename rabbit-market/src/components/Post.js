@@ -17,6 +17,7 @@ const Post = (props) => {
         </Text>
         <Text size=".9rem">가격 : {numberWithCommas(props.price)}</Text>
         <Text size=".7rem">작성시간 : {transformDate(props.createdAt)}</Text>
+        <Text size=".4rem">댓글 수 : {props.comments_cnt}개</Text>
       </Grid>
     </>
   );
