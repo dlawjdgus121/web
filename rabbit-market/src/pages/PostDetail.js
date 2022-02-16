@@ -29,6 +29,7 @@ const PostDetail = (props) => {
   // 판매 상태 저장 state
 
   const [isSold, setIsSold] = React.useState(post.isSold ? true : false);
+  console.log(post.isSold);
   const [isId, setIsId] = React.useState('');
   const [nickname, setnickname] = React.useState('');
 
