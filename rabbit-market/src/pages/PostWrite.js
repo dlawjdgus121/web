@@ -16,8 +16,7 @@ const PostWrite = (props) => {
   const dispatch = useDispatch(null);
 
   const post = useSelector((store) => store.post.post);
-  // const posts = useSelector((store) => store.post);
-  // console.log(posts, '확인좀하자');
+
   const is_token = localStorage.getItem('login-token') ? true : false;
 
   const edit_id = props.match.params.id;
@@ -29,8 +28,16 @@ const PostWrite = (props) => {
 
   const img_url = useSelector((store) => store.post.post.img);
 
+  const [fileImage, setFileImage] = React.useState(
+    post.imgurl !== '' && is_edit
+      ? post.imgurl
+      : 'https://w7.pngwing.com/pngs/767/518/png-transparent-color-vantablack-light-graphy-white-paper-blue-white-text-thumbnail.png'
+  );
+
   const editPost = () => {
-    dispatch(postActions.editPostAPI(post.id, title, price, img_url, contents));
+    dispatch(
+      postActions.editPostAPI(post.id, title, price, fileImage, contents)
+    );
   };
 
   // 새로고침 시 데이터 유지하기 (나중에 할 일)
@@ -51,13 +58,9 @@ const PostWrite = (props) => {
   };
 
   const addPost = () => {
-    dispatch(postActions.addPostAPI(title, price, img_url, contents));
+    dispatch(postActions.addPostAPI(title, price, fileImage, contents));
   };
-  const [fileImage, setFileImage] = React.useState(
-    post.imgurl !== '' && is_edit
-      ? post.imgurl
-      : 'https://w7.pngwing.com/pngs/767/518/png-transparent-color-vantablack-light-graphy-white-paper-blue-white-text-thumbnail.png'
-  );
+
   const saveFileImage = (e) => {
     const img = e.target.files[0];
     const formData = new FormData();

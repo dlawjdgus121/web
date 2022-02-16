@@ -20,7 +20,6 @@ const CommentList = (props) => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    console.log(props.userId);
     if (!uploading) dispatch(userActions.checkLoginDB());
     return;
   }, []);

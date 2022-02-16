@@ -98,9 +98,11 @@ const getPostAPI = () => {
   };
 };
 //판매 상품 등록
-const addPostAPI = (title, price, imgurl, content) => {
+const addPostAPI = (title, price, imgurl = '', content) => {
   return function (dispatch, useState, { history }) {
     const token = localStorage.getItem('login-token');
+
+    console.log(title, price, imgurl, content);
 
     apis
       .add(
@@ -110,6 +112,7 @@ const addPostAPI = (title, price, imgurl, content) => {
         }
       )
       .then(function (res) {
+        console.log(res);
         history.replace('/');
       });
   };
@@ -139,7 +142,7 @@ const editPostAPI = (postId, title, price, imgurl, content) => {
       )
       .then(function (res) {
         history.replace('/');
-        console.log(res);
+        console.log('this', res);
       });
   };
 };
