@@ -28,9 +28,6 @@ const Main = (props) => {
       <ControlledCarousel />
 
       <Grid padding="2vw 13vw 0vw 13vw">
-        <Text size="2rem" margin="0">
-          상품들이 깡충깡충
-        </Text>
         <DropDown />
       </Grid>
       <Grid padding="2vw 13vw 0vw 13vw" is_grid is_wrap>
