@@ -27,7 +27,7 @@ const PostWrite = (props) => {
   const [price, setPrice] = React.useState(is_edit ? post.price : '');
   const [title, setTitle] = React.useState(is_edit ? post.title : '');
 
-  const img_url = useSelector((store) => store.post.img);
+  const img_url = useSelector((store) => store.post.post.img);
 
   const editPost = () => {
     dispatch(
