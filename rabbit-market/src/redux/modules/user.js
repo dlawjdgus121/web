@@ -11,7 +11,7 @@ const SET_USER = 'SET_USER';
 
 //action creators
 const uploading = createAction(UPLOADING, (uploading) => ({ uploading }));
-const checkid = createAction(CHECK_ID, () => ({}));
+const checkid = createAction(CHECK_ID, (is_check_id) => ({ is_check_id }));
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
 const setUser = createAction(SET_USER, (user) => ({ user }));
 
@@ -62,7 +62,7 @@ const checkIdDB = (id) => {
           return;
         }
         window.alert('사용 가능한 아이디입니다.');
-        dispatch(checkid());
+        dispatch(checkid(true));
       })
       .catch((err) => {
         window.alert('이미 존재하는 아이디입니다.');
@@ -107,8 +107,7 @@ export default handleActions(
   {
     [CHECK_ID]: (state, action) =>
       produce(state, (draft) => {
-        console.log(action.payload);
-        draft.is_check_id = true;
+        draft.is_check_id = action.payload.is_check_id;
       }),
 
     [SET_USER]: (state, action) =>
@@ -140,6 +139,7 @@ const actionCreators = {
   setLoginDB,
   logoutDB,
   checkIdDB,
+  checkid,
   checkLoginDB,
 };
 

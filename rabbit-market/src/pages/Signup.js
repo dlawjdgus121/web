@@ -32,6 +32,10 @@ const Signup = (props) => {
       alert('비밀번호와 비밀번호 확인이 서로 다릅니다. 다시 적어주세요.');
       return;
     }
+    if (!disabled) {
+      alert('아이디 중복체크를 해주세요.');
+      return;
+    }
     dispatch(userActions.registerDB(id, pwd, nickname));
   };
 
@@ -52,7 +56,9 @@ const Signup = (props) => {
             value={id}
             _onChange={(e) => {
               setId(e.target.value);
-              console.log(disabled);
+              if (disabled) {
+                dispatch(userActions.checkid(false));
+              }
             }}
           ></Input>
           <Button

@@ -106,6 +106,7 @@ const ElInput = styled.input`
   ${(props) =>
     props.border_bottom ? `border-bottom:${props.border_bottom};` : ''}
   ${(props) => (props.is_focus ? `&:focus{outline: none;}` : '')}
+${(props) => (props.type === 'password' ? 'font-family:맑은 고딕' : '')}
 `;
 
 const HeaderInput = styled.input`
