@@ -81,13 +81,17 @@ const FloatButton = styled.button`
   box-sizing: 36px;
   font-weight: 800;
   position: fixed;
-  bottom: 50px;
-  right: 16px;
+  bottom: 60px;
+  right: 60px;
   text-align: center;
   border: none;
   border-radius: 50%;
   vertical-align: middle;
   cursor: pointer;
+  transition-duration: 0.5s;
+  &:hover {
+    transform: rotate(180deg);
+  }
 `;
 
 export default Button;

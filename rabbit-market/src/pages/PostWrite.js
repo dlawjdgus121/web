@@ -71,6 +71,7 @@ const PostWrite = (props) => {
     console.log(formData); // FormData {}
     for (const keyValue of formData) console.log(keyValue);
     dispatch(postActions.imageAPI(formData));
+    setFileImage(URL.createObjectURL(e.target.files[0]));
   };
 
   // 로그인 상태 체크
@@ -169,7 +170,9 @@ const PostWrite = (props) => {
             _onClick={() => {
               editPost();
             }}
-            // disabled={contents === '' ? true : false}
+            is_disabled={
+              title === '' || price === '' || contents === '' ? true : false
+            }
           ></Button>
         ) : (
           <Button
@@ -177,7 +180,9 @@ const PostWrite = (props) => {
             _onClick={() => {
               addPost();
             }}
-            // disabled={contents === '' ? true : false}
+            is_disabled={
+              title === '' || price === '' || contents === '' ? true : false
+            }
           ></Button>
         )}
       </Grid>
