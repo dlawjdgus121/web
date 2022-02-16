@@ -14,14 +14,16 @@ const Main = (props) => {
   const dispatch = useDispatch();
 
   const post_list = useSelector((state) => state.post.list);
+  const filterState = useSelector((state) => state.post.filterState);
 
   const { history } = props;
 
   React.useEffect(() => {
-    // if (post_list.length === 0) {
-    dispatch(postActions.getPostAPI());
-    // }
-  }, []);
+    console.log(filterState);
+
+    if (filterState === 0) dispatch(postActions.getPostAPI());
+    else dispatch(postActions.filterAPI(filterState));
+  }, [filterState]);
 
   return (
     <>
