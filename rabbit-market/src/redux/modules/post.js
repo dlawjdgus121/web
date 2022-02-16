@@ -17,6 +17,7 @@ const IMAGE_URL = 'IMAGE_URL';
 const GET_COMMENTS = 'GET_COMMENTS';
 const SET_COMMENTS = 'SET_COMMENTS';
 const DEL_COMMENTS = 'DEL_COMMENTS';
+const EDIT_COMMENTS = 'EDIT_COMMENTS';
 
 const setPost = createAction(SET_POST, (post_list) => ({ post_list }));
 const addPost = createAction(ADD_POST, (post) => ({ post }));
@@ -41,6 +42,11 @@ const setComments = createAction(
   })
 );
 const delComment = createAction(DEL_COMMENTS, (del_idx) => ({ del_idx }));
+const editComment = createAction(EDIT_COMMENTS, (conmmentId, comment) => ({
+  conmmentId,
+  comment,
+}));
+
 const initialState = {
   list: [],
   post: [],
@@ -123,7 +129,6 @@ const editPostAPI = (postId, title, price, imgurl, contents) => {
 const deletePostAPI = (post_id) => {
   return async function (dispatch, useState, { history }) {
     const token = localStorage.getItem('login-token');
-    console.log(token, 'dddddddddd');
 
     apis
       .del({
@@ -214,7 +219,9 @@ const editCommentAPI = (commentId, comment) => {
           headers: { Authorization: `Bearer ${token}` },
         }
       )
-      .then(function (res) {});
+      .then(function (res) {
+        dispatch(editComment(commentId, comment));
+      });
   };
 };
 
@@ -268,6 +275,17 @@ export default handleActions(
           return parseInt(action.payload.del_idx) !== i;
         });
         draft.comments = deleted;
+      }),
+    [EDIT_COMMENTS]: (state, action) =>
+      produce(state, (draft) => {
+        let edited = draft.comments.filter((c, i) => {
+          return parseInt(action.payload.conmmentId) !== c.commentId;
+        });
+        console.log(action.payload.conmmentId);
+
+        console.log(edited);
+        edited.unshift(action.payload.comment);
+        draft.comments = edited;
       }),
   },
   initialState

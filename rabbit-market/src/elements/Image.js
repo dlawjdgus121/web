@@ -25,7 +25,7 @@ const Image = (props) => {
 
 Image.defaultProps = {
   shape: 'rectangle',
-  src: 'https://s1.best-wallpaper.net/wallpaper/m/1812/Portugal-Porto-river-bridge-city-morning_m.jpg',
+  src: 'https://w7.pngwing.com/pngs/767/518/png-transparent-color-vantablack-light-graphy-white-paper-blue-white-text-thumbnail.png',
   size: '36',
   is_main: false,
 };

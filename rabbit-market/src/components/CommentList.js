@@ -51,7 +51,7 @@ const CommentItem = (props) => {
     dispatch(postActions.delCommentAPI(commentId));
   };
 
-  // 댓글 수정
+  // 댓글 수정 시작
   const editComment = () => {
     setIsEdit(true);
     console.log(isEdit);
