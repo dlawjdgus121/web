@@ -8,6 +8,8 @@ import Button from '../elements/Button';
 import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user'; // as : 별명 주는거
 
+import { history } from '../redux/configureStore';
+
 const Login = (props) => {
   const dispatch = useDispatch();
 
@@ -42,6 +44,7 @@ const Login = (props) => {
         <Grid padding="0px 1rem">
           <Input
             value={pwd}
+            type="password"
             _onChange={(e) => {
               setPwd(e.target.value);
             }}
@@ -58,6 +61,7 @@ const Login = (props) => {
             _onClick={() => {
               login();
             }}
+            is_disabled={id === '' || pwd === ''}
           >
             로그인
           </Button>
@@ -69,7 +73,13 @@ const Login = (props) => {
           center
         >
           <Text>아직 토끼장터 회원이 아니시라면?</Text>
-          <Text is_deco>회원가입</Text>
+          <Grid
+            _onClick={() => {
+              history.push('/signup');
+            }}
+          >
+            <Text is_deco>회원가입</Text>
+          </Grid>
         </Grid>
       </Grid>
     </>
