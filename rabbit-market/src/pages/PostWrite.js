@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { history } from '../redux/configureStore';
 
+import { apis } from '../shared/api';
+
 // component import
 import Grid from '../elements/Grid';
 import Text from '../elements/Text';
@@ -20,6 +22,9 @@ const PostWrite = (props) => {
   const is_token = localStorage.getItem('login-token') ? true : false;
 
   const edit_id = props.match.params.id;
+  apis.posts(edit_id).then(function (res) {
+    console.log(res, 'check');
+  });
   const [is_edit, setIsEdit] = React.useState(edit_id ? true : false);
   const [contents, setContent] = React.useState(is_edit ? post.content : '');
   console.log(contents);
