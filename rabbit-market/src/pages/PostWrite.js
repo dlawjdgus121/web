@@ -30,13 +30,13 @@ const PostWrite = (props) => {
     dispatch(postActions.editPostAPI(post.id, title, price, img_url, contents));
   };
 
-  //새로고침 시 데이터 유지하기 (나중에 할 일)
-  // React.useEffect(() => {
-  //   if (is_edit) {
-  //     dispatch(postActions.getOnePostAPI());
-  //     return;
-  //   }
-  // }, []);
+  // 새로고침 시 데이터 유지하기 (나중에 할 일)
+  React.useEffect(() => {
+    if (is_edit) {
+      dispatch(postActions.getOnePostAPI());
+      return;
+    }
+  }, []);
 
   const changePrice = (e) => {
     setPrice(e.target.value);
