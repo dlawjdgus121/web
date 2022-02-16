@@ -21,15 +21,12 @@ import { numberWithCommas } from '../shared/numberWithCommas';
 
 const PostDetail = (props) => {
   //클릭한 포스트 정보 가져오기
-
   const post = useSelector((store) => store.post.post);
 
   const dispatch = useDispatch();
 
   // 판매 상태 저장 state
 
-  const [isSold, setIsSold] = React.useState(post.isSold ? true : false);
-  console.log(post.isSold);
   const [isId, setIsId] = React.useState('');
   const [nickname, setnickname] = React.useState('');
 
@@ -61,12 +58,12 @@ const PostDetail = (props) => {
   }
 
   React.useEffect(() => {
+    console.log('hei', post.isSold);
     checkLogin();
   }, []);
 
   // 판매 상태 수정 함수
   function setState() {
-    setIsSold(!isSold);
     dispatch(postActions.statePostAPI(postId));
   }
 
@@ -94,7 +91,7 @@ const PostDetail = (props) => {
             {transformDate(post.createdAt)}
           </Text>
           <Text size="1.5vw" is_end>
-            {isSold ? '판매 완료' : '판매중'}
+            {post.isSold ? '판매 완료' : '판매중'}
           </Text>
         </Grid>
       </Grid>
@@ -134,7 +131,7 @@ const PostDetail = (props) => {
 
             <Grid padding="1px">
               <Button
-                text={isSold ? '판매 완료' : '판매중'}
+                text={post.isSold ? '판매 완료' : '판매중'}
                 _onClick={() => {
                   setState();
                 }}
