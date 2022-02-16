@@ -2,6 +2,8 @@ import React from 'react';
 import Grid from '../elements/Grid';
 import Post from '../components/Post';
 import Image from '../elements/Image';
+import Button from '../elements/Button';
+
 import Text from '../elements/Text';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -53,6 +55,13 @@ const Main = (props) => {
           );
         })}
       </Grid>
+      <Button
+        is_float
+        text="+"
+        _onClick={() => {
+          history.push('/write');
+        }}
+      ></Button>
     </>
   );
 };

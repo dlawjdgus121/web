@@ -8,7 +8,6 @@ import Signup from '../pages/Signup';
 import PostWrite from '../pages/PostWrite';
 import PostDetail from '../pages/PostDetail';
 
-import Button from '../elements/Button';
 import Grid from '../elements/Grid';
 import Header from '../components/Header';
 import React from 'react';
@@ -30,14 +29,6 @@ function App() {
           <Route path="/post/:id" exact component={PostDetail}></Route>
         </Grid>
       </ConnectedRouter>
-
-      <Button
-        is_float
-        text="+"
-        _onClick={() => {
-          history.push('/write');
-        }}
-      ></Button>
     </React.Fragment>
   );
 }

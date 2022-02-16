@@ -44,6 +44,7 @@ const setLoginDB = (id, pwd) => {
         return;
       }
       localStorage.setItem('login-token', res.data.token);
+      alert(`안녕하세요! ${id}님`);
       dispatch(setUser({ userId: id }));
       history.replace('/');
     });
@@ -56,7 +57,6 @@ const checkIdDB = (id) => {
     apis
       .checkId(id)
       .then((res) => {
-        console.log(res);
         if (!res.data.ok) {
           window.alert('이미 존재하는 아이디입니다.');
           return;
