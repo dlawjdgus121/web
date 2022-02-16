@@ -28,7 +28,7 @@ const editPost = createAction(EDIT_POST, (post_id, post) => ({
 }));
 const deletePost = createAction(DELETE_POST, (post_id) => ({ post_id }));
 const getOnePost = createAction(ONE_POST, (post) => ({ post }));
-const statePost = createAction(STATE_POST, (postId) => ({ postId }));
+const statePost = createAction(STATE_POST, () => ({}));
 
 const getImageUrl = createAction(IMAGE_URL, (img_url) => ({ img_url }));
 
@@ -146,11 +146,9 @@ const deletePostAPI = (post_id) => {
 //상세페이지 판매 상태 변경
 const statePostAPI = (postId) => {
   return function (dispatch, useState, { history }) {
-    const token = localStorage.getItem('login-token');
-
     apis.changeStatus({ postId }).then(function (res) {
-      console.log(res);
-      dispatch(statePost(postId));
+      dispatch(statePost());
+      // history.replace(`/post/${postId}`);
     });
   };
 };
@@ -259,7 +257,9 @@ export default handleActions(
       }),
     [STATE_POST]: (state, action) =>
       produce(state, (draft) => {
-        console.log(state.post.isSold, '리듀서 확인');
+        draft.post.isSold = !state.post.isSold;
+        // console.log(list);
+        console.log(state.post);
       }),
     // 이미지
     [IMAGE_URL]: (state, action) =>

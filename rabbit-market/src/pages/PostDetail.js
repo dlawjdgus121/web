@@ -21,6 +21,7 @@ import { numberWithCommas } from '../shared/numberWithCommas';
 
 const PostDetail = (props) => {
   //클릭한 포스트 정보 가져오기
+
   const post = useSelector((store) => store.post.post);
 
   const dispatch = useDispatch();
@@ -31,7 +32,6 @@ const PostDetail = (props) => {
   const [isId, setIsId] = React.useState('');
   const [nickname, setnickname] = React.useState('');
 
-  console.log('솔드확인', isSold);
   // 포스트 아이디 찾아내기
   const postId = props.match.params.id;
 
@@ -67,7 +67,6 @@ const PostDetail = (props) => {
   function setState() {
     setIsSold(!isSold);
     dispatch(postActions.statePostAPI(postId));
-    console.log(post.id);
   }
 
   React.useEffect(() => {
