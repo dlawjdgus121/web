@@ -20,6 +20,7 @@ const CommentList = (props) => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
+    console.log(props.userId);
     if (!uploading) dispatch(userActions.checkLoginDB());
     return;
   }, []);
@@ -28,7 +29,7 @@ const CommentList = (props) => {
     <React.Fragment>
       <Grid padding="2vh 0 0">
         {comments.map((comment, idx) => {
-          if (props.userId === comment.userId)
+          if (user.userId === comment.userId)
             return <CommentItem key={idx} {...comment} isMe />;
           else return <CommentItem key={idx} {...comment} />;
         })}

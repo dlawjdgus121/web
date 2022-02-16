@@ -24,10 +24,10 @@ const PostWrite = (props) => {
   const [price, setPrice] = React.useState(is_edit ? post.price : '');
   const [title, setTitle] = React.useState(is_edit ? post.title : '');
 
-  const img_url = useSelector((store) => store.post.img);
+  const img_url = useSelector((store) => store.post.post.img);
 
   const editPost = () => {
-    dispatch(postActions.editPostAPI(post.id, title, price, img_url, contents));
+    dispatch(postActions.editPostAPI(edit_id, title, price, img_url, contents));
   };
 
   // 새로고침 시 데이터 유지하기 (나중에 할 일)
