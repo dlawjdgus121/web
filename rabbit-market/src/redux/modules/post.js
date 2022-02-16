@@ -111,7 +111,6 @@ const addPostAPI = (title, price, imgurl, content) => {
       )
       .then(function (res) {
         history.replace('/');
-        console.log(res);
       });
   };
 };
@@ -130,7 +129,7 @@ const getOnePostAPI = (postId) => {
 const editPostAPI = (postId, title, price, imgurl, contents) => {
   return async function (dispatch, useState, { history }) {
     const token = localStorage.getItem('login-token');
-    console.log(postId, title, price, imgurl, contents);
+    console.log('확인하기', postId, title, price, imgurl, contents);
     apis
       .edit(
         { postId, title, price, imgurl, contents },
