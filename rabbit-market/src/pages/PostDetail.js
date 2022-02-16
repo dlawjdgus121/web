@@ -27,8 +27,11 @@ const PostDetail = (props) => {
 
   const dispatch = useDispatch();
 
-  // 판매 상태 저장 state
+  React.useEffect(() => {
+    replaceBr();
+  }, []);
 
+  // 판매 상태 저장 state
   const [isId, setIsId] = React.useState('');
   const [nickname, setnickname] = React.useState('');
 
