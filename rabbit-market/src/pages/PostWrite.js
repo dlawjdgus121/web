@@ -26,7 +26,7 @@ const PostWrite = (props) => {
   const [price, setPrice] = React.useState(is_edit ? post.price : '');
   const [title, setTitle] = React.useState(is_edit ? post.title : '');
 
-  const img_url = useSelector((store) => store.post.post.img);
+  const img_url = useSelector((store) => store.post.img);
 
   const [fileImage, setFileImage] = React.useState(
     post.imgurl !== '' && is_edit
@@ -58,7 +58,7 @@ const PostWrite = (props) => {
   };
 
   const addPost = () => {
-    dispatch(postActions.addPostAPI(title, price, fileImage, contents));
+    dispatch(postActions.addPostAPI(title, price, img_url, contents));
   };
 
   const saveFileImage = (e) => {

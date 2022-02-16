@@ -92,7 +92,6 @@ const initialPost = {
 const getPostAPI = () => {
   return async function (dispatch, useState, { history }) {
     await apis.posts().then(function (res) {
-      // console.log('addPostAPI : ', res);
       dispatch(setPost(res.data.posts));
     });
   };
@@ -208,8 +207,6 @@ const filterAPI = (number) => {
 const imageAPI = (file) => {
   for (const keyValue of file) console.log(keyValue);
   return async function (dispatch, useState, { history }) {
-    const token = localStorage.getItem('login-token');
-
     apis.image(file).then(function (res) {
       console.log(res.data.imgurl);
       dispatch(getImageUrl(res.data.imgurl));
