@@ -54,7 +54,7 @@ const PostWrite = (props) => {
     dispatch(postActions.addPostAPI(title, price, img_url, contents));
   };
   const [fileImage, setFileImage] = React.useState(
-    post.imgurl !== ''
+    post.imgurl !== '' && is_edit
       ? post.imgurl
       : 'https://w7.pngwing.com/pngs/767/518/png-transparent-color-vantablack-light-graphy-white-paper-blue-white-text-thumbnail.png'
   );
