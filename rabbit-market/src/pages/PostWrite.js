@@ -25,7 +25,6 @@ const PostWrite = (props) => {
   const [title, setTitle] = React.useState(is_edit ? post.title : '');
 
   const img_url = useSelector((store) => store.post.img);
-  console.log(img_url);
 
   const editPost = () => {
     dispatch(postActions.editPostAPI(post.id, title, price, img_url, contents));
@@ -55,7 +54,9 @@ const PostWrite = (props) => {
     dispatch(postActions.addPostAPI(title, price, img_url, contents));
   };
   const [fileImage, setFileImage] = React.useState(
-    'https://w7.pngwing.com/pngs/767/518/png-transparent-color-vantablack-light-graphy-white-paper-blue-white-text-thumbnail.png'
+    post.imgurl !== '' && is_edit
+      ? post.imgurl
+      : 'https://w7.pngwing.com/pngs/767/518/png-transparent-color-vantablack-light-graphy-white-paper-blue-white-text-thumbnail.png'
   );
   const saveFileImage = (e) => {
     const img = e.target.files[0];

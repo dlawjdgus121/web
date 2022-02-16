@@ -70,7 +70,7 @@ const CommentItem = (props) => {
     return (
       <>
         <Grid is_flex margin="1px 0">
-          <Grid width="5rem">
+          <Grid width="10rem">
             <Text bold>{nickname}</Text>
           </Grid>
           <Grid is_flex margin="0px 4px">
@@ -126,7 +126,7 @@ const CommentItem = (props) => {
     // 다른 사람이 작성한 댓글일 경우
     return (
       <Grid is_flex>
-        <Grid width="5rem">
+        <Grid width="8.5rem">
           <Text bold>{nickname}</Text>
         </Grid>
         <Grid is_flex margin="0px 4px">

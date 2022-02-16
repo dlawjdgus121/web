@@ -9,7 +9,8 @@ import Grid from '../elements/Grid';
 import Image from '../elements/Image';
 import Text from '../elements/Text';
 import Button from '../elements/Button';
-import Permit from '../shared/Permit';
+
+import { transformDate } from '../shared/transformDate';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions } from '../redux/modules/post';
@@ -83,7 +84,7 @@ const PostDetail = (props) => {
           </Grid>
           <Text size="3vw" bold></Text>
           <Text size="1.5vw" is_end>
-            {post.createdAt}
+            {transformDate(post.createdAt)}
           </Text>
           <Text size="1.5vw" is_end>
             {isSold ? '판매 완료' : '판매중'}
