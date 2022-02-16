@@ -16,6 +16,8 @@ const PostWrite = (props) => {
   const dispatch = useDispatch(null);
 
   const post = useSelector((store) => store.post.post);
+  const posts = useSelector((store) => store.list);
+  console.log(posts);
   const is_token = localStorage.getItem('login-token') ? true : false;
 
   const edit_id = props.match.params.id;
@@ -31,12 +33,11 @@ const PostWrite = (props) => {
   };
 
   // 새로고침 시 데이터 유지하기 (나중에 할 일)
-  React.useEffect(() => {
-    if (is_edit) {
-      dispatch(postActions.getOnePostAPI());
-      return;
-    }
-  }, []);
+  // React.useEffect(() => {
+  //   if (is_edit) {
+  //     dispatch(postActions.getOnePostAPI());
+  //   }
+  // }, []);
 
   const changePrice = (e) => {
     setPrice(e.target.value);
