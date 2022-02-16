@@ -22,6 +22,7 @@ import { numberWithCommas } from '../shared/numberWithCommas';
 const PostDetail = (props) => {
   //클릭한 포스트 정보 가져오기
   const post = useSelector((store) => store.post.post);
+  const comment_cnt = useSelector((store) => store.post.comments.length);
 
   const dispatch = useDispatch();
 
@@ -106,6 +107,9 @@ const PostDetail = (props) => {
       </Grid>
 
       <CommentWrite postId={postId} />
+      <Text size=".4rem" margin="0.5rem 0 0 0">
+        댓글 수 : {comment_cnt}개
+      </Text>
       <CommentList postId={postId} userId={isId} />
       {isId === writeUserId ? (
         <Grid is_flex margin="10vh 0 0">
