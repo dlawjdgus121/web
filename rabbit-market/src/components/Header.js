@@ -41,11 +41,13 @@ const Header = () => {
           </Grid>
           {/* 검색창, 로그인 회원가입 버튼 */}
           <Grid is_flex margin="0 5vw">
-            <Grid margin="1vw">
+            <Grid>
               <Input placeholder="상품명 입력" is_header />
             </Grid>
             <Grid width="5rem">
-              <Button border_radius="5px">검색</Button>
+              <Button border_radius="0 20% 20% 0">
+                <BiSearchAlt2 size={34} />
+              </Button>
             </Grid>
           </Grid>
           <Grid is_flex width="30rem">
@@ -85,9 +87,15 @@ const Header = () => {
             <Image shape="logo" src={'/img/logo2.png'} />
           </Grid>
           {/* 검색창, 로그인 회원가입 버튼 */}
-          <Grid margin="0 5vh" margin="0 1vw" is_flex>
-            <Input placeholder="상품명 입력" is_header />
-            <Button border_radius="5px">검색</Button>
+          <Grid is_flex margin="0 5vw">
+            <Grid>
+              <Input placeholder="상품명 입력" is_header />
+            </Grid>
+            <Grid width="5rem">
+              <Button border_radius="0 20% 20% 0">
+                <BiSearchAlt2 size={34} />
+              </Button>
+            </Grid>
           </Grid>
           <Grid is_flex width="30rem">
             <Grid>
