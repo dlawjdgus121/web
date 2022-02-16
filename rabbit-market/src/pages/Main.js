@@ -43,6 +43,7 @@ const Main = (props) => {
               width="100%"
               min_width="8.7rem"
               margin="0.5rem 0"
+              border
               _onClick={() => {
                 history.push(`/post/${p.id}`);
               }}

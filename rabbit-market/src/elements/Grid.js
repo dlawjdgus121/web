@@ -89,7 +89,7 @@ const GridBox = styled.div`
       ? `display:flex; align-items: center; justify-content:space-between;`
       : ''}
   ${(props) => (props.center ? `text-align: center;` : '')}
-  ${(props) => (props.border ? `border: 2px solid rgb(200, 200, 200);` : '')}
+  ${(props) => (props.border ? `border: 1px solid rgb(200, 200, 200);` : '')}
   ${(props) =>
     props.border_bottom ? `border-bottom: 1px solid rgb(200, 200, 200);` : ''}
   ${(props) => (props.is_wrap ? `flex-wrap:wrap;` : '')}

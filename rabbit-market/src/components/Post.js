@@ -15,11 +15,13 @@ const Post = (props) => {
   return (
     <>
       <Image src={props.imgurl} size="25" is_main={true} />
-      <Text bold size="1rem">
-        상품명 : {props.title}
-      </Text>
-      <Text size=".9rem">가격 : {props.price}</Text>
-      <Text size=".7rem">작성시간 : {transformDate(props.createdAt)}</Text>
+      <Grid padding="1vw 1vw 0">
+        <Text bold size="1rem">
+          상품명 : {props.title}
+        </Text>
+        <Text size=".9rem">가격 : {props.price}</Text>
+        <Text size=".7rem">작성시간 : {transformDate(props.createdAt)}</Text>
+      </Grid>
     </>
   );
 };
