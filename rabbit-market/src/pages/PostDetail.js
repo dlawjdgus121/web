@@ -60,7 +60,6 @@ const PostDetail = (props) => {
   }
 
   React.useEffect(() => {
-    console.log('hei', post.isSold);
     checkLogin();
   }, []);
 
