@@ -17,8 +17,6 @@ const Main = (props) => {
 
   const [cnt, setCnt] = React.useState(0);
 
-  console.log(post_list[0].isSold);
-
   const { history } = props;
 
   React.useEffect(() => {
