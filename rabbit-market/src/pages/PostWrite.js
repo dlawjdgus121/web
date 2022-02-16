@@ -25,7 +25,6 @@ const PostWrite = (props) => {
   const [postId, setPostId] = React.useState('');
   const [is_edit, setIsEdit] = React.useState(edit_id ? true : false);
   const [contents, setContent] = React.useState(is_edit ? post.content : '');
-  console.log(contents);
   const [price, setPrice] = React.useState(is_edit ? post.price : '');
   const [title, setTitle] = React.useState(is_edit ? post.title : '');
 
@@ -48,9 +47,10 @@ const PostWrite = (props) => {
     });
   }, []);
   // 새로고침 시 데이터 유지하기 (나중에 할 일)
-  // React.useEffect(() => {
-  //   dispatch(postActions.getOnePostAPI());
-  // }, []);
+  React.useEffect(() => {
+    dispatch(postActions.getOnePostAPI(edit_id));
+    console.log(title);
+  }, []);
 
   const changePrice = (e) => {
     setPrice(e.target.value);
