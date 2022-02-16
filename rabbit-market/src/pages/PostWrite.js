@@ -28,13 +28,7 @@ const PostWrite = (props) => {
 
   const editPost = () => {
     dispatch(
-      postActions.editPostAPI(
-        post.id,
-        title,
-        price,
-        'https://w7.pngwing.com/pngs/767/518/png-transparent-color-vantablack-light-graphy-white-paper-blue-white-text-thumbnail.png',
-        contents
-      )
+      postActions.editPostAPI(post.id, title, price, post.img_url, contents)
     );
   };
 

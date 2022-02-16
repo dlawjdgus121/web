@@ -24,12 +24,13 @@ const initialState = {
 
 // 회원가입
 const registerDB = (id, pw, nickname) => {
-  return function ({ history }) {
+  return function (dispatch, getState, { history }) {
     apis.signup(id, pw, nickname).then((res) => {
       if (!res.data.ok) {
         alert(res.data.result);
         return;
       }
+      history.replace('/login');
     });
   };
 };
