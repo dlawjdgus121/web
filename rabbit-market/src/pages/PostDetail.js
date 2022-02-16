@@ -23,6 +23,7 @@ const PostDetail = (props) => {
   //클릭한 포스트 정보 가져오기
   const post = useSelector((store) => store.post.post);
   const comment_cnt = useSelector((store) => store.post.comments.length);
+  console.log(post.content);
 
   const dispatch = useDispatch();
 
