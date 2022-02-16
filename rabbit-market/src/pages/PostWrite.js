@@ -90,7 +90,7 @@ const PostWrite = (props) => {
   return (
     <Grid padding="0 13vw">
       {/* 글 제목 */}
-      <Grid padding="16px" is_flex border_bottom>
+      <Grid is_flex border_bottom>
         <Grid width="6rem">
           <Text font=".7rem" bold>
             제목
@@ -107,7 +107,7 @@ const PostWrite = (props) => {
         </Grid>
       </Grid>
       {/* 판매 가격 */}
-      <Grid padding="16px" only_flex border_bottom>
+      <Grid only_flex border_bottom>
         <Grid is_flex width="50%">
           <Grid width="6rem">
             <Text font=".7rem" bold>
@@ -133,17 +133,17 @@ const PostWrite = (props) => {
       </Grid>
 
       {/* 상품 이미지 */}
-      <Grid padding="16px" is_flex border_bottom>
-        <Grid width="13rem">
+      <Grid is_flex border_bottom>
+        <Grid width="10rem">
           <Text font=".7rem" bold>
             상품 이미지
           </Text>
         </Grid>
-        <Grid margin="2vw">
+        <Grid margin="2vw" width="30vw">
           <Input type="file" _onChange={saveFileImage} size="30" />
         </Grid>
         <Grid margin="2vw">
-          <Image shape="rectangle" src={fileImage} />
+          <Image shape="rectangle" src={fileImage} is_main />
         </Grid>
       </Grid>
       {/* 게시글 작성 */}
