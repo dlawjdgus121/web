@@ -44,10 +44,7 @@ const setComments = createAction(
   })
 );
 const delComment = createAction(DEL_COMMENTS, (del_idx) => ({ del_idx }));
-const editComment = createAction(EDIT_COMMENTS, (conmmentId, comment) => ({
-  conmmentId,
-  comment,
-}));
+const editComment = createAction(EDIT_COMMENTS, (comment) => ({ comment }));
 
 const initialState = {
   list: [],
@@ -226,7 +223,8 @@ const editCommentAPI = (commentId, comment) => {
         }
       )
       .then(function (res) {
-        dispatch(editComment(commentId, comment));
+        console.log(res.data.result);
+        dispatch(editComment(res.data.result));
       });
   };
 };
@@ -288,13 +286,12 @@ export default handleActions(
       }),
     [EDIT_COMMENTS]: (state, action) =>
       produce(state, (draft) => {
-        let edited = draft.comments.filter((c, i) => {
-          return parseInt(action.payload.conmmentId) !== c.commentId;
+        let edited = [];
+        state.comments.map((c, i) => {
+          if (action.payload.comment.commentId !== c.commentId) edited.push(c);
+          else edited.push(action.payload.comment);
         });
-        console.log(action.payload.conmmentId);
 
-        console.log(edited);
-        edited.unshift(action.payload.comment);
         draft.comments = edited;
       }),
   },

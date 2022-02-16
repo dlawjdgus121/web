@@ -20,6 +20,7 @@ const CommentWrite = (props) => {
 
   const writeComment = () => {
     dispatch(commentActions.addCommentAPI(props.postId, comment));
+    setComment('');
   };
 
   return (

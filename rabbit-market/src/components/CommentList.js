@@ -59,7 +59,6 @@ const CommentItem = (props) => {
 
   // 댓글 수정 완료
   const completeEdit = () => {
-    console.log(edComment);
     dispatch(postActions.editCommentAPI(commentId, edComment));
 
     setIsEdit(false);
