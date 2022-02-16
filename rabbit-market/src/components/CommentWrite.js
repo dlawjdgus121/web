@@ -13,6 +13,7 @@ const CommentWrite = (props) => {
   const dispatch = useDispatch(null);
 
   const user = useSelector((state) => state.user);
+  const is_token = localStorage.getItem('login-token') ? true : false;
 
   const _setComment = (e) => {
     setComment(e.target.value);
@@ -39,6 +40,7 @@ const CommentWrite = (props) => {
           _onClick={() => {
             writeComment();
           }}
+          is_disabled={!is_token}
           border_radius="5px"
         >
           작성
