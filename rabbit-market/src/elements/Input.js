@@ -106,7 +106,7 @@ const ElInput = styled.input`
   ${(props) =>
     props.border_bottom ? `border-bottom:${props.border_bottom};` : ''}
   ${(props) => (props.is_focus ? `&:focus{outline: none;}` : '')}
-${(props) => (props.type === 'password' ? 'font-family:맑은 고딕' : '')}
+  font-family:맑은 고딕;
 `;
 
 const HeaderInput = styled.input`
@@ -119,6 +119,7 @@ const HeaderInput = styled.input`
   ${(props) =>
     props.border_radius ? `border-radius:${props.border_radius};` : ''}
   border: 0.3rem solid #6667ab;
+  font-family: 맑은 고딕;
 `;
 
 export default Input;
