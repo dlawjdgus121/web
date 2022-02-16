@@ -1,12 +1,9 @@
 import React from 'react';
 import Grid from '../elements/Grid';
 import Post from '../components/Post';
-import Image from '../elements/Image';
 import Button from '../elements/Button';
-
-import ControlledCarousel from '../components/ControlledCarousel';
-
 import Text from '../elements/Text';
+import ControlledCarousel from '../components/ControlledCarousel';
 
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -16,8 +13,6 @@ const Main = (props) => {
   const dispatch = useDispatch();
 
   const post_list = useSelector((state) => state.post.list);
-
-  const [cnt, setCnt] = React.useState(0);
 
   const { history } = props;
 

@@ -11,6 +11,9 @@ import { actionCreators as userActions } from '../redux/modules/user'; // as : �
 // 페이지 이동
 import { history } from '../redux/configureStore';
 
+// 리액트 아이콘
+import { BiSearchAlt2 } from 'react-icons/bi';
+
 const Header = () => {
   const dispatch = useDispatch();
 
@@ -37,8 +40,13 @@ const Header = () => {
             <Image shape="logo" src={'/img/logo2.png'} />
           </Grid>
           {/* 검색창, 로그인 회원가입 버튼 */}
-          <Grid margin="0 5vh" margin="0 1vw">
-            <Input placeholder="상품명 입력" is_header />
+          <Grid is_flex margin="0 5vw">
+            <Grid margin="1vw">
+              <Input placeholder="상품명 입력" is_header />
+            </Grid>
+            <Grid width="5rem">
+              <Button border_radius="5px">검색</Button>
+            </Grid>
           </Grid>
           <Grid is_flex width="30rem">
             <Grid>
@@ -46,7 +54,7 @@ const Header = () => {
                 text="내 정보"
                 margin="0 1px"
                 _onClick={() => {}}
-                border_radius="2px"
+                border_radius="5px"
               />
             </Grid>
             <Grid>
@@ -56,7 +64,7 @@ const Header = () => {
                 _onClick={() => {
                   dispatch(userActions.logoutDB());
                 }}
-                border_radius="2px"
+                border_radius="5px"
               />
             </Grid>
           </Grid>
@@ -77,8 +85,9 @@ const Header = () => {
             <Image shape="logo" src={'/img/logo2.png'} />
           </Grid>
           {/* 검색창, 로그인 회원가입 버튼 */}
-          <Grid margin="0 5vh" margin="0 1vw">
+          <Grid margin="0 5vh" margin="0 1vw" is_flex>
             <Input placeholder="상품명 입력" is_header />
+            <Button border_radius="5px">검색</Button>
           </Grid>
           <Grid is_flex width="30rem">
             <Grid>
@@ -88,7 +97,7 @@ const Header = () => {
                 _onClick={() => {
                   history.push('/login');
                 }}
-                border_radius="2px"
+                border_radius="5px"
               />
             </Grid>
             <Grid>
@@ -98,7 +107,7 @@ const Header = () => {
                 _onClick={() => {
                   history.push('/signup');
                 }}
-                border_radius="2px"
+                border_radius="5px"
               />
             </Grid>
           </Grid>
@@ -117,6 +126,9 @@ const HeaderBox = styled.div`
   left: 0;
   z-index: 10;
   padding: 0 13vw;
+  @media (max-width: 595px) {
+    padding: 0;
+  }
 `;
 
 export default Header;

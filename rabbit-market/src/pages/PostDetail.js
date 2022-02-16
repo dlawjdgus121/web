@@ -17,6 +17,8 @@ import { actionCreators as postActions } from '../redux/modules/post';
 
 import { history } from '../redux/configureStore';
 
+import { numberWithCommas } from '../shared/numberWithCommas';
+
 const PostDetail = (props) => {
   const dispatch = useDispatch();
   // 판매 상태 저장 state
