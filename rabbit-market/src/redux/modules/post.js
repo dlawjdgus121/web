@@ -126,13 +126,13 @@ const getOnePostAPI = (postId) => {
   };
 };
 //판매 상품 수정
-const editPostAPI = (postId, title, price, imgurl, contents) => {
+const editPostAPI = (postId, title, price, imgurl, content) => {
   return async function (dispatch, useState, { history }) {
     const token = localStorage.getItem('login-token');
-    console.log('확인하기', postId, title, price, imgurl, contents);
+    console.log('확인하기', postId, title, price, imgurl, content);
     apis
       .edit(
-        { postId, title, price, imgurl, contents },
+        { postId, title, price, imgurl, content },
         {
           headers: { Authorization: `Bearer ${token}` },
         }

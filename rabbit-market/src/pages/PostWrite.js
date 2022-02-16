@@ -30,9 +30,7 @@ const PostWrite = (props) => {
   const img_url = useSelector((store) => store.post.post.img);
 
   const editPost = () => {
-    dispatch(
-      postActions.editPostAPI(post.id, title, price, post.imgurl, contents)
-    );
+    dispatch(postActions.editPostAPI(post.id, title, price, img_url, contents));
   };
 
   // 새로고침 시 데이터 유지하기 (나중에 할 일)
