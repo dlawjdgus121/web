@@ -11,6 +11,10 @@ import { actionCreators as postActions } from '../redux/modules/post';
 
 import { transformDate } from '../shared/transformDate';
 
+// 리액트 아이콘
+import { BsFillPencilFill, BsTrashFill } from 'react-icons/bs';
+import { AiOutlineEnter } from 'react-icons/ai';
+
 const CommentList = (props) => {
   // 해당 포스트의 댓글 정보
   const comments = useSelector((store) => store.post.comments);
@@ -77,21 +81,23 @@ const CommentItem = (props) => {
           </Grid>
           <Grid is_flex width="10rem" height="1.5rem">
             <Button
-              text="수정"
               margin="1px"
               border_radius="1rem"
               _onClick={() => {
                 editComment();
               }}
-            />
+            >
+              <BsFillPencilFill />
+            </Button>
             <Button
-              text="삭제"
               margin="1px"
               border_radius="1rem"
               _onClick={() => {
                 delComment();
               }}
-            />
+            >
+              <BsTrashFill />
+            </Button>
           </Grid>
         </Grid>
         {isEdit ? (
@@ -109,10 +115,11 @@ const CommentItem = (props) => {
                 _onClick={() => {
                   completeEdit();
                 }}
-                text="수정 완료"
                 border_radius="5px"
                 margin="0 2px"
-              />
+              >
+                <AiOutlineEnter size={20} />
+              </Button>
             </Grid>
           </Grid>
         ) : (

@@ -34,6 +34,7 @@ const Ul = styled.ul`
   line-height: 50px;
   margin: auto;
   border-radius: 10px;
+  cursor: pointer;
 
   &:hover {
     Li {
@@ -45,6 +46,7 @@ const Ul = styled.ul`
 
 const Li = styled.li`
   display: none;
+  cursor: pointer;
 `;
 
 export default DropDown;

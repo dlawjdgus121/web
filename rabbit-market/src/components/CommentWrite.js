@@ -8,8 +8,10 @@ import { actionCreators as commentActions } from '../redux/modules/post';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { AiOutlineEnter } from 'react-icons/ai';
+
 const CommentWrite = (props) => {
-  const [comment, setComment] = React.useState();
+  const [comment, setComment] = React.useState('');
   const dispatch = useDispatch(null);
 
   const user = useSelector((state) => state.user);
@@ -40,10 +42,10 @@ const CommentWrite = (props) => {
           _onClick={() => {
             writeComment();
           }}
-          is_disabled={!is_token}
+          is_disabled={!is_token || comment === ''}
           border_radius="5px"
         >
-          작성
+          <AiOutlineEnter size={20} />
         </Button>
       </Grid>
     </React.Fragment>

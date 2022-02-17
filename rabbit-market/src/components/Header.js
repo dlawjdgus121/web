@@ -32,6 +32,11 @@ const Header = () => {
   }, [isLogin]);
 
   const search = () => {
+    if (searchWord === '') {
+      alert('검색할 단어를 입력해주세요.');
+      return;
+    }
+
     dispatch(postActions.searchAPI(searchWord));
     history.push(`/search/${searchWord}`);
     console.log(searchWord);
@@ -45,8 +50,9 @@ const Header = () => {
           <Grid
             width="20rem"
             _onClick={() => {
-              history.push('/');
+              window.location.replace('/');
             }}
+            cursor
           >
             <Image shape="logo" src={'/img/logo2.png'} />
           </Grid>
@@ -110,18 +116,31 @@ const Header = () => {
           <Grid
             width="20rem"
             _onClick={() => {
-              history.push('/');
+              window.location.replace('/');
             }}
+            cursor
           >
             <Image shape="logo" src={'/img/logo2.png'} />
           </Grid>
           {/* 검색창, 로그인 회원가입 버튼 */}
           <Grid is_flex margin="0 5vw">
             <Grid>
-              <Input placeholder="상품명 입력" is_header />
+              <Input
+                placeholder="상품명 입력"
+                is_header
+                value={searchWord}
+                _onChange={(e) => {
+                  setSearchWord(e.target.value);
+                }}
+              />
             </Grid>
             <Grid width="5rem">
-              <Button border_radius="0 20% 20% 0">
+              <Button
+                border_radius="0 20% 20% 0"
+                _onClick={() => {
+                  search();
+                }}
+              >
                 <BiSearchAlt2 size={34} />
               </Button>
             </Grid>

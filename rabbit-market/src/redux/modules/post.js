@@ -71,7 +71,7 @@ const initialState = {
   list: [],
   post: [],
   comments: [],
-  img: 'https://w7.pngwing.com/pngs/767/518/png-transparent-color-vantablack-light-graphy-white-paper-blue-white-text-thumbnail.png',
+  img: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FlOeQ2%2Fbtrtys8M1UX%2FEXvjbkD77erg12mnimKaK0%2Fimg.png',
   searchList: [],
   filterState: 0, // 0 : 전체보기 1 : 판매 중 2: 판매 완료
 };
