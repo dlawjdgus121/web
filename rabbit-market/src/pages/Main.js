@@ -20,10 +20,11 @@ const Main = (props) => {
 
   React.useEffect(() => {
     dispatch(postActions.setFilterState(0));
+    dispatch(postActions.getPostAPI());
   }, []);
 
   React.useEffect(() => {
-    if (filterState === 0) dispatch(postActions.getPostAPI());
+    if (filterState === 0) return;
     else dispatch(postActions.filterAPI(filterState));
   }, [filterState]);
 
