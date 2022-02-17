@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../redux/configureStore';
+import styled from 'styled-components';
 
 import Main from '../pages/Main';
 import Login from '../pages/Login';
@@ -12,6 +13,7 @@ import Search from '../pages/Search';
 import Grid from '../elements/Grid';
 import Header from '../components/Header';
 import React from 'react';
+import Footer from '../components/Footer';
 
 function App() {
   return (
@@ -32,6 +34,7 @@ function App() {
           <Route path="/search/:searchWord" exact component={Search}></Route>
         </Grid>
       </ConnectedRouter>
+      <Footer></Footer>
     </React.Fragment>
   );
 }

@@ -22,6 +22,7 @@ import { replaceBr } from '../shared/replaceBr';
 const PostDetail = (props) => {
   //클릭한 포스트 정보 가져오기
   const post = useSelector((store) => store.post.post);
+  console.log(post, 'galksdjf;alweijfal;dskfj');
   const comment_cnt = useSelector((store) => store.post.comments.length);
 
   const dispatch = useDispatch();
