@@ -111,8 +111,7 @@ const addPostAPI = (title, price, imgurl = '', content) => {
         }
       )
       .then(function (res) {
-        console.log(res);
-        history.replace('/');
+        window.location.replace('/');
       });
   };
 };
@@ -120,7 +119,7 @@ const addPostAPI = (title, price, imgurl = '', content) => {
 const getOnePostAPI = (postId) => {
   return async function (dispatch, useState, { history }) {
     await apis.post(postId).then(function (res) {
-      console.log(res.data.post);
+      console.log('꺄아아아아ㅏ앙아아아아ㅏ아아');
       dispatch(getOnePost(res.data.post));
       // 해당 글의 댓글 가져오기
       dispatch(getComments(res.data.comments));
@@ -141,7 +140,6 @@ const editPostAPI = (postId, title, price, imgurl, content) => {
       )
       .then(function (res) {
         history.replace('/');
-        console.log('this', res);
       });
   };
 };

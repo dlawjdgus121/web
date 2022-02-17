@@ -42,7 +42,7 @@ const PostWrite = (props) => {
   // 새로고침 시 데이터 유지하기 (나중에 할 일)
   React.useEffect(() => {
     dispatch(postActions.getOnePostAPI(edit_id));
-    console.log(title);
+    console.log(post);
   }, []);
 
   const changePrice = (e) => {

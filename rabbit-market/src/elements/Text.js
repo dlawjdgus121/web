@@ -49,14 +49,22 @@ const P = styled.p`
   font-weight: ${(props) => (props.bold ? '600' : '400')};
   ${(props) => (props.margin ? `margin: ${props.margin};` : 'margin: 0;')}
   ${(props) => (props.is_end ? `text-align: end;` : '')}
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   ${(props) =>
     props.is_contents ? 'word-break: break-all; white-space: nowrap;' : ''}
   ${(props) =>
     props.is_deco
       ? '&:hover{text-decoration: underline;   cursor: pointer; color:blue}'
       : ``}
+
+  /* overflow: hidden; */
+  /* text-overflow: ellipsis; */
+  word-break: break-all;
+  white-space: nowrap;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  /* white-space: ;
+
+  text-overflow: clip;
+  word-wrap: break-word; */
 `;
 export default Text;
