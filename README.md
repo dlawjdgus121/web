@@ -1,15 +1,14 @@
 ![토끼장터](https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F9e680b3d-860c-491b-8ba8-062c03b9b7c3%2Flogo2.png?table=block&id=c92fe78a-b9e4-4a5f-b8d4-3e6b044e65d4&spaceId=c4a58787-6451-44b1-a89e-57209eda852b&width=2000&userId=4183a253-f057-4617-8b7a-46b310e00823&cache=v2)
 
-토끼처럼 빠른 거래
-
-## 깃허브 주소
-[BE](https://github.com/daonez/rabbitMarket_BE)
-[FE](https://github.com/clappingmin/rabbitMarket_FE)
+## 깃허브 및 팀노션
+ - [BE](https://github.com/daonez/rabbitMarket_BE)
+ - [FE](https://github.com/clappingmin/rabbitMarket_FE)
+ - [Notion](https://www.notion.so/17ff16d892c54f32810e0d41a39b19de)
 
 ## 개발 기간 및 팀원 소개
 2022.02.11 - 2022.02.017
 
-##
+
 
 ## 사용 기술 스택
 
