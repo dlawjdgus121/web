@@ -78,7 +78,7 @@ const Header = () => {
               <Button
                 margin="0 1px"
                 _onClick={() => {
-                  history.push('/write');
+                  window.location.replace('/write');
                 }}
                 border_radius="5px"
               >

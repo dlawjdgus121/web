@@ -34,7 +34,10 @@ const editPost = createAction(EDIT_POST, (post_id, post) => ({
   post,
 }));
 const deletePost = createAction(DELETE_POST, (post_id) => ({ post_id }));
-const getOnePost = createAction(ONE_POST, (post) => ({ post }));
+const getOnePost = createAction(ONE_POST, (post, comments) => ({
+  post,
+  comments,
+}));
 const statePost = createAction(STATE_POST, () => ({}));
 
 // 이미지 url 저장
@@ -119,8 +122,7 @@ const addPostAPI = (title, price, imgurl = '', content) => {
 const getOnePostAPI = (postId) => {
   return async function (dispatch, useState, { history }) {
     await apis.post(postId).then(function (res) {
-      console.log('꺄아아아아ㅏ앙아아아아ㅏ아아');
-      dispatch(getOnePost(res.data.post));
+      dispatch(getOnePost(res.data.post, res.data.comments));
       // 해당 글의 댓글 가져오기
       dispatch(getComments(res.data.comments));
     });
@@ -191,7 +193,6 @@ const filterAPI = (number) => {
     axios
       .get(`http://52.79.160.167/api/sales?isSold=${boolNum}`)
       .then(function (res) {
-        console.log(res.data.posts);
         dispatch(setPost(res.data.posts));
       })
       .catch(function (error) {
@@ -283,8 +284,8 @@ export default handleActions(
       }),
     [ONE_POST]: (state, action) =>
       produce(state, (draft) => {
-        // console.log(action.payload.post, '뭔데');
         draft.post = action.payload.post;
+        draft.post.comments = action.payload.comments;
       }),
     [ADD_POST]: (state, action) =>
       produce(state, (draft) => {

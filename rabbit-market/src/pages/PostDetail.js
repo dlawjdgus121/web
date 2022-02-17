@@ -22,7 +22,7 @@ const PostDetail = (props) => {
   //클릭한 포스트 정보 가져오기
   const post = useSelector((store) => store.post.post);
   const comment_cnt = useSelector((store) => store.post.comments.length);
-  const comment = useSelector((store) => store.post.comments);
+  const user = useSelector((store) => store.user.user);
 
   const dispatch = useDispatch();
 
@@ -57,16 +57,13 @@ const PostDetail = (props) => {
       });
   }
 
-  React.useEffect(() => {
-    checkLogin();
-  }, []);
-
   // 판매 상태 수정 함수
   function setState() {
     dispatch(postActions.statePostAPI(postId));
   }
 
   React.useEffect(() => {
+    checkLogin();
     dispatch(postActions.getOnePostAPI(postId));
   }, []);
 
@@ -110,7 +107,7 @@ const PostDetail = (props) => {
       <Text size=".4rem" margin="0.5rem 0 0 0">
         댓글 수 : {comment_cnt}개
       </Text>
-      <CommentList postId={postId} userId={isId} comments={comment} />
+      <CommentList postId={postId} />
       {isId === writeUserId ? (
         <Grid is_flex margin="10vh 0 0">
           <Grid width="10rem" padding="1px">

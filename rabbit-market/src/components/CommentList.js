@@ -20,8 +20,8 @@ const CommentList = (props) => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(postActions.getOnePostAPI(props.postId));
     if (!uploading) dispatch(userActions.checkLoginDB());
+    return;
   }, []);
 
   return (

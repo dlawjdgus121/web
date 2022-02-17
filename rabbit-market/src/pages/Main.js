@@ -23,8 +23,6 @@ const Main = (props) => {
   }, []);
 
   React.useEffect(() => {
-    console.log(filterState);
-
     if (filterState === 0) dispatch(postActions.getPostAPI());
     else dispatch(postActions.filterAPI(filterState));
   }, [filterState]);
