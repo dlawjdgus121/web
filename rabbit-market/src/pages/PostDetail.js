@@ -11,6 +11,7 @@ import Text from '../elements/Text';
 import Button from '../elements/Button';
 
 import { transformDate } from '../shared/transformDate';
+import { numberWithCommas } from '../shared/numberWithCommas';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions } from '../redux/modules/post';
@@ -81,7 +82,7 @@ const PostDetail = (props) => {
               {post.title}
             </Text>
             <Text size="3vw" bold>
-              {post.price} 원
+              {numberWithCommas(post.price)} 원
             </Text>
           </Grid>
           <Text size="3vw" bold></Text>
