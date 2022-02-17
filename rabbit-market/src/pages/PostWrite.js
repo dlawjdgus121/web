@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { history } from '../redux/configureStore';
 
+import { apis } from '../shared/api';
+
 // component import
 import Grid from '../elements/Grid';
 import Text from '../elements/Text';
@@ -20,6 +22,7 @@ const PostWrite = (props) => {
   const is_token = localStorage.getItem('login-token') ? true : false;
 
   const edit_id = props.match.params.id;
+  const [postId, setPostId] = React.useState('');
   const [is_edit, setIsEdit] = React.useState(edit_id ? true : false);
   const [contents, setContent] = React.useState(is_edit ? post.content : '');
   const [price, setPrice] = React.useState(is_edit ? post.price : '');
@@ -33,12 +36,16 @@ const PostWrite = (props) => {
       : 'https://w7.pngwing.com/pngs/767/518/png-transparent-color-vantablack-light-graphy-white-paper-blue-white-text-thumbnail.png'
   );
 
-  const editPost = () => {
-    dispatch(
-      postActions.editPostAPI(post.id, title, price, fileImage, contents)
-    );
-  };
-
+  React.useEffect(() => {
+    apis.post(edit_id).then(function (res) {
+      console.log(res.data.post);
+      setPostId(res.data.post.id);
+      setPrice(res.data.post.price);
+      setContent(res.data.post.content);
+      setTitle(res.data.post.title);
+      setFileImage(res.data.post.imgurl);
+    });
+  }, []);
   // 새로고침 시 데이터 유지하기 (나중에 할 일)
   React.useEffect(() => {
     dispatch(postActions.getOnePostAPI(edit_id));
@@ -55,6 +62,11 @@ const PostWrite = (props) => {
 
   const changeTitle = (e) => {
     setTitle(e.target.value);
+  };
+  const editPost = () => {
+    dispatch(
+      postActions.editPostAPI(postId, title, price, fileImage, contents)
+    );
   };
 
   const addPost = () => {
