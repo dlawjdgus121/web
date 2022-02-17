@@ -1,3 +1,8 @@
 export function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  if (!x) return;
+  const before = new String(x);
+
+  const edited = x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+  return edited;
 }

@@ -34,7 +34,10 @@ const editPost = createAction(EDIT_POST, (post_id, post) => ({
   post,
 }));
 const deletePost = createAction(DELETE_POST, (post_id) => ({ post_id }));
-const getOnePost = createAction(ONE_POST, (post) => ({ post }));
+const getOnePost = createAction(ONE_POST, (post, comments) => ({
+  post,
+  comments,
+}));
 const statePost = createAction(STATE_POST, () => ({}));
 
 // 이미지 url 저장
@@ -68,7 +71,7 @@ const initialState = {
   list: [],
   post: [],
   comments: [],
-  img: 'https://w7.pngwing.com/pngs/767/518/png-transparent-color-vantablack-light-graphy-white-paper-blue-white-text-thumbnail.png',
+  img: 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FlOeQ2%2Fbtrtys8M1UX%2FEXvjbkD77erg12mnimKaK0%2Fimg.png',
   searchList: [],
   filterState: 0, // 0 : 전체보기 1 : 판매 중 2: 판매 완료
 };
@@ -111,8 +114,7 @@ const addPostAPI = (title, price, imgurl = '', content) => {
         }
       )
       .then(function (res) {
-        console.log(res);
-        history.replace('/');
+        window.location.replace('/');
       });
   };
 };
@@ -120,8 +122,7 @@ const addPostAPI = (title, price, imgurl = '', content) => {
 const getOnePostAPI = (postId) => {
   return async function (dispatch, useState, { history }) {
     await apis.post(postId).then(function (res) {
-      console.log(res.data.post);
-      dispatch(getOnePost(res.data.post));
+      dispatch(getOnePost(res.data.post, res.data.comments));
       // 해당 글의 댓글 가져오기
       dispatch(getComments(res.data.comments));
     });
@@ -141,7 +142,6 @@ const editPostAPI = (postId, title, price, imgurl, content) => {
       )
       .then(function (res) {
         history.replace('/');
-        console.log('this', res);
       });
   };
 };
@@ -193,7 +193,6 @@ const filterAPI = (number) => {
     axios
       .get(`http://52.79.160.167/api/sales?isSold=${boolNum}`)
       .then(function (res) {
-        console.log(res.data.posts);
         dispatch(setPost(res.data.posts));
       })
       .catch(function (error) {
@@ -285,8 +284,8 @@ export default handleActions(
       }),
     [ONE_POST]: (state, action) =>
       produce(state, (draft) => {
-        // console.log(action.payload.post, '뭔데');
         draft.post = action.payload.post;
+        draft.post.comments = action.payload.comments;
       }),
     [ADD_POST]: (state, action) =>
       produce(state, (draft) => {

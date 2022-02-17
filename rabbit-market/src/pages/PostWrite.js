@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { history } from '../redux/configureStore';
 
-import { apis } from '../shared/api';
-
 // component import
 import Grid from '../elements/Grid';
 import Text from '../elements/Text';
@@ -22,7 +20,6 @@ const PostWrite = (props) => {
   const is_token = localStorage.getItem('login-token') ? true : false;
 
   const edit_id = props.match.params.id;
-  const [postId, setPostId] = React.useState('');
   const [is_edit, setIsEdit] = React.useState(edit_id ? true : false);
   const [contents, setContent] = React.useState(is_edit ? post.content : '');
   const [price, setPrice] = React.useState(is_edit ? post.price : '');
@@ -33,23 +30,18 @@ const PostWrite = (props) => {
   const [fileImage, setFileImage] = React.useState(
     post.imgurl !== '' && is_edit
       ? post.imgurl
-      : 'https://w7.pngwing.com/pngs/767/518/png-transparent-color-vantablack-light-graphy-white-paper-blue-white-text-thumbnail.png'
+      : 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FlOeQ2%2Fbtrtys8M1UX%2FEXvjbkD77erg12mnimKaK0%2Fimg.png'
   );
 
-  React.useEffect(() => {
-    apis.post(edit_id).then(function (res) {
-      console.log(res.data.post);
-      setPostId(res.data.post.id);
-      setPrice(res.data.post.price);
-      setContent(res.data.post.content);
-      setTitle(res.data.post.title);
-      setFileImage(res.data.post.imgurl);
-    });
-  }, []);
+  const editPost = () => {
+    dispatch(
+      postActions.editPostAPI(post.id, title, price, fileImage, contents)
+    );
+  };
+
   // 새로고침 시 데이터 유지하기 (나중에 할 일)
   React.useEffect(() => {
     dispatch(postActions.getOnePostAPI(edit_id));
-    console.log(title);
   }, []);
 
   const changePrice = (e) => {
@@ -62,11 +54,6 @@ const PostWrite = (props) => {
 
   const changeTitle = (e) => {
     setTitle(e.target.value);
-  };
-  const editPost = () => {
-    dispatch(
-      postActions.editPostAPI(postId, title, price, fileImage, contents)
-    );
   };
 
   const addPost = () => {

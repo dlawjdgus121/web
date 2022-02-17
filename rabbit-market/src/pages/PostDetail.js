@@ -11,25 +11,21 @@ import Text from '../elements/Text';
 import Button from '../elements/Button';
 
 import { transformDate } from '../shared/transformDate';
+import { numberWithCommas } from '../shared/numberWithCommas';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as postActions } from '../redux/modules/post';
 
 import { history } from '../redux/configureStore';
 
-import { replaceBr } from '../shared/replaceBr';
-
 const PostDetail = (props) => {
   //클릭한 포스트 정보 가져오기
   const post = useSelector((store) => store.post.post);
   console.log(post, 'galksdjf;alweijfal;dskfj');
   const comment_cnt = useSelector((store) => store.post.comments.length);
+  const user = useSelector((store) => store.user.user);
 
   const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    replaceBr();
-  }, []);
 
   // 판매 상태 저장 state
   const [isId, setIsId] = React.useState('');
@@ -62,16 +58,13 @@ const PostDetail = (props) => {
       });
   }
 
-  React.useEffect(() => {
-    checkLogin();
-  }, []);
-
   // 판매 상태 수정 함수
   function setState() {
     dispatch(postActions.statePostAPI(postId));
   }
 
   React.useEffect(() => {
+    checkLogin();
     dispatch(postActions.getOnePostAPI(postId));
   }, []);
 
@@ -87,7 +80,7 @@ const PostDetail = (props) => {
               {post.title}
             </Text>
             <Text size="3vw" bold>
-              {post.price} 원
+              {numberWithCommas(post.price)} 원
             </Text>
           </Grid>
           <Text size="3vw" bold></Text>
@@ -101,19 +94,21 @@ const PostDetail = (props) => {
       </Grid>
       {/* 상품 정보 */}
       <Grid margin="2vh 0 0">
-        <Text Text size="1.5vw" bold>
-          상품 정보
-        </Text>
-        <Text Text size="1.5vw" is_contents>
-          {replaceBr(post.content)}
-        </Text>
+        <div>
+          <Text Text size="1.5vw" bold>
+            상품 정보
+          </Text>
+          <Text Text size="1.5vw" is_contents>
+            {post.content}
+          </Text>
+        </div>
       </Grid>
 
       <CommentWrite postId={postId} />
       <Text size=".4rem" margin="0.5rem 0 0 0">
         댓글 수 : {comment_cnt}개
       </Text>
-      <CommentList postId={postId} userId={isId} />
+      <CommentList postId={postId} />
       {isId === writeUserId ? (
         <Grid is_flex margin="10vh 0 0">
           <Grid width="10rem" padding="1px">

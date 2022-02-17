@@ -20,12 +20,11 @@ const Main = (props) => {
 
   React.useEffect(() => {
     dispatch(postActions.setFilterState(0));
+    dispatch(postActions.getPostAPI());
   }, []);
 
   React.useEffect(() => {
-    console.log(filterState);
-
-    if (filterState === 0) dispatch(postActions.getPostAPI());
+    if (filterState === 0) return;
     else dispatch(postActions.filterAPI(filterState));
   }, [filterState]);
 
@@ -47,6 +46,7 @@ const Main = (props) => {
               min_width="8.7rem"
               margin="0.5rem 0"
               border
+              cursor
               _onClick={() => {
                 history.push(`/post/${p.id}`);
               }}
