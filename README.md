@@ -12,8 +12,7 @@
 <a href="https://github.com/daonez"><img width="180"  src="https://img.shields.io/static/v1?label=Node.js&message=Francisco Choi&color=08CE5D&style=for-the-badge&>"/></a> <a href="https://github.com/Sinclebear"><img width="180"  src="https://img.shields.io/static/v1?label=Node.js&message=Sanghyuk Jin&color=08CE5D&style=for-the-badge&>"/></a> <a href="https://github.com/bgg01555"><img width="180"  src="https://img.shields.io/static/v1?label=Node.js&message=Juhyeon Yu&color=08CE5D&style=for-the-badge&>"/></a>
 
 ### Front-end
-<p><a href="https://github.com/clappingmin"><img width="180"  src="https://img.shields.io/static/v1?label=React&message=Sumin Park&color=61dafb&style=for-the-badge&>"/></a></p>
-<p><a href="ttps://github.com/Junparkk"><img width="180"  src="https://img.shields.io/static/v1?label=React&message=HyoJun Park&color=61dafb&style=for-the-badge&>"/></a></p>
+<a href="https://github.com/clappingmin"><img width="180"  src="https://img.shields.io/static/v1?label=React&message=Sumin Park&color=61dafb&style=for-the-badge&>"/></a> <a href="ttps://github.com/Junparkk"><img width="180"  src="https://img.shields.io/static/v1?label=React&message=HyoJun Park&color=61dafb&style=for-the-badge&>"/></a>
 
 
 ## 사용 기술 스택
