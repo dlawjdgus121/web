@@ -11,10 +11,10 @@ import { actionCreators as userActions } from '../redux/modules/user'; // as : ë
 import { history } from '../redux/configureStore';
 
 const Login = (props) => {
-  const dispatch = useDispatch();
+const dispatch = useDispatch();
 
-  const [id, setId] = React.useState('');
-  const [pwd, setPwd] = React.useState('');
+const [id, setId] = React.useState('');
+const [pwd, setPwd] = React.useState('');
 
   const login = () => {
     dispatch(userActions.setLoginDB(id, pwd));
