@@ -57,6 +57,7 @@ const checkIdDB = (id) => {
   return function (dispatch) {
     apis
       .checkId(id)
+      
       .then((res) => {
         if (!res.data.ok) {
           window.alert('이미 존재하는 아이디입니다.');
@@ -66,7 +67,8 @@ const checkIdDB = (id) => {
         dispatch(checkid(true));
       })
       .catch((err) => {
-        window.alert('이미 존재하는 아이디입니다.');
+        console.error('아이디 중복 체크 실패:', err);
+        window.alert('아이디 확인 중 오류가 발생했습니다. 나중에 다시 시도해주세요.');
       });
   };
 };

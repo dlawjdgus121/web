@@ -4,6 +4,7 @@ import Grid from '../elements/Grid';
 import Input from '../elements/Input';
 import Text from '../elements/Text';
 import Button from '../elements/Button';
+import  { useEffect } from "react";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user'; // as : 별명 주는거
@@ -38,7 +39,10 @@ const Signup = (props) => {
     }
     dispatch(userActions.registerDB(id, pwd, nickname));
   };
-
+useEffect(() => {
+  // 예시: id 상태 변경 시 중복확인 reset
+  dispatch(userActions.checkid(false));
+}, [id, dispatch]); // dispatch 빠지면 eslint 경고 발생
   return (
     <>
       <Grid width="28rem" margin="auto" padding="3rem 1rem">
