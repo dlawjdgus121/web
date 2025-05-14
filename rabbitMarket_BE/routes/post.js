@@ -65,7 +65,8 @@ router.post('/image', upload.single('imgUrl'), async (req, res) => {
         //사진경로가있는 주소를  imgurl이라는 이름으로 저장
         res.status(200).json({ imgurl: result });
     } catch (e) {
-        //console.log(e);
+        console.error('이미지 업로드 실패:', e);
+        return res.status(500).json({ ok: false, message: '이미지 업로드 실패' });
     }
 });
 //판매 상품 등록
@@ -77,7 +78,7 @@ router.post('/posts', authMiddleware, async function (req, res) {
 
     if (title != '' && content != '' && price != '' && imgurl != '') {
         await Post.create({
-            title,
+            title,  
             content,
             price,
             imgurl,

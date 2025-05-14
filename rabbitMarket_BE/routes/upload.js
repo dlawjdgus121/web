@@ -36,4 +36,5 @@ const upload = multer({
 
 
 console.log(process.env.S3_BUCKET_NAME);
-exports.upload = multer(upload);
+exports.upload = upload; // ✅ 올바른 방식
+
