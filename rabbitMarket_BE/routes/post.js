@@ -14,6 +14,7 @@ router.get('/posts', async (req, res) => {
     for (let i = 0; i < posts.length; i++) {
         const comments_cnt = await Comment.count({ postId: posts[i]._id });
         posts[i]._doc.comments_cnt = comments_cnt;
+          posts[i]._doc.postId = posts[i]._id; 
     }
     //console.log(posts);
     res.json({ ok: true, posts });
@@ -57,6 +58,7 @@ router.get('/posts/:postId', async function (req, res) {
 //image upload to s3 사진 1개씩 저장,
 
 router.post('/image', upload.single('imgUrl'), async (req, res) => {
+     console.log('파일 정보:', req.file);
     const file = await req.file;
     //console.log(file);
     try {
@@ -71,24 +73,30 @@ router.post('/image', upload.single('imgUrl'), async (req, res) => {
 });
 //판매 상품 등록
 router.post('/posts', authMiddleware, async function (req, res) {
-    const { title, price, imgurl, content } = req.body;
-    let { user } = res.locals;
+      console.log("받은 데이터:", req.body);
+    try {
+        console.log('요청 바디:', req.body);
+        const { title, price, imgurl, content } = req.body;
+        
+        let { user } = res.locals;
 
-    //price number? string? 자동 변환 되는지
-
-    if (title != '' && content != '' && price != '' && imgurl != '') {
-        await Post.create({
-            title,  
-            content,
-            price,
-            imgurl,
-            isSold: false,
-            userId: user.userId,
-            nickname: user.nickname,
-        });
-        return res.json({ ok: true, result: '판매 상품이 등록되었습니다.' });
-    } else {
-        return res.json({ ok: false, result: '올바른 입력이 아닙니다.' });
+        if (title && content && price && imgurl) {
+            await Post.create({
+                title,
+                content,
+                price,
+                imgurl,
+                isSold: false,
+                userId: user.userId,
+                nickname: user.nickname,
+            });
+            return res.json({ ok: true, result: '판매 상품이 등록되었습니다.' });
+        } else {
+            return res.status(400).json({ ok: false, result: '올바른 입력이 아닙니다.' });
+        }
+    } catch (error) {
+        console.error('게시물 등록 중 오류:', error);
+        return res.status(500).json({ ok: false, result: '서버 오류가 발생했습니다.' });
     }
 });
 
@@ -178,5 +186,6 @@ router.get('/sales', async (req, res) => {
     }
     return res.json({ ok: true, posts });
 });
+
 
 module.exports = router;

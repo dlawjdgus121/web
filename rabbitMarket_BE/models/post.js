@@ -16,7 +16,7 @@ const PostSchema = new mongoose.Schema(
         price: {
             type: Number,
             required: true,
-            trim: true,
+            
         },
         imgurl: {
             type: String,
@@ -24,7 +24,7 @@ const PostSchema = new mongoose.Schema(
         },
         isSold: {
             type: Boolean,
-            required: true,
+              default: false,
         },
         nickname: {
             type: String,
@@ -33,7 +33,7 @@ const PostSchema = new mongoose.Schema(
         userId: {
             type: String,
             required: true,
-        },
+        },      
     },
 
     { timestamps: true } // createdAt, updatedAt 으로 Date형 객체 입력
