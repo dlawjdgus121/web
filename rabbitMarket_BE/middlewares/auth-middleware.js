@@ -39,6 +39,8 @@ module.exports = (req, res, next) => {
                 next();
             });
     } catch (error) {
+            console.error('❌ JWT 인증 실패:', error.message);  // 추가
+
         // 토큰이 없거나, 유효하지 않은 토큰인 경우 이쪽으로 접근.
         res.send({
             ok: false,
